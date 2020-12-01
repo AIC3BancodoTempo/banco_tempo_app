@@ -16,9 +16,11 @@ Aplicativo para banco do tempo de Rio Grande
 
 ## Bibliotecas e Documentação
 
-["Flutter Install"]("https://flutter.dev/docs/get-started/install")
-["Flutter Widgets"]("https://flutter.dev/docs/development/ui/widgets")
-["Pub Dev"]("https://pub.dev/")
+[Flutter Install](https://flutter.dev/docs/get-started/install)
+
+[Flutter Widgets](https://flutter.dev/docs/development/ui/widgets)
+
+[Pub Dev](https://pub.dev/)
 ## Primeira execução
 
 - flutter pub get
