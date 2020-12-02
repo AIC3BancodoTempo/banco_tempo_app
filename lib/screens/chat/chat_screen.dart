@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/chat/components/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController listScrollController = ScrollController();
     chatBloc = BlocProvider.of<ChatBloc>(context);
     return Scaffold(
       appBar: ChatAppBar(chatBloc: chatBloc, descricao: 'Yoga', nome: 'Sofia'),
@@ -37,9 +39,18 @@ class ChatPage extends StatelessWidget {
             return Column(
               children: <Widget>[
                 Expanded(
-                  child: Container(),
-
-                  ///build Message here
+                  child: Container(
+                    child: ListView.builder(
+                      padding: EdgeInsets.only(
+                          right: 10, left: 10, top: 10, bottom: 10),
+                      itemBuilder: (context, index) {
+                        return ChatMessage();
+                      },
+                      itemCount: 2,
+                      reverse: true,
+                      controller: listScrollController,
+                    ),
+                  ),
                 ),
                 ChatInputArea(
                   chatBloc: chatBloc,
