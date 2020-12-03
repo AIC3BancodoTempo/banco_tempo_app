@@ -26,6 +26,7 @@ Aplicativo para banco do tempo de Rio Grande
 
 [UI](https://www.figma.com/file/REzChgtpWAinmgFMwg7YML/Banco-do-tempo)
 
+[myreli](https://myreli.dev)
 ## Primeira execução
 
 - flutter pub get
