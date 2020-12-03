@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/chat/components/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,6 +5,7 @@ import '../../blocs/chat/chat_bloc.dart';
 import '../core/loading.dart';
 import 'components/app_bar.dart';
 import 'components/input_area.dart';
+import 'components/message_bubble.dart';
 
 class Chat extends StatelessWidget {
   //Chat({});

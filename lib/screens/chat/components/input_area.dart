@@ -1,8 +1,8 @@
-import 'package:banco_do_tempo_app/screens/chat/components/text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
 import 'send_button.dart';
+import 'text_field.dart';
 
 class ChatInputArea extends StatelessWidget {
   final ChatBloc chatBloc;
