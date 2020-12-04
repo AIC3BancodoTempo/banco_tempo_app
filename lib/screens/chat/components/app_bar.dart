@@ -5,7 +5,9 @@ import '../../core/colors.dart';
 import '../../core/profile_image.dart';
 import '../../core/return_button.dart';
 import 'app_bar_action.dart';
+import 'exchange_dialog.dart';
 import 'profile_description.dart';
+import 'report_dialog.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final ChatBloc chatBloc;
@@ -19,14 +21,6 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   void onCloseEvent() {
     chatBloc.close();
-  }
-
-  void onReportEvent() {
-    chatBloc.add(ExchangeEvent());
-  }
-
-  void onExchangeEvent() {
-    chatBloc.add(ReportEvent());
   }
 
   @override
@@ -69,12 +63,17 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     ChatAppBarAction(
-                        onPressEvent: onReportEvent, icon: Icons.warning),
+                        onPressEvent: () {
+                          buildReportDialog(context, chatBloc);
+                        },
+                        icon: Icons.warning),
                     SizedBox(
                       width: 5,
                     ),
                     ChatAppBarAction(
-                        onPressEvent: onExchangeEvent,
+                        onPressEvent: () {
+                          buildExchangeDialog(context, chatBloc, "Yoga", 1, 1);
+                        },
                         icon: Icons.multiple_stop_sharp)
                   ],
                 )
