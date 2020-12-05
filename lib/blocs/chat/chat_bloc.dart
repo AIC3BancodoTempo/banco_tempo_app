@@ -20,6 +20,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     } else if (event is SendMessageEvent) {
       print(event.message);
     } else if (event is ReportEvent) {
+      print(event.report);
     } else if (event is ExchangeEvent) {}
   }
 }

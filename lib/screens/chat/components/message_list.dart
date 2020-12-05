@@ -11,7 +11,7 @@ class ChatMessageList extends StatelessWidget {
         padding: EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 10),
         itemBuilder: (context, index) {
           return ChatMessageArea(
-            recebidoEnviado: "1" == index.toString(),
+            recebidoEnviado: index % 2 == 0,
             visualizado: true,
             fromImageUrl:
                 "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg",
@@ -19,7 +19,7 @@ class ChatMessageList extends StatelessWidget {
             message: 'Meu sorvete',
           );
         },
-        itemCount: 2,
+        itemCount: 6,
         reverse: true,
         controller: listScrollController,
       ),

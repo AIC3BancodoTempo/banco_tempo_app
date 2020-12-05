@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
+import '../../core/app_barr_action.dart';
 import '../../core/colors.dart';
 import '../../core/profile_image.dart';
 import '../../core/return_button.dart';
-import 'app_bar_action.dart';
 import 'exchange_dialog.dart';
 import 'profile_description.dart';
 import 'report_dialog.dart';
@@ -62,7 +62,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    ChatAppBarAction(
+                    AppBarAction(
                         onPressEvent: () {
                           buildReportDialog(context, chatBloc);
                         },
@@ -70,7 +70,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    ChatAppBarAction(
+                    AppBarAction(
                         onPressEvent: () {
                           buildExchangeDialog(context, chatBloc, "Yoga", 1, 1);
                         },

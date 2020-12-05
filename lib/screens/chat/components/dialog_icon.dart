@@ -13,7 +13,7 @@ class ChatDialogIcon extends StatelessWidget {
       left: padding,
       right: padding,
       child: CircleAvatar(
-        backgroundColor: chatActionsColor.withOpacity(0.9),
+        backgroundColor: themeColor.withOpacity(0.9),
         radius: avatarRadius,
         child: Icon(icon, color: Colors.white, size: 50),
       ),

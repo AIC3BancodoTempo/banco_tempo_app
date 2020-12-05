@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
 import 'dialog_icon.dart';
+import 'exchange_dialog_body.dart';
 
 buildExchangeDialog(BuildContext context, ChatBloc chatBloc, String nome,
     int unidade, int horasUtilizadas) {
@@ -60,50 +61,12 @@ class CustomDialog extends StatelessWidget {
                 offset: const Offset(0.0, 10.0),
               )
             ]),
-        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          Text(
-            "Confirmar a troca?",
-            style: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          SizedBox(height: 16.0),
-          Text(
-            "Nome: " + nome,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(height: 16.0),
-          Text(
-            "Unidade: " + unidade.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(height: 16.0),
-          Text(
-            "Consumo de horas: " + horasUtilizadas.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
-          SizedBox(height: 24.0),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: FlatButton(
-              onPressed: () {
-                chatBloc.add(ExchangeEvent());
-                Navigator.of(context).pop();
-              },
-              child: Text("Trocar"),
-            ),
-          ),
-        ]),
+        child: ExchangeDialogBody(
+          chatBloc: chatBloc,
+          horasUtilizadas: horasUtilizadas,
+          nome: nome,
+          unidade: unidade,
+        ),
       ),
       ChatDialogIcon(icon: Icons.multiple_stop_sharp),
     ]);

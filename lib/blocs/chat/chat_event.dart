@@ -9,9 +9,15 @@ abstract class ChatEvent extends Equatable {
 
 class ChatStartedEvent extends ChatEvent {}
 
-class ReportEvent extends ChatEvent {}
+class ReportEvent extends ChatEvent {
+  final String report;
+
+  ReportEvent({@required this.report});
+}
 
 class ExchangeEvent extends ChatEvent {}
+
+class UploadImageEvent extends ChatEvent {}
 
 class SendMessageEvent extends ChatEvent {
   final String message;
