@@ -17,7 +17,11 @@ class ReportEvent extends ChatEvent {
 
 class ExchangeEvent extends ChatEvent {}
 
-class UploadImageEvent extends ChatEvent {}
+class UploadImageEvent extends ChatEvent {
+  final File image;
+
+  UploadImageEvent({@required this.image});
+}
 
 class SendMessageEvent extends ChatEvent {
   final String message;

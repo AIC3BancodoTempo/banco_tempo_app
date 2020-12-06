@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,6 +22,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       print(event.message);
     } else if (event is ReportEvent) {
       print(event.report);
-    } else if (event is ExchangeEvent) {}
+    } else if (event is ExchangeEvent) {
+    } else if (event is UploadImageEvent) {
+      if (event.image != null) {
+        print('image received');
+      }
+    }
   }
 }
