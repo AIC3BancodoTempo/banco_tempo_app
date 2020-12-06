@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:banco_do_tempo_app/screens/core/image_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
 import '../../core/circle_button.dart';
 import '../../core/colors.dart';
+import '../../core/image_picker.dart';
 
 class ExchangeDialogBody extends StatelessWidget {
   final ChatBloc chatBloc;
