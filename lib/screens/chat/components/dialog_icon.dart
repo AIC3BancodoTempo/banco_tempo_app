@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/colors.dart';
 
 class ChatDialogIcon extends StatelessWidget {
   final IconData icon;
