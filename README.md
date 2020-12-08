@@ -37,4 +37,4 @@ Aplicativo para banco do tempo de Rio Grande
 
 - assets
     - logo -> logo do banco do tempo
-    - images -> imagens disponíveis no aplicativo
+    - images -> imagens disponíveis no aplicativo.
