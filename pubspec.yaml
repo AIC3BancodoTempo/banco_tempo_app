@@ -22,9 +22,10 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutter    
 
   equatable: ^1.2.5
+  carousel_slider: ^2.3.1
   flutter_bloc: ^6.1.1
   meta:
   # The following adds the Cupertino Icons font to your application.
@@ -34,12 +35,21 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  simple_animations: ^1.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/dm-sans-regular.ttf
+
+  assets:
+   - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
