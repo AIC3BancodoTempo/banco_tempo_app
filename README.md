@@ -4,7 +4,7 @@ Aplicativo para banco do tempo de Rio Grande
 
 ## Padrão de arquitetura
 
-["Bloc Pattern"]("https://www.youtube.com/watch?v=bLHSMirH3_o&list=PLOnrrPHXrrjRt7mRpXk-4BAB5DP8ECIWe&index=5&ab_channel=CODEVILLAGE")
+[Bloc Pattern](https://www.youtube.com/watch?v=bLHSMirH3_o&list=PLOnrrPHXrrjRt7mRpXk-4BAB5DP8ECIWe&index=5&ab_channel=CODEVILLAGE)
 
 ## Extensões Visual Studio Code
 

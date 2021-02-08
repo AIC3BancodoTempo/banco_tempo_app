@@ -1,4 +1,5 @@
 import 'package:banco_do_tempo_app/screens/TrocasAndamento.dart';
+import 'package:banco_do_tempo_app/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.purple[400],
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 class MyHomePage extends StatelessWidget {
   @override
