@@ -3,30 +3,16 @@ import 'dart:io';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Alterar Dados'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Profilescreen extends StatefulWidget {
+  Profilescreen({Key key, this.title}) : super(key: key);
 
   final String title;
-
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ProfilescreenState createState() => _ProfilescreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ProfilescreenState extends State<Profilescreen> {
+  @override
   File imageFile;
 
   _openGallery(BuildContext context) async {
