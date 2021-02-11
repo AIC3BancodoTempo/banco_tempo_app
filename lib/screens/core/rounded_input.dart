@@ -1,15 +1,15 @@
-import 'package:banco_do_tempo_app/components/text_field_container.dart';
 import 'package:banco_do_tempo_app/core/colors.dart';
+import 'package:banco_do_tempo_app/screens/core/text_field_container.dart';
 import 'package:flutter/material.dart';
 
-class RoundedInputName extends StatelessWidget {
+class RoundedInput extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
-  const RoundedInputName({
+  const RoundedInput({
     Key key,
     this.hintText,
-    this.icon = Icons.person,
+    this.icon,
     this.onChanged,
   }) : super(key: key);
 

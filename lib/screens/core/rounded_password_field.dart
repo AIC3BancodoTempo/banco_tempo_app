@@ -1,15 +1,12 @@
-import 'package:banco_do_tempo_app/components/text_field_container.dart';
 import 'package:banco_do_tempo_app/core/colors.dart';
 import 'package:flutter/material.dart';
 
-class RoundedInputEmail extends StatelessWidget {
-  final String hintText;
-  final IconData icon;
+import 'text_field_container.dart';
+
+class RoundedPasswordField extends StatelessWidget {
   final ValueChanged<String> onChanged;
-  const RoundedInputEmail({
+  const RoundedPasswordField({
     Key key,
-    this.hintText,
-    this.icon = Icons.email,
     this.onChanged,
   }) : super(key: key);
 
@@ -17,14 +14,19 @@ class RoundedInputEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        obscureText: true,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
+          hintText: "Senha",
           icon: Icon(
-            icon,
+            Icons.lock,
             color: kPrimaryColor,
           ),
-          hintText: hintText,
+          suffixIcon: Icon(
+            Icons.visibility,
+            color: kPrimaryColor,
+          ),
           border: InputBorder.none,
         ),
       ),
