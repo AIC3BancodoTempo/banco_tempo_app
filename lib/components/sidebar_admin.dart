@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/store/menu.dart';
 
-class sideBar extends StatelessWidget {
+class SideBarAdm extends StatelessWidget {
   final draweradmin = Drawer (
             child: ListView(
               children: <Widget>[
@@ -42,7 +41,7 @@ class sideBar extends StatelessWidget {
                   title: Text("Divulgações pendentes"),
                   onTap: () {},
                 ),
-
+                
                 ListTile(
 
                   trailing: Icon(Icons.article_outlined),
@@ -137,13 +136,10 @@ final draweruser = Drawer (
       
   );
 
-  MenuSelect menu = MenuSelect();
+
+
   @override
   Widget build(BuildContext context) {
-    if(menu.isAdmin){
       return draweradmin;
-    }else{
-      return draweruser;
-    };
   }
 }

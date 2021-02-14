@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/sidebar.dart';
+import 'components/sidebar_admin.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget{
         appBar: AppBar(
           title: Text(""),
         ),//AppBar
-        drawer:sideBar(),
+        drawer:SideBarAdm(),
         body: Center(
-      child: const Text('Press the button with a label below!'),
+      child: const Text('Inicial'),
     ),
       ),
     );
