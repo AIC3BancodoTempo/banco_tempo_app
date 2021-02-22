@@ -1,6 +1,5 @@
-import 'package:banco_do_tempo_app/screens/cadastros_e_descricaoCard/cadastro_habilidade.dart';
-import 'package:banco_do_tempo_app/screens/cadastros_e_descricaoCard/descricao_card.dart';
 import 'package:flutter/material.dart';
+import 'screens/cadastrosHabilidades/cadastro_habilidade.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +10,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MyCustomForm(),
+      home: AddAbilityPage(),
+      //MyDescriptionPage(),
     );
   }
 }

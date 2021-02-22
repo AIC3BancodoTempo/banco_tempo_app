@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
-import 'components/fields.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+import '../core/appBar.dart';
+import '../core/main_button.dart';
+import 'components/advertiser_description.dart';
+import 'components/carousel_image.dart';
+import 'components/chips.dart';
+import 'components/description_under_title.dart';
+import 'components/main_description_title.dart';
+import 'components/title_in_description.dart';
+import 'components/vertical_horizontal_space.dart';
+
+class MyDescriptionPage extends StatefulWidget {
+  MyDescriptionPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyDescriptionPageState createState() => _MyDescriptionPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyDescriptionPageState extends State<MyDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   spaceVertical(20),
                   anunciante(),
                   spaceVertical(20),
-                  product_button_message(),
+                  mainButton("TENHO INTERESSE", Icons.chat),
                 ],
               ),
             ),

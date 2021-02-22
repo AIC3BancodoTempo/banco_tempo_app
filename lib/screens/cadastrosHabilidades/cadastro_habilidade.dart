@@ -1,15 +1,19 @@
-import 'package:banco_do_tempo_app/screens/core/button.dart';
 import 'package:flutter/material.dart';
-import 'components/fields.dart';
 
-class MyCustomForm extends StatefulWidget {
+import '../core/appBar.dart';
+import '../core/main_button.dart';
+import 'components/add_image_button.dart';
+import 'components/insert_input_texts.dart';
+import 'components/title_add_text.dart';
+
+class AddAbilityPage extends StatefulWidget {
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  AddAbilityPageState createState() {
+    return AddAbilityPageState();
   }
 }
 
-class MyCustomFormState extends State<MyCustomForm> {
+class AddAbilityPageState extends State<AddAbilityPage> {
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
 
@@ -22,7 +26,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              descriptionText(
+              titleAddText(
                   'Adicione uma habilidade, serviço ou o que está procurando.'),
               insertInputs(
                 'Nome',
@@ -37,8 +41,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 'Quantidade Disponível',
               ),
               SizedBox(height: 50.0),
-              photoInclude(),
-              mainButton(),
+              ImageInclude(),
+              SizedBox(height: 30.0),
+              mainButton("CADASTRAR", Icons.login_rounded),
             ],
           ),
         ),
