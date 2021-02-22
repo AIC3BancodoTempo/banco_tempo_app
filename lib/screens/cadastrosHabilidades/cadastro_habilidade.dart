@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../core/appBar.dart';
 import '../core/main_button.dart';
 import 'components/add_image_button.dart';
 import 'components/insert_input_texts.dart';
@@ -20,30 +19,50 @@ class AddAbilityPageState extends State<AddAbilityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar('Descrição'),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {},
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFFA95EFA),
+        title: Text(
+          "Descrição",
+        ),
+      ),
       body: new SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
-              titleAddText(
-                  'Adicione uma habilidade, serviço ou o que está procurando.'),
-              insertInputs(
-                'Nome',
+              TitleAddText(
+                insertTitleHere:
+                    'Adicione uma habilidade, serviço ou o que está procurando.',
               ),
-              insertInputs(
-                'Quantia em Horas',
+              InsertInputs(
+                insertLabel: 'Nome',
+                onChanged: null,
               ),
-              insertInputs(
-                'Descrição',
+              InsertInputs(
+                insertLabel: 'Quantia em Horas',
+                onChanged: null,
               ),
-              insertInputs(
-                'Quantidade Disponível',
+              InsertInputs(
+                insertLabel: 'Descrição',
+                onChanged: null,
+              ),
+              InsertInputs(
+                insertLabel: 'Quantidade Disponível',
+                onChanged: null,
               ),
               SizedBox(height: 50.0),
               ImageInclude(),
               SizedBox(height: 30.0),
-              mainButton("CADASTRAR", Icons.login_rounded),
+              ButtonDescriptionAndAdd(
+                iconData: Icons.login_rounded,
+                onpress: () {},
+                text: "CADASTRAR",
+              ),
             ],
           ),
         ),
