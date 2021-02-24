@@ -2,9 +2,11 @@
 
 Aplicativo para banco do tempo de Rio Grande
 
+[Detalhes do projeto](https://docs.google.com/document/d/1x88PNOqaUK9KA9aSLZWdklQ2OCdgoQTLl_SQKOj1ivE/edit?usp=sharing)
+
 ## Padrão de arquitetura
 
-["Bloc Pattern"]("https://www.youtube.com/watch?v=bLHSMirH3_o&list=PLOnrrPHXrrjRt7mRpXk-4BAB5DP8ECIWe&index=5&ab_channel=CODEVILLAGE")
+[Bloc Pattern](https://www.youtube.com/watch?v=bLHSMirH3_o&list=PLOnrrPHXrrjRt7mRpXk-4BAB5DP8ECIWe&index=5&ab_channel=CODEVILLAGE)
 
 ## Extensões Visual Studio Code
 
@@ -37,4 +39,4 @@ Aplicativo para banco do tempo de Rio Grande
 
 - assets
     - logo -> logo do banco do tempo
-    - images -> imagens disponíveis no aplicativo
+    - images -> imagens disponíveis no aplicativo.
