@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/components/drawerHeaderUSER.dart';
 import 'package:flutter/material.dart';
 
 class SideBarUser extends StatelessWidget {
@@ -5,36 +6,7 @@ class SideBarUser extends StatelessWidget {
 final draweruser = Drawer (
             child: ListView(
               children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: 
-                  Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 35.0,
-                        ),//CircleAvatar
-                        ),//Align
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text ('Usuário',
-                          style: TextStyle(fontSize:20.0,),
-                          ),//Text
-                        ),//Align
-                        Align(
-                          alignment: Alignment.centerRight + Alignment(0, .3),
-                          child: Text('Horas acumuladas: 20:00',
-                          style: TextStyle(),
-                          ),
-                        ),
-                    ],
-                  ),
-                  
-                ),//DrawerHeader
+                DrawerHeaderUSER(),//DrawerHeader
                 ListTile(
 
                   trailing: Icon(Icons.article_outlined),

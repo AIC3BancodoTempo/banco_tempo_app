@@ -1,39 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:banco_do_tempo_app/components/drawerHeaderADM.dart';
 
 class SideBarAdm extends StatelessWidget {
   final draweradmin = Drawer (
             child: ListView(
               children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: 
-                  Stack(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 35.0,
-                        ),//CircleAvatar
-                        ),//Align
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text ('Admin',
-                          style: TextStyle(fontSize:20.0,),
-                          ),//Text
-                        ),//Align
-                        Align(
-                          alignment: Alignment.centerRight + Alignment(0, .3),
-                          child: Text('Horas acumuladas: 20:00',
-                          style: TextStyle(),
-                          ),
-                        ),
-                    ],
-                  ),
-                  
-                ),//DrawerHeader
+                DrawerHeaderADM(),//DrawerHeader
 
                 ListTile(
 
