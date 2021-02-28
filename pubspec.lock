@@ -56,6 +56,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.15.0-nullsafety.3"
   convert:
     dependency: transitive
@@ -64,13 +65,16 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+=======
+    version: "1.15.0-nullsafety.5"
+>>>>>>> origin/develop
   cupertino_icons:
     dependency: "direct main"
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1+1"
   equatable:
     dependency: "direct main"
     description:
@@ -97,6 +101,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.1"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -111,11 +116,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.19.1"
+=======
+>>>>>>> origin/develop
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   http:
     dependency: transitive
     description:
@@ -151,6 +159,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+=======
+>>>>>>> origin/develop
   matcher:
     dependency: transitive
     description:
@@ -178,6 +188,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.8.0-nullsafety.1"
   path_drawing:
     dependency: transitive
@@ -214,6 +225,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+=======
+    version: "1.8.0-nullsafety.3"
+>>>>>>> origin/develop
   provider:
     dependency: transitive
     description:
@@ -281,6 +295,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.1.0-nullsafety.3"
   xml:
     dependency: transitive
@@ -292,3 +307,9 @@ packages:
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
   flutter: ">=1.18.0-6.0.pre <2.0.0"
+=======
+    version: "2.1.0-nullsafety.5"
+sdks:
+  dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.16.0"
+>>>>>>> origin/develop
