@@ -1,5 +1,6 @@
+import 'package:banco_do_tempo_app/screens/TrocasAndamento.dart';
+import 'package:banco_do_tempo_app/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/screens/resgister_questionary/custom_register_questionary_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,51 +13,40 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.purple[400],
+        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/trocas_andamento': (context) => TrocasAndamento(),
+      },
+      initialRoute: '/',
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> routes = [
+      {'Trocas em andamento': '/trocas_andamento'},
+    ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Início"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(child: CustomFormState()),
-
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: routes.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, routes[index].values.first);
+            },
+            title: Text(routes[index].keys.first),
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

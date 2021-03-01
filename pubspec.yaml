@@ -22,13 +22,14 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
-
+    sdk: flutter    
+  
   equatable: ^1.2.5
+  image_picker: ^0.6.7+22
+  carousel_slider: ^2.3.1
   flutter_bloc: ^6.1.1
   meta:
   intl: ^0.16.1 
-  image_picker: ^0.6.7+14
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -43,6 +44,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/dm-sans-regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
