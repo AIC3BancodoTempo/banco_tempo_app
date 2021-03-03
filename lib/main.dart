@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget{
     home: MyHomePage(),
 
       routes: {
-        '/': (context) => MyHomePage(),
+       
         '/trocas_andamento': (context) => TrocasAndamento(),
       },
       initialRoute: '/',

@@ -1,12 +1,12 @@
-import 'package:banco_do_tempo_app/components/drawerHeaderUSER.dart';
+import 'package:banco_do_tempo_app/components/drawerHeaderGeral.dart';
 import 'package:flutter/material.dart';
 
-class SideBarUser extends StatelessWidget {
+class SideBarGeral extends StatelessWidget {
 
 final draweruser = Drawer (
             child: ListView(
               children: <Widget>[
-                DrawerHeaderUSER(),//DrawerHeader
+                DrawerHeaderGeral(),//DrawerHeader
                 ListTile(
 
                   trailing: Icon(Icons.article_outlined),

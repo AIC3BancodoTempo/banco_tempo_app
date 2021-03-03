@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/components/drawerHeaderADM.dart';
+import 'package:banco_do_tempo_app/components/drawerHeaderGeral.dart';
 
 class SideBarAdm extends StatelessWidget {
   final draweradmin = Drawer (
             child: ListView(
               children: <Widget>[
-                DrawerHeaderADM(),//DrawerHeader
+                DrawerHeaderGeral(),//DrawerHeader
 
                 ListTile(
 

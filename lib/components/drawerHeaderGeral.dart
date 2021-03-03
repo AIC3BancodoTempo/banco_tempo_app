@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DrawerHeaderADM extends StatelessWidget {
+class DrawerHeaderGeral extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DrawerHeader(
@@ -19,7 +19,7 @@ class DrawerHeaderADM extends StatelessWidget {
                         ),//Align
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Text ('Adm',
+                          child: Text ('Nome Pessoa',
                           style: TextStyle(fontSize:20.0,),
                           ),//Text
                         ),//Align
