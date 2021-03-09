@@ -1,24 +1,26 @@
 import 'package:banco_do_tempo_app/screens/TrocasAndamento.dart';
 import 'package:banco_do_tempo_app/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'components/sidebar_admin.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: ThemeData(   
         primaryColor: Colors.purple[400],
         primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+    home: MyHomePage(),
+
       routes: {
-        '/': (context) => MyHomePage(),
+       
         '/trocas_andamento': (context) => TrocasAndamento(),
       },
       initialRoute: '/',
@@ -36,6 +38,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Início"),
       ),
+      drawer:SideBarAdm(),
       body: ListView.builder(
         itemCount: routes.length,
         itemBuilder: (BuildContext context, int index) {
