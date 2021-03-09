@@ -2,7 +2,7 @@ import 'package:banco_do_tempo_app/screens/TrocasAndamento.dart';
 import 'package:banco_do_tempo_app/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'components/sidebar_admin.dart';
-
+import 'screens/profile/profilescreens.dart';
 
 
 void main() => runApp(MyApp());
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget{
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     home: MyHomePage(),
-
       routes: {
        
         '/trocas_andamento': (context) => TrocasAndamento(),
+        '/profile': (context) => Profilescreen(),
       },
       initialRoute: '/',
     );

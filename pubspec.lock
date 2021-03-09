@@ -106,6 +106,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.4"
+
   characters:
     dependency: transitive
     description:
@@ -148,6 +149,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.5.0"
+
   collection:
     dependency: transitive
     description:
@@ -290,7 +292,7 @@ packages:
       name: image_picker_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.6"
   intl:
     dependency: "direct main"
     description:
