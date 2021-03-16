@@ -1,4 +1,4 @@
-import 'package:banco_do_tempo_app/screens/my_posts/core/PostCard.dart';
+import 'package:banco_do_tempo_app/screens/my_posts/core/my_post_card.dart';
 import 'package:flutter/material.dart';
 
 class MyPosts extends StatefulWidget {
