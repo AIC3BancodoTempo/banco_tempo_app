@@ -4,19 +4,18 @@ class NewCard extends StatelessWidget {
   final String service;
   final String hour;
   final String amount;
+  final String imgUrl;
   final Function press;
 
   const NewCard({
-    Key key,
-    this.hour,
-    this.service,
-    this.amount,
-    this.press,
-  }) : super(key: key);
+    @required this.hour,
+    @required this.service,
+    @required this.amount,
+    @required this.imgUrl,
+    this.press});
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
         child: Card(
           child: InkWell(
@@ -28,8 +27,7 @@ class NewCard extends StatelessWidget {
             padding: EdgeInsets.all(5.0),
             child: Column(
               children: <Widget>[
-                Image.network(
-                    "https://flutter.io/images/catalog-widget-placeholder.png"),
+                Image.network(imgUrl, scale: 2.0,),
                 Text(service),
                 Text(hour),
                 Text(amount),
