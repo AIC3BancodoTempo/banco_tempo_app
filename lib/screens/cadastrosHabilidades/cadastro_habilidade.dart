@@ -3,7 +3,6 @@ import '../core/main_button.dart';
 import 'components/add_image_button.dart';
 import 'components/insert_input_texts.dart';
 import 'components/title_add_text.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -67,8 +66,6 @@ class AddAbilityPageState extends State<AddAbilityPage> {
                 text: "CADASTRAR",
               ),
               SizedBox(height: 30.0),
-              //NECESSÁRIO INICIALIZAR O FIREBASE (Firebase.initializeApp(),)
-              //PARA RODAR O firebase_picture_uploader.
               PictureUploadWidget(
                 onPicturesChange: profilePictureCallback,
                 initialImages: _profilePictures,
