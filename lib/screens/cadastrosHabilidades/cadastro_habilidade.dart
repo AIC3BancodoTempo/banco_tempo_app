@@ -15,7 +15,7 @@ class AddAbilityPage extends StatefulWidget {
 }
 
 class AddAbilityPageState extends State<AddAbilityPage> {
-  //List<UploadJob> _profilePictures = [];
+  List<UploadJob> _profilePictures = [];
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
 
@@ -69,7 +69,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
               SizedBox(height: 30.0),
               //NECESSÁRIO INICIALIZAR O FIREBASE (Firebase.initializeApp(),)
               //PARA RODAR O firebase_picture_uploader.
-              /*PictureUploadWidget(
+              PictureUploadWidget(
                 onPicturesChange: profilePictureCallback,
                 initialImages: _profilePictures,
                 settings:
@@ -77,7 +77,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
                 buttonStyle: PictureUploadButtonStyle(),
                 buttonText: 'Upload Picture',
                 enabled: true,
-              ),*/
+              ),
             ],
           ),
         ),
@@ -85,13 +85,13 @@ class AddAbilityPageState extends State<AddAbilityPage> {
     );
   }
 
-  /*void onErrorCallback(error, stackTrace) {
+  void onErrorCallback(error, stackTrace) {
     print(error);
     print(stackTrace);
-  }*/
+  }
 
-  /*void profilePictureCallback(
+  void profilePictureCallback(
       {List<UploadJob> uploadJobs, bool pictureUploadProcessing}) {
     _profilePictures = uploadJobs;
-  }*/
+  }
 }
