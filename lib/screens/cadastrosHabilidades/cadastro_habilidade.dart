@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../core/main_button.dart';
 import 'components/add_image_button.dart';
 import 'components/insert_input_texts.dart';
 import 'components/title_add_text.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class AddAbilityPage extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class AddAbilityPage extends StatefulWidget {
 }
 
 class AddAbilityPageState extends State<AddAbilityPage> {
+  //List<UploadJob> _profilePictures = [];
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
 
@@ -63,10 +66,32 @@ class AddAbilityPageState extends State<AddAbilityPage> {
                 onpress: () {},
                 text: "CADASTRAR",
               ),
+              SizedBox(height: 30.0),
+              //NECESSÁRIO INICIALIZAR O FIREBASE (Firebase.initializeApp(),)
+              //PARA RODAR O firebase_picture_uploader.
+              /*PictureUploadWidget(
+                onPicturesChange: profilePictureCallback,
+                initialImages: _profilePictures,
+                settings:
+                    PictureUploadSettings(onErrorFunction: onErrorCallback),
+                buttonStyle: PictureUploadButtonStyle(),
+                buttonText: 'Upload Picture',
+                enabled: true,
+              ),*/
             ],
           ),
         ),
       ),
     );
   }
+
+  /*void onErrorCallback(error, stackTrace) {
+    print(error);
+    print(stackTrace);
+  }*/
+
+  /*void profilePictureCallback(
+      {List<UploadJob> uploadJobs, bool pictureUploadProcessing}) {
+    _profilePictures = uploadJobs;
+  }*/
 }
