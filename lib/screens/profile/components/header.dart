@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:banco_do_tempo_app/screens/profile/components/image_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'image_profile.dart';
 
 class ProfileHeader extends StatefulWidget {
   @override

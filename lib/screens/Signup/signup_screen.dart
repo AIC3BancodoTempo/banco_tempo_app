@@ -1,3 +1,4 @@
+import '../../blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -8,6 +9,9 @@ import '../core/rounded_password_field.dart';
 import '../login/login_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
+  final AuthBloc authBloc;
+
+  const SignUpScreen({Key key, this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

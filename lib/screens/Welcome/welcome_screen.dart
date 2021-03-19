@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../core/colors.dart';
+import '../../blocs/auth/auth_bloc.dart';
 import '../Signup/signup_screen.dart';
+import '../core/colors.dart';
 import '../core/rounded_button.dart';
 import '../login/login_screen.dart';
 
-// ignore: must_be_immutable
 class WelcomeScreen extends StatelessWidget {
+  final AuthBloc authBloc;
+
+  const WelcomeScreen({Key key, this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -43,14 +46,7 @@ class WelcomeScreen extends StatelessWidget {
                   RoundedButton(
                     text: "LOGIN",
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginScreen();
-                          },
-                        ),
-                      );
+                      authBloc.add(LoginEvent());
                     },
                   ),
                   RoundedButton(
@@ -58,14 +54,7 @@ class WelcomeScreen extends StatelessWidget {
                     color: kPrimaryLightColor,
                     textColor: Colors.black,
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return SignUpScreen();
-                          },
-                        ),
-                      );
+                      authBloc.add(SignupEvent());
                     },
                   ),
                 ],
