@@ -34,7 +34,9 @@ class Run extends StatelessWidget {
       home: App(setUser: setUser),
       routes: {
         '/trocasAndamento': (context) => TrocasAndamento(),
-        '/chat': (context) => Chat(),
+        '/chat': (context) => Chat(
+              user: user,
+            ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
         '/profile': (context) => Profilescreen(),
