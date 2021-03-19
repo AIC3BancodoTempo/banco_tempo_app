@@ -8,8 +8,8 @@ import 'components/fields.dart';
 import 'components/main_description_title.dart';
 import 'components/title_in_description.dart';
 
-class MyDescriptionPage extends StatefulWidget {
-  MyDescriptionPage({Key key, this.title}) : super(key: key);
+class AbilityDescriptionPage extends StatefulWidget {
+  AbilityDescriptionPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -17,7 +17,7 @@ class MyDescriptionPage extends StatefulWidget {
   _MyDescriptionPageState createState() => _MyDescriptionPageState();
 }
 
-class _MyDescriptionPageState extends State<MyDescriptionPage> {
+class _MyDescriptionPageState extends State<AbilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

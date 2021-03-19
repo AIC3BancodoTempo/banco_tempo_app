@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/core/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;

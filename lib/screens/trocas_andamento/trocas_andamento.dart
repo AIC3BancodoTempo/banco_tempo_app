@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'core/card_trocas_andamento.dart';
+import '../core/card_trocas_andamento.dart';
 
 class TrocasAndamento extends StatefulWidget {
   @override
