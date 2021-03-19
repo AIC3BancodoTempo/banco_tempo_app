@@ -6,12 +6,11 @@ import '../core/already_have_an_account_acheck.dart';
 import '../core/rounded_button.dart';
 import '../core/rounded_input.dart';
 import '../core/rounded_password_field.dart';
-import '../login/login_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  const SignUpScreen({Key key, this.authBloc}) : super(key: key);
+  const SignUpScreen({Key key, @required this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -72,14 +71,7 @@ class SignUpScreen extends StatelessWidget {
                   AlreadyHaveAnAccountCheck(
                     login: false,
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginScreen();
-                          },
-                        ),
-                      );
+                      authBloc.add(LoginEvent());
                     },
                   ),
                 ],

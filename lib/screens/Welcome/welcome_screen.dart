@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
-import '../Signup/signup_screen.dart';
 import '../core/colors.dart';
 import '../core/rounded_button.dart';
-import '../login/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  const WelcomeScreen({Key key, this.authBloc}) : super(key: key);
+  const WelcomeScreen({Key key, @required this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

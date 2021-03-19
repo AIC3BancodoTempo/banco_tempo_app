@@ -11,7 +11,7 @@ import '../core/rounded_password_field.dart';
 class LoginScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  LoginScreen({Key key, this.authBloc}) : super(key: key);
+  LoginScreen({Key key, @required this.authBloc}) : super(key: key);
   final TextEditingController emailCntrlr = TextEditingController();
   final TextEditingController passCntrlr = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -58,11 +58,12 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: size.height * 0.03),
                     RoundedInput(
-                      hintText: "Seu e-mail",
-                      controller: emailCntrlr,
-                      icon: Icons.mail,
-                    ),
-                    RoundedPasswordField(controller: passCntrlr),
+                        hintText: "Seu e-mail",
+                        controller: emailCntrlr,
+                        icon: Icons.mail,
+                        validator: validateEmail),
+                    RoundedPasswordField(
+                        controller: passCntrlr, validator: validateSenha),
                     RoundedButton(
                       text: "LOGIN",
                       press: () {
