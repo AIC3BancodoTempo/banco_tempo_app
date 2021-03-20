@@ -1,7 +1,7 @@
-import '../../blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../blocs/auth/auth_bloc.dart';
 import '../core/already_have_an_account_acheck.dart';
 import '../core/rounded_button.dart';
 import '../core/rounded_input.dart';

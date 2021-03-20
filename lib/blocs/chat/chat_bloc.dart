@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:banco_do_tempo_app/core/models/chat_model.dart';
-import 'package:banco_do_tempo_app/core/models/troca_model.dart';
-import 'package:banco_do_tempo_app/resources/chat/firestore_chat.dart';
-import 'package:banco_do_tempo_app/resources/storage/firebase_storage.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../core/models/chat_model.dart';
+import '../../core/models/troca_model.dart';
+import '../../resources/chat/firestore_chat.dart';
+import '../../resources/storage/firebase_storage.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';

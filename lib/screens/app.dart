@@ -1,4 +1,4 @@
-import 'package:banco_do_tempo_app/screens/welcome/welcome_screen.dart';
+import 'welcome/welcome_screen.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';

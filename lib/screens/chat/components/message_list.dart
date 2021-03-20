@@ -1,4 +1,4 @@
-import 'package:banco_do_tempo_app/core/models/chat_model.dart';
+import '../../../core/models/chat_model.dart';
 import 'package:flutter/material.dart';
 
 import 'message_area.dart';
