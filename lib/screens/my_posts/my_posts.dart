@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/screens/my_posts/core/my_post_card.dart';
 import 'package:flutter/material.dart';
+
+import '../core/my_post_card.dart';
 
 class MyPosts extends StatefulWidget {
   @override
