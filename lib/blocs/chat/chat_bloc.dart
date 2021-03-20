@@ -48,7 +48,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             ChatModel chat = ChatModel.fromSnapshot(data, element);
             int index =
                 chatList.indexWhere((element) => chat.key == element.key);
-            if (index > 0)
+            if (index >= 0)
               chatList[index] = chat;
             else
               chatList.insert(0, chat);
@@ -60,6 +60,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           });
         });
       }
+      yield ShowMessagesState();
     } else if (event is ReceivedEvent) {
       if (event.userId != event.fromId && event.visualizado == false) {
         _chatRepository.receivedCheck(trocaModel.salaId, event.messageId);
@@ -74,16 +75,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           timestamp: DateTime.now().millisecondsSinceEpoch.toString());
       _chatRepository.addChat(trocaModel.salaId, chat);
     } else if (event is SendImageEvent) {
-      String image = await _storageRepository.sendChatFile(
-          event.imageFile.readAsBytesSync(),
-          DateTime.now().millisecondsSinceEpoch.toString());
-      ChatModel chat = ChatModel(
-          content: "",
-          url: image,
-          fromId: user.uid,
-          type: 2,
-          timestamp: DateTime.now().millisecondsSinceEpoch.toString());
-      _chatRepository.addChat(trocaModel.salaId, chat);
+      // String image = await _storageRepository.sendChatFile(
+      //     event.imageFile.readAsBytesSync(),
+      //     DateTime.now().millisecondsSinceEpoch.toString());
+      // ChatModel chat = ChatModel(
+      //     content: "",
+      //     url: image,
+      //     fromId: user.uid,
+      //     type: 2,
+      //     timestamp: DateTime.now().millisecondsSinceEpoch.toString());
+      // _chatRepository.addChat(trocaModel.salaId, chat);
     } else if (event is GetMoreMessagesEvent) {
       chatList += await _chatRepository.getMoreMessages(
           trocaModel.salaId, chatList.last.documentSnapshot);

@@ -25,5 +25,3 @@ class SignupState extends AuthState {}
 class ForgotState extends AuthState {}
 
 class LoginState extends AuthState {}
-
-class GoToHomeState extends AuthState {}

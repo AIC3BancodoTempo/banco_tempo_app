@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/screens/services/components/item_card.dart';
+
+import 'item_card.dart';
 
 class Cards extends StatefulWidget {
   @override

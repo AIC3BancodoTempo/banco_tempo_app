@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../core/colors.dart';
 import '../core/drawer/sidebar_user.dart';
 import 'components/cards.dart';
 
@@ -13,7 +14,7 @@ class Services extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: themeColor,
         centerTitle: true,
         title: const Text('Serviços/Habilidades'),
         actions: <Widget>[

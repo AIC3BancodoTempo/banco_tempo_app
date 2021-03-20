@@ -1,13 +1,12 @@
-import 'services/services.dart';
-import 'welcome/welcome_screen.dart';
-
-import '../blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/auth/auth_bloc.dart';
 import 'Signup/signup_screen.dart';
 import 'core/ui.dart';
 import 'login/login_screen.dart';
+import 'services/services.dart';
+import 'welcome/welcome_screen.dart';
 
 class App extends StatelessWidget {
   final Function setUser;
@@ -62,7 +61,7 @@ class _AppPageState extends State<AppPage> {
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
-          if (state is GoToHomeState) {
+          if (state is AuthenticatedState) {
             return Services(
               authBloc: authBloc,
             );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class BuildAppBar extends PreferredSize {
   final String insertText;
 
@@ -12,7 +14,7 @@ class BuildAppBar extends PreferredSize {
         onPressed: () {},
       ),
       centerTitle: true,
-      backgroundColor: Color(0xFFA95EFA),
+      backgroundColor: themeColor,
       title: Text(
         insertText,
       ),

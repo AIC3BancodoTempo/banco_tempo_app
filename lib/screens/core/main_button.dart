@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import 'colors.dart';
+
 class ButtonDescriptionAndAdd extends StatelessWidget {
   final String text;
   final IconData iconData;
@@ -19,7 +21,7 @@ class ButtonDescriptionAndAdd extends StatelessWidget {
       minWidth: 300,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Color(0xFFA95EFA),
+          primary: themeColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../core/colors.dart';
+import '../../core/navigation.dart';
+
 class ItemCard extends StatelessWidget {
   final String service;
   final String hour;
@@ -19,9 +22,9 @@ class ItemCard extends StatelessWidget {
     return Container(
       child: Card(
         child: InkWell(
-          splashColor: Colors.purpleAccent,
+          splashColor: themeColor,
           onTap: () {
-            print('Card tapped.');
+            navigateToExchangeDetailsScreen(context);
           },
           child: Container(
             margin: EdgeInsets.all(1),

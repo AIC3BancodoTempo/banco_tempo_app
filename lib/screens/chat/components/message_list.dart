@@ -1,6 +1,6 @@
-import '../../../core/models/chat_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/models/chat_model.dart';
 import 'message_area.dart';
 
 class ChatMessageList extends StatelessWidget {

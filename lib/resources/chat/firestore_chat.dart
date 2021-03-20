@@ -83,8 +83,8 @@ class ChatRepository {
         .collection('chat')
         .doc(docId)
         .collection("mensagens")
-        .startAfterDocument(docRef)
         .orderBy('timestamp', descending: true)
+        .startAfterDocument(docRef)
         .limit(20)
         .get();
     if (snapshot.size > 0) {
