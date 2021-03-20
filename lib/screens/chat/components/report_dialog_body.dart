@@ -51,7 +51,7 @@ class ReportDialogBody extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -60,7 +60,7 @@ class ReportDialogBody extends StatelessWidget {
                         style: TextStyle(color: themeColor),
                       ),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         chatBloc.add(ReportEvent(report: controller.text));
                         Navigator.of(context).pop();

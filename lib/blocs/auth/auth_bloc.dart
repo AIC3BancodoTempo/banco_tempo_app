@@ -15,6 +15,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial());
   User user;
   StreamSubscription _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
+  }
+
   @override
   Stream<AuthState> mapEventToState(
     AuthEvent event,
