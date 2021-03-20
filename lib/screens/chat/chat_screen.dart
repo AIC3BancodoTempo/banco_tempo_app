@@ -57,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     chatBloc = BlocProvider.of<ChatBloc>(context);
     return Scaffold(
-      appBar: ChatAppBar(chatBloc: chatBloc, descricao: 'Yoga', nome: 'Sofia'),
+      appBar: ChatAppBar(chatBloc: chatBloc),
       body: BlocListener<ChatBloc, ChatState>(
         listener: (contextListener, state) {},
         child: BlocBuilder<ChatBloc, ChatState>(builder: (context, state) {

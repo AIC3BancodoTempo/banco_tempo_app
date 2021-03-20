@@ -11,10 +11,8 @@ import 'report_dialog.dart';
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   final ChatBloc chatBloc;
-  final String nome;
-  final String descricao;
 
-  ChatAppBar({this.chatBloc, this.nome, this.descricao});
+  ChatAppBar({this.chatBloc});
 
   @override
   Size get preferredSize => const Size.fromHeight(70);
@@ -52,9 +50,11 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 12,
                       ),
                       ChatProfileDescription(
-                        nome: nome,
-                        descricao: descricao,
-                      ),
+                          nome: chatBloc.trocaModel.userConsumerId ==
+                                  chatBloc.user.uid
+                              ? chatBloc.trocaModel.userPostName
+                              : chatBloc.trocaModel.userConsumerName,
+                          descricao: chatBloc.trocaModel.productName),
                       SizedBox(
                         width: 12,
                       ),
@@ -72,7 +72,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     AppBarAction(
                         onPressEvent: () {
-                          buildExchangeDialog(context, chatBloc, "Yoga", 1, 1);
+                          buildExchangeDialog(context, chatBloc);
                         },
                         icon: Icons.multiple_stop_sharp)
                   ],
