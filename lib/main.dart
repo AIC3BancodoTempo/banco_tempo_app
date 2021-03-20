@@ -1,3 +1,6 @@
+
+import 'screens/my_posts/MyPosts.dart';
+import 'screens/pending_posts/PendingPosts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +43,8 @@ class Run extends StatelessWidget {
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
         '/profile': (context) => Profilescreen(),
+        '/my_posts': (context) => MyPosts(),
+        '/pending_posts': (context) => PendingPosts(),
       },
       initialRoute: '/',
     );
