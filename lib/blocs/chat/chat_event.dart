@@ -9,22 +9,41 @@ abstract class ChatEvent extends Equatable {
 
 class ChatStartedEvent extends ChatEvent {}
 
-class ReportEvent extends ChatEvent {
-  final String report;
-
-  ReportEvent({@required this.report});
-}
-
-class ExchangeEvent extends ChatEvent {}
-
-class UploadImageEvent extends ChatEvent {
-  final File image;
-
-  UploadImageEvent({@required this.image});
+class ReceivedEvent extends ChatEvent {
+  final String messageId, userId, fromId;
+  final bool visualizado;
+  ReceivedEvent({this.fromId, this.visualizado, this.userId, this.messageId});
+  @override
+  List<Object> get props => [messageId, userId, fromId, visualizado];
 }
 
 class SendMessageEvent extends ChatEvent {
   final String message;
-
-  SendMessageEvent({@required this.message});
+  SendMessageEvent({
+    this.message,
+  });
+  @override
+  List<Object> get props => [message];
 }
+
+class SendImageEvent extends ChatEvent {
+  final File imageFile;
+  SendImageEvent({
+    this.imageFile,
+  });
+  @override
+  List<Object> get props => [imageFile];
+}
+
+class ExchangeEvent extends ChatEvent {}
+
+class ReportEvent extends ChatEvent {
+  final String report;
+
+  ReportEvent({this.report});
+
+  @override
+  List<Object> get props => [report];
+}
+
+class GetMoreMessagesEvent extends ChatEvent {}

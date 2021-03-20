@@ -1,57 +1,52 @@
-import 'package:banco_do_tempo_app/screens/my_posts/MyPosts.dart';
-import 'package:banco_do_tempo_app/screens/pending_posts/PendingPosts.dart';
-import 'package:banco_do_tempo_app/screens/chat/chat_screen.dart';
+
+import 'screens/my_posts/MyPosts.dart';
+import 'screens/pending_posts/PendingPosts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+import 'screens/app.dart';
+import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
+import 'screens/chat/chat_screen.dart';
+import 'screens/descricao_habilidade/descricao_card.dart';
+import 'screens/profile/profilescreens.dart';
+import 'screens/trocas_andamento/trocas_andamento.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(Run());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class Run extends StatelessWidget {
+  User user;
+
+  setUser(User value) {
+    user = value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Banco do Tempo',
       theme: ThemeData(
         primaryColor: Colors.purple[400],
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      home: App(setUser: setUser),
       routes: {
-        '/': (context) => MyHomePage(),
+        '/trocasAndamento': (context) => TrocasAndamento(),
+        '/chat': (context) => Chat(
+              user: user,
+            ),
+        '/cadastroHabilidades': (context) => AddAbilityPage(),
+        '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
+        '/profile': (context) => Profilescreen(),
         '/my_posts': (context) => MyPosts(),
         '/pending_posts': (context) => PendingPosts(),
-        '/chat': (context) => Chat(),
       },
       initialRoute: '/',
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    List<Map<String, String>> routes = [
-      {'Minhas publicações': '/my_posts'},
-      {'Publicações pendentes': '/pending_posts'},
-      {'Chat': '/chat'},
-    ];
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Início"),
-        ),
-        body: ListView.builder(
-          itemCount: routes.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-                onTap: () {
-                  Navigator.pushNamed(context, routes[index].values.first);
-                },
-                title: Text(routes[index].keys.first),
-            );
-          },
-        ),
     );
   }
 }
