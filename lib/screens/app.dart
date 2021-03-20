@@ -1,3 +1,4 @@
+import 'services/services.dart';
 import 'welcome/welcome_screen.dart';
 
 import '../blocs/auth/auth_bloc.dart';
@@ -62,9 +63,9 @@ class _AppPageState extends State<AppPage> {
         },
         child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           if (state is GoToHomeState) {
-            // return Home(
-            //   authBloc: authBloc,
-            // );
+            return Services(
+              authBloc: authBloc,
+            );
           } else if (state is SignupState) {
             return SignUpScreen(
               authBloc: authBloc,

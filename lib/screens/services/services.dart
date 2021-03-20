@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/screens/services/components/cards.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
+import '../core/drawer/sidebar_user.dart';
+import 'components/cards.dart';
 
 class Services extends StatelessWidget {
-  Services({Key key}) : super(key: key);
+  final AuthBloc authBloc;
+
+  Services({Key key, this.authBloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +23,9 @@ class Services extends StatelessWidget {
           ),
         ],
       ),
+      drawer: SideBarGeral(),
       body: Stack(
-        children: [
-          Cards()
-        ],
+        children: [Cards()],
       ),
     );
   }
