@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileImage extends StatelessWidget {
-  String image;
-  double radius;
+  final String image;
+  final double radius;
 
   ProfileImage({@required this.image, @required this.radius});
 

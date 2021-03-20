@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../core/models/troca_model.dart';
+import '../core/colors.dart';
 import '../core/main_button.dart';
+import '../core/navigation.dart';
 import 'components/advertiser_description.dart';
 import 'components/carousel_image.dart';
 import 'components/chips.dart';
@@ -14,20 +17,22 @@ class AbilityDescriptionPage extends StatefulWidget {
   final String title;
 
   @override
-  _MyDescriptionPageState createState() => _MyDescriptionPageState();
+  _DescriptionPageState createState() => _DescriptionPageState();
 }
 
-class _MyDescriptionPageState extends State<AbilityDescriptionPage> {
+class _DescriptionPageState extends State<AbilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFA95EFA),
+        backgroundColor: themeColor,
         title: Text(
           "Serviços/Habilidades",
         ),
@@ -56,7 +61,19 @@ class _MyDescriptionPageState extends State<AbilityDescriptionPage> {
                   spaceVertical(20),
                   ButtonDescriptionAndAdd(
                     iconData: Icons.chat,
-                    onpress: () {},
+                    onpress: () {
+                      navigateToChatScreen(
+                          context,
+                          TrocaModel(
+                              userConsumerId: "wWwPf2qqN7cJdzfpzeNBxe8uOfb2",
+                              userConsumerName: 'Alexandre',
+                              productId: '123',
+                              productName: "Yoga",
+                              salaId: "1232456",
+                              status: 0,
+                              userPostId: "kdmWiXSXeVYu3SBWXmg7lK8lzI73",
+                              userPostName: 'André'));
+                    },
                     text: "TENHO INTERESSE",
                   ),
                 ],

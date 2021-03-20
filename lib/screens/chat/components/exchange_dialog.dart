@@ -4,29 +4,17 @@ import '../../../blocs/chat/chat_bloc.dart';
 import 'dialog_icon.dart';
 import 'exchange_dialog_body.dart';
 
-buildExchangeDialog(BuildContext context, ChatBloc chatBloc, String nome,
-    int unidade, int horasUtilizadas) {
+buildExchangeDialog(BuildContext context, ChatBloc chatBloc) {
   showDialog(
     context: context,
-    builder: (BuildContext context) => CustomDialog(
-        chatBloc: chatBloc,
-        horasUtilizadas: horasUtilizadas,
-        nome: nome,
-        unidade: unidade),
+    builder: (BuildContext context) => CustomDialog(chatBloc: chatBloc),
   );
 }
 
 class CustomDialog extends StatelessWidget {
   final ChatBloc chatBloc;
-  final String nome;
-  final int unidade;
-  final int horasUtilizadas;
 
-  CustomDialog(
-      {@required this.chatBloc,
-      @required this.nome,
-      @required this.unidade,
-      @required this.horasUtilizadas});
+  CustomDialog({@required this.chatBloc});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -63,9 +51,9 @@ class CustomDialog extends StatelessWidget {
             ]),
         child: ExchangeDialogBody(
           chatBloc: chatBloc,
-          horasUtilizadas: horasUtilizadas,
-          nome: nome,
-          unidade: unidade,
+          horasUtilizadas: 1,
+          nome: chatBloc.trocaModel.productName,
+          unidade: 1,
         ),
       ),
       ChatDialogIcon(icon: Icons.multiple_stop_sharp),

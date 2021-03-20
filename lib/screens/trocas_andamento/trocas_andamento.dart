@@ -36,7 +36,13 @@ class _TrocasAndamento extends State<TrocasAndamento> {
       appBar: AppBar(
         title: Text("Trocas em andamento"),
         centerTitle: true,
-        actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.of(context).pop();
+              })
+        ],
       ),
       body: ListView.builder(
           itemCount: _mockupContato.length,

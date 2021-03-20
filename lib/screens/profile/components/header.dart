@@ -23,7 +23,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   }
 
   _openCamera(BuildContext context) async {
-    var picture = await ImagePicker();
+    var picture = ImagePicker();
     var file = await picture.getImage(source: ImageSource.camera);
     this.setState(() {
       imageFile = File(file.path);

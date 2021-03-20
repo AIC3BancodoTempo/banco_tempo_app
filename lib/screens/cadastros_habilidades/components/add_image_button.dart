@@ -10,22 +10,27 @@ class ImageInclude extends StatefulWidget {
 
 class _ImageIncludeState extends State<ImageInclude> {
   File _image;
-  _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
 
-    setState(() {
-      _image = image;
-    });
+  void _imgFromCamera() async {
+    PickedFile pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 50);
+    File file = File(pickedFile.path);
+    if (file != null) {
+      setState(() {
+        _image = file;
+      });
+    }
   }
 
-  _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
-
-    setState(() {
-      _image = image;
-    });
+  void _imgFromGallery() async {
+    PickedFile pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50);
+    File file = File(pickedFile.path);
+    if (file != null) {
+      setState(() {
+        _image = file;
+      });
+    }
   }
 
   @override

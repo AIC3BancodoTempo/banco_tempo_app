@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/colors.dart';
+
 class MainTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class MainTitle extends StatelessWidget {
             "1 Hora",
             style: TextStyle(
               fontSize: 16,
-              color: Color(0xFFA95EFA),
+              color: themeColor,
             ),
           ),
         ],

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import '../../core/errors/auth_error.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../resources/auth/auth_firestore.dart';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+
+import '../../core/errors/auth_error.dart';
+import '../../resources/auth/auth_firestore.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -15,6 +15,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial());
   User user;
   StreamSubscription _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
+  }
+
   @override
   Stream<AuthState> mapEventToState(
     AuthEvent event,

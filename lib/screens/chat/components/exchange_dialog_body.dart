@@ -20,7 +20,7 @@ class ExchangeDialogBody extends StatelessWidget {
       @required this.horasUtilizadas});
 
   loadImageEvent(File image) {
-    chatBloc.add(UploadImageEvent(image: image));
+    chatBloc.add(SendImageEvent(imageFile: image));
   }
 
   @override
@@ -80,7 +80,7 @@ class ExchangeDialogBody extends StatelessWidget {
             SizedBox(height: 16.0),
             Align(
               alignment: Alignment.bottomCenter,
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   chatBloc.add(ExchangeEvent());
                   Navigator.of(context).pop();

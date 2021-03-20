@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/screens/services/components/services.dart';
 
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
@@ -23,7 +22,6 @@ class Run extends StatelessWidget {
     user = value;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,7 +34,9 @@ class Run extends StatelessWidget {
       home: App(setUser: setUser),
       routes: {
         '/trocasAndamento': (context) => TrocasAndamento(),
-        '/chat': (context) => Chat(),
+        '/chat': (context) => Chat(
+              user: user,
+            ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
         '/profile': (context) => Profilescreen(),
