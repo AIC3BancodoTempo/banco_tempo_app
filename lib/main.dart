@@ -1,6 +1,3 @@
-
-import 'screens/my_posts/MyPosts.dart';
-import 'screens/pending_posts/PendingPosts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +6,8 @@ import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
 import 'screens/chat/chat_screen.dart';
 import 'screens/descricao_habilidade/descricao_card.dart';
+import 'screens/my_posts/my_posts.dart';
+import 'screens/pending_posts/pending_posts.dart';
 import 'screens/profile/profilescreens.dart';
 import 'screens/trocas_andamento/trocas_andamento.dart';
 

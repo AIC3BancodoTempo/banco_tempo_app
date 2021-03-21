@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:banco_do_tempo_app/screens/core/my_pending_card.dart';
+import 'my_pending_card.dart';
 
 class PostCard extends StatelessWidget {
   final String title, subtitle, imageUrl;
@@ -44,11 +44,11 @@ class PostCard extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.grey,
                   )),
-                  PendingPostCard(
-                    amount: this.amount,
-                    renderActionButtons: this.renderActionButtons,
-                    timeAmount: this.timeAmount,
-                  ),
+              PendingPostCard(
+                amount: this.amount,
+                renderActionButtons: this.renderActionButtons,
+                timeAmount: this.timeAmount,
+              ),
             ],
           ),
           CircleAvatar(

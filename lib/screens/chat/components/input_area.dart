@@ -11,8 +11,10 @@ class ChatInputArea extends StatelessWidget {
   ChatInputArea({@required this.chatBloc});
 
   void onSendMessage() {
-    chatBloc.add(SendMessageEvent(message: textEditingController.text));
-    textEditingController.clear();
+    if (textEditingController.text.isNotEmpty) {
+      chatBloc.add(SendMessageEvent(message: textEditingController.text));
+      textEditingController.clear();
+    }
   }
 
   @override
