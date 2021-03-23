@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../core/validations.dart';
 import '../core/already_have_an_account_acheck.dart';
+import '../core/forgot_password.dart';
 import '../core/rounded_button.dart';
 import '../core/rounded_input.dart';
 import '../core/rounded_password_field.dart';
+import '../forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -64,6 +66,19 @@ class LoginScreen extends StatelessWidget {
                         validator: validateEmail),
                     RoundedPasswordField(
                         controller: passCntrlr, validator: validateSenha),
+                    ForgotPassword(
+                      press: () {
+                        authBloc.add(ForgotEvent());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgotPasswordScreen(
+                                    authBloc: authBloc,
+                                  )),
+                        );
+                      },
+                    ),
+                    SizedBox(height: size.height * 0.03),
                     RoundedButton(
                       text: "LOGIN",
                       press: () {
