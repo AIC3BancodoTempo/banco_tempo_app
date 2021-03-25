@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/register_questionary/questionary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,9 +67,9 @@ class _AppPageState extends State<AppPage> {
               authBloc: authBloc,
             );
           } else if (state is SignupState) {
-            return SignUpScreen(
-              authBloc: authBloc,
-            );
+            return QuestinaryScreen(
+                //authBloc: authBloc,
+                );
           } else if (state is LoginState) {
             return LoginScreen(authBloc: authBloc);
           } else {
