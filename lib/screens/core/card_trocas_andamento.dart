@@ -1,4 +1,7 @@
+import 'package:banco_do_tempo_app/core/models/troca_model.dart';
 import 'package:flutter/material.dart';
+
+import 'navigation.dart';
 
 class CardTrocas extends StatelessWidget {
   final String fotoContato, nome, ultimaMensagem;
@@ -12,6 +15,19 @@ class CardTrocas extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            onTap: () {
+              navigateToChatScreen(
+                  context,
+                  TrocaModel(
+                      userConsumerId: "wWwPf2qqN7cJdzfpzeNBxe8uOfb2",
+                      userConsumerName: 'Alexandre',
+                      productId: '123',
+                      productName: "Yoga",
+                      salaId: "1232456",
+                      status: 0,
+                      userPostId: "kdmWiXSXeVYu3SBWXmg7lK8lzI73",
+                      userPostName: 'André'));
+            },
             leading: CircleAvatar(
                 radius: 40.0, backgroundImage: NetworkImage(this.fotoContato)),
             title: Text(this.nome),
