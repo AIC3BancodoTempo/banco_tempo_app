@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/core/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,11 +10,7 @@ import '../core/rounded_password_field.dart';
 class SignUpScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  SignUpScreen({Key key, @required this.authBloc}) : super(key: key);
-  final TextEditingController emailCntrlr = TextEditingController();
-  final TextEditingController passCntrlr = TextEditingController();
-  final TextEditingController nomeCntrlr = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  const SignUpScreen({Key key, @required this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,6 +18,7 @@ class SignUpScreen extends StatelessWidget {
       body: Container(
         height: size.height,
         width: double.infinity,
+        // Here i can use size.width but use double.infinity because both work as a same
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -43,55 +39,42 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
             SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "CADASTRE-SE",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    SvgPicture.asset(
-                      "assets/icons/signup.svg",
-                      height: size.height * 0.35,
-                    ),
-                    RoundedInput(
-                        hintText: "Seu nome",
-                        controller: nomeCntrlr,
-                        validator: validateEmptyField,
-                        icon: Icons.person),
-                    RoundedInput(
-                      hintText: "Seu e-mail",
-                      controller: emailCntrlr,
-                      validator: validateEmail,
-                      icon: Icons.mail,
-                    ),
-                    RoundedPasswordField(
-                      controller: passCntrlr,
-                      validator: validateSenha,
-                    ),
-                    RoundedButton(
-                      text: "CADASTRAR",
-                      press: () {
-                        if (validateAndSave(formKey)) {
-                          authBloc.add(CreateLoginEmailEvent(
-                              email: emailCntrlr.text,
-                              senha: passCntrlr.text,
-                              nome: nomeCntrlr.text));
-                        }
-                      },
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    AlreadyHaveAnAccountCheck(
-                      login: false,
-                      press: () {
-                        authBloc.add(LoginEvent());
-                      },
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "CADASTRE-SE",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  SvgPicture.asset(
+                    "assets/icons/signup.svg",
+                    height: size.height * 0.35,
+                  ),
+                  RoundedInput(
+                      hintText: "Seu nome",
+                      onChanged: (value) {},
+                      icon: Icons.person),
+                  RoundedInput(
+                    hintText: "Seu e-mail",
+                    onChanged: (value) {},
+                    icon: Icons.mail,
+                  ),
+                  RoundedPasswordField(
+                    onChanged: (value) {},
+                  ),
+                  RoundedButton(
+                    text: "CADASTRAR",
+                    press: () {},
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  AlreadyHaveAnAccountCheck(
+                    login: false,
+                    press: () {
+                      authBloc.add(LoginEvent());
+                    },
+                  ),
+                ],
               ),
             ),
           ],

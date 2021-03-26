@@ -1,12 +1,11 @@
+import 'package:banco_do_tempo_app/screens/register_questionary/questionary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import 'Signup/signup_screen.dart';
 import 'core/ui.dart';
-import 'forgot_password/forgot_password_screen.dart';
 import 'login/login_screen.dart';
-import 'register_questionary/questionary_screen.dart';
 import 'services/services.dart';
 import 'welcome/welcome_screen.dart';
 
@@ -54,10 +53,12 @@ class _AppPageState extends State<AppPage> {
         listener: (contextListener, state) {
           if (state is AuthenticatedState) {
             if (state.user != null) {
-              widget.setUser(state.user, state.userModel);
+              widget.setUser(state.user);
             }
           } else if (state is ExceptionState) {
             uiBuilder.buildSnackBarUi(context, state.message);
+          } else if (state is ForgotState) {
+            //navigateToForgotScreen(context);
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
@@ -65,18 +66,12 @@ class _AppPageState extends State<AppPage> {
             return Services(
               authBloc: authBloc,
             );
-          } else if (state is QuestionaryState) {
-            return QuestinaryScreen(
-              authBloc: authBloc,
-            );
           } else if (state is SignupState) {
-            return SignUpScreen(
-              authBloc: authBloc,
-            );
+            return QuestinaryScreen(
+                //authBloc: authBloc,
+                );
           } else if (state is LoginState) {
             return LoginScreen(authBloc: authBloc);
-          } else if (state is ForgotState) {
-            return ForgotPasswordScreen(authBloc: authBloc);
           } else {
             return WelcomeScreen(authBloc: authBloc);
           }

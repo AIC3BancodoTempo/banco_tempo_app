@@ -15,17 +15,13 @@ class LoginEmailEvent extends AuthEvent {
 class CreateLoginEmailEvent extends AuthEvent {
   final String email;
   final String senha;
-  final String nome;
 
-  CreateLoginEmailEvent(
-      {@required this.email, @required this.senha, @required this.nome});
+  CreateLoginEmailEvent({@required this.email, @required this.senha});
 }
 
 class LogoutEvent extends AuthEvent {}
 
 class SignupEvent extends AuthEvent {}
-
-class QuestionaryEvent extends AuthEvent {}
 
 class ExitEvent extends AuthEvent {}
 
@@ -38,9 +34,3 @@ class LoginSuccessEvent extends AuthEvent {
 }
 
 class LoginEvent extends AuthEvent {}
-
-class RequestNewPasswordEvent extends AuthEvent {
-  final String email;
-
-  RequestNewPasswordEvent({@required this.email});
-}

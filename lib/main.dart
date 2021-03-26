@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'core/models/user_model.dart';
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
 import 'screens/chat/chat_screen.dart';
@@ -19,12 +18,10 @@ void main() async {
 }
 
 class Run extends StatelessWidget {
-  User _user;
-  UserModel _userModel;
+  User user;
 
-  setUser(User value, UserModel model) {
-    _user = value;
-    _userModel = model;
+  setUser(User value) {
+    user = value;
   }
 
   @override
@@ -40,7 +37,7 @@ class Run extends StatelessWidget {
       routes: {
         '/trocasAndamento': (context) => TrocasAndamento(),
         '/chat': (context) => Chat(
-              user: _user,
+              user: user,
             ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => AbilityDescriptionPage(),

@@ -1,6 +1,6 @@
+import 'package:banco_do_tempo_app/screens/core/navigation.dart';
 import 'package:flutter/material.dart';
 
-import '../navigation.dart';
 import 'drawerHeaderGeral.dart';
 
 class SideBarAdm extends StatelessWidget {
