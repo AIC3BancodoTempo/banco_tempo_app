@@ -35,6 +35,12 @@ class _ServicesPageState extends State<ServicesPage> {
   ServicesBloc servicesBloc;
 
   @override
+  void dispose() {
+    servicesBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     servicesBloc = BlocProvider.of<ServicesBloc>(context);
     return Scaffold(

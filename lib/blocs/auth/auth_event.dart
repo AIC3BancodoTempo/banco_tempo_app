@@ -29,6 +29,8 @@ class QuestionaryEvent extends AuthEvent {}
 
 class ExitEvent extends AuthEvent {}
 
+class ToWelcomeEvent extends AuthEvent {}
+
 class ForgotEvent extends AuthEvent {}
 
 class LoginSuccessEvent extends AuthEvent {

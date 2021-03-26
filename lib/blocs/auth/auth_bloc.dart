@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (user != null) {
             add(LoginSuccessEvent(user: user));
           } else {
-            add(ExitEvent());
+            add(ToWelcomeEvent());
           }
         });
       } else if (event is LoginEmailEvent) {
@@ -92,6 +92,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       } else if (event is QuestionaryEvent) {
         yield QuestionaryState();
+      } else if (event is ToWelcomeEvent) {
+        yield WelcomeState();
       }
     } catch (e) {
       if (e is FirebaseAuthException) {

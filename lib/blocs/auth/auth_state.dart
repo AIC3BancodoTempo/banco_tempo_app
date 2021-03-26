@@ -28,3 +28,5 @@ class QuestionaryState extends AuthState {}
 class ForgotState extends AuthState {}
 
 class LoginState extends AuthState {}
+
+class WelcomeState extends AuthState {}

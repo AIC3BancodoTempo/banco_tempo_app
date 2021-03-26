@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-class DescriptionTitle extends StatelessWidget {
+class AnuncianteText extends StatelessWidget {
+  final String text;
+
+  const AnuncianteText({Key key, @required this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -8,7 +11,7 @@ class DescriptionTitle extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Título do Texto",
+            'Anunciante: ' + text,
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,

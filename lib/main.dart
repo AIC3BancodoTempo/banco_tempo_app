@@ -6,7 +6,7 @@ import 'core/models/user_model.dart';
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
 import 'screens/chat/chat_screen.dart';
-import 'screens/descricao_habilidade/descricao_card.dart';
+import 'screens/descricao_habilidade/descricao_habilidade.dart';
 import 'screens/my_posts/my_posts.dart';
 import 'screens/pending_posts/pending_posts.dart';
 import 'screens/profile/profilescreens.dart';
@@ -43,7 +43,9 @@ class Run extends StatelessWidget {
               user: _user,
             ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
-        '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
+        '/descricaoHabilidades': (context) => HabilityDescription(
+              user: _user,
+            ),
         '/profile': (context) => Profilescreen(
               userModel: _userModel,
             ),
