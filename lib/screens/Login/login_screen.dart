@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: size.height * 0.03),
                     RoundedButton(
                       text: "LOGIN",
-                      press: () {
+                      onpress: () {
                         if (validateAndSave(formKey)) {
                           authBloc.add(LoginEmailEvent(
                               email: emailCntrlr.text, senha: passCntrlr.text));

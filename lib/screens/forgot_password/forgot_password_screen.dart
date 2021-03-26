@@ -58,7 +58,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   RoundedButton(
                     text: "RECEBER INSTRUÇÕES",
-                    press: () {},
+                    onpress: () {},
                   ),
                   SizedBox(height: size.height * 0.03),
                   AlreadyHaveAnAccountCheck(

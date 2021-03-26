@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../core/my_post_card.dart';
@@ -55,9 +56,15 @@ class _MyPostsState extends State<MyPosts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        backgroundColor: kPrimaryColor,
         title: Text("Meus Cadastros"),
         centerTitle: true,
-        actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})],
       ),
       body: ListView.builder(
           itemCount: _mockupPosts.length,

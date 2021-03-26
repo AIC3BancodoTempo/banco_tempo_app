@@ -36,6 +36,11 @@ class SideBarGeral extends StatelessWidget {
             title: Text("Perguntas Frequentes"),
             onTap: () {},
           ),
+          ListTile(
+            trailing: Icon(Icons.logout),
+            title: Text("Sair"),
+            onTap: () {},
+          ),
         ],
       ),
     );

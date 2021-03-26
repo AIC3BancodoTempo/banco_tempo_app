@@ -65,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   RoundedButton(
                     text: "CADASTRAR",
-                    press: () {},
+                    onpress: () {},
                   ),
                   SizedBox(height: size.height * 0.03),
                   AlreadyHaveAnAccountCheck(
