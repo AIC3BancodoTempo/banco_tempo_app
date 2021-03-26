@@ -87,9 +87,7 @@ class QuestinaryScreen extends StatelessWidget {
             Align(
               child: CustomFormSubmitButton(onPressed: () {
                 if (_formKey.currentState.validate()) {
-                  final showSnackBar = ScaffoldMessenger.of(context)
-                      .showSnackBar(
-                          SnackBar(content: Text('Analisando respostas...')));
+                  authBloc.add(SignupEvent());
                 }
               }),
             ),
