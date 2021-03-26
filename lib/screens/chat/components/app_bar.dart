@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
-import '../../core/app_bar_action.dart';
+import '../../core/app_bars/app_bar_action.dart';
 import '../../core/colors.dart';
 import '../../core/profile_image.dart';
 import '../../core/return_button.dart';

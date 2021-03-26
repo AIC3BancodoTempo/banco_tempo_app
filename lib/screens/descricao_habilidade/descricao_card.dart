@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/models/troca_model.dart';
 import '../core/colors.dart';
-import '../core/main_button.dart';
 import '../core/navigation.dart';
+import '../core/rounded_button.dart';
 import 'components/advertiser_description.dart';
 import 'components/carousel_image.dart';
 import 'components/chips.dart';
@@ -26,13 +26,13 @@ class _DescriptionPageState extends State<AbilityDescriptionPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         centerTitle: true,
-        backgroundColor: themeColor,
+        backgroundColor: kPrimaryColor,
         title: Text(
           "Serviços/Habilidades",
         ),
@@ -59,23 +59,22 @@ class _DescriptionPageState extends State<AbilityDescriptionPage> {
                   spaceVertical(20),
                   Anunciante(),
                   spaceVertical(20),
-                  ButtonDescriptionAndAdd(
-                    iconData: Icons.chat,
-                    onpress: () {
-                      navigateToChatScreen(
-                          context,
-                          TrocaModel(
-                              userConsumerId: "wWwPf2qqN7cJdzfpzeNBxe8uOfb2",
-                              userConsumerName: 'Alexandre',
-                              productId: '123',
-                              productName: "Yoga",
-                              salaId: "1232456",
-                              status: 0,
-                              userPostId: "kdmWiXSXeVYu3SBWXmg7lK8lzI73",
-                              userPostName: 'André'));
-                    },
-                    text: "TENHO INTERESSE",
-                  ),
+                  RoundedButton(
+                      color: kPrimaryColor,
+                      text: "TENHO INTERESSE",
+                      onpress: () {
+                        navigateToChatScreen(
+                            context,
+                            TrocaModel(
+                                userConsumerId: "wWwPf2qqN7cJdzfpzeNBxe8uOfb2",
+                                userConsumerName: 'Alexandre',
+                                productId: '123',
+                                productName: "Yoga",
+                                salaId: "1232456",
+                                status: 0,
+                                userPostId: "kdmWiXSXeVYu3SBWXmg7lK8lzI73",
+                                userPostName: 'André'));
+                      }),
                 ],
               ),
             ),

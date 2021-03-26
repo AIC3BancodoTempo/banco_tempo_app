@@ -1,7 +1,8 @@
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:flutter/material.dart';
 
-import '../core/main_button.dart';
+import '../core/colors.dart';
+import '../core/rounded_button.dart';
 import 'components/add_image_button.dart';
 import 'components/insert_input_texts.dart';
 import 'components/title_add_text.dart';
@@ -23,11 +24,13 @@ class AddAbilityPageState extends State<AddAbilityPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFA95EFA),
+        backgroundColor: kPrimaryColor,
         title: Text(
           "Descrição",
         ),
@@ -39,7 +42,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
             children: <Widget>[
               TitleAddText(
                 insertTitleHere:
-                    'Adicione uma habilidade, serviço ou o que está procurando.',
+                    'Adicione uma habilidade, serviço ou o que está procurando!',
               ),
               InsertInputs(
                 insertLabel: 'Nome',
@@ -60,11 +63,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
               SizedBox(height: 50.0),
               ImageInclude(),
               SizedBox(height: 30.0),
-              ButtonDescriptionAndAdd(
-                iconData: Icons.login_rounded,
-                onpress: () {},
-                text: "CADASTRAR",
-              ),
+              RoundedButton(text: "CADASTRAR", onpress: () {}),
               SizedBox(height: 30.0),
               PictureUploadWidget(
                 onPicturesChange: profilePictureCallback,

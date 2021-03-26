@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../core/colors.dart';
 import '../../core/navigation.dart';
+import 'card_detail.dart';
+import 'image_card.dart';
 
 class ItemCard extends StatelessWidget {
-  final String service;
+  final String title;
   final String hour;
   final String amount;
   final String imgUrl;
@@ -12,34 +13,32 @@ class ItemCard extends StatelessWidget {
 
   const ItemCard(
       {@required this.hour,
-      @required this.service,
+      @required this.title,
       @required this.amount,
       @required this.imgUrl,
       this.press});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 14,
+        semanticContainer: true,
+        shadowColor: Colors.black45,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         child: InkWell(
-          splashColor: themeColor,
           onTap: () {
             navigateToExchangeDetailsScreen(context);
           },
-          child: Container(
-            margin: EdgeInsets.all(1),
-            padding: EdgeInsets.all(5.0),
-            child: Column(
-              children: <Widget>[
-                Image.network(
-                  imgUrl,
-                  scale: 2.0,
-                ),
-                Text(service),
-                Text(hour),
-                Text(amount),
-              ],
-            ),
+          child: Column(
+            children: [
+              ImageCard(imgUrl: imgUrl),
+              CardDetails(title: title, hour: hour, amount: amount),
+            ],
           ),
         ),
       ),
