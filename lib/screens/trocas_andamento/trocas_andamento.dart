@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -34,15 +35,13 @@ class _TrocasAndamento extends State<TrocasAndamento> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }),
         title: Text("Trocas em andamento"),
         centerTitle: true,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Navigator.of(context).pop();
-              })
-        ],
       ),
       body: ListView.builder(
           itemCount: _mockupContato.length,

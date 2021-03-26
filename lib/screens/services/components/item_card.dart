@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/navigation.dart';
+import 'card_detail.dart';
+import 'image_card.dart';
 
 class ItemCard extends StatelessWidget {
   final String title;
@@ -34,89 +36,8 @@ class ItemCard extends StatelessWidget {
           },
           child: Column(
             children: [
-              Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: ShapeDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(imgUrl), fit: BoxFit.fitHeight),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusDirectional.only(
-                        topEnd: Radius.circular(15),
-                        topStart: Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                  width: double.maxFinite,
-                  height: 100,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Text(
-                        title,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  hour,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                Text(
-                                  ' unidades',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  amount,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                Text(
-                                  " horas",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              ImageCard(imgUrl: imgUrl),
+              CardDetails(title: title, hour: hour, amount: amount),
             ],
           ),
         ),

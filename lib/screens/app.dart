@@ -1,11 +1,10 @@
-import 'package:banco_do_tempo_app/screens/register_questionary/questionary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/auth/auth_bloc.dart';
-
 import 'core/ui.dart';
 import 'login/login_screen.dart';
+import 'register_questionary/questionary_screen.dart';
 import 'services/services.dart';
 import 'welcome/welcome_screen.dart';
 
