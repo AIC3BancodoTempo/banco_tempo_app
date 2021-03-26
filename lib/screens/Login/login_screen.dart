@@ -69,13 +69,6 @@ class LoginScreen extends StatelessWidget {
                     ForgotPassword(
                       press: () {
                         authBloc.add(ForgotEvent());
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ForgotPasswordScreen(
-                                    authBloc: authBloc,
-                                  )),
-                        );
                       },
                     ),
                     SizedBox(height: size.height * 0.03),
