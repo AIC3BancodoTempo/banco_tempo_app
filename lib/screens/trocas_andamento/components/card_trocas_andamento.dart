@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/models/troca_model.dart';
-import 'navigation.dart';
+import '../../../core/models/troca_model.dart';
+import '../../core/navigation.dart';
 
 class CardTrocas extends StatelessWidget {
   final String fotoContato, nome, ultimaMensagem;
