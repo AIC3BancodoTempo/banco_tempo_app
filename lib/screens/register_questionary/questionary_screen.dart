@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
@@ -14,14 +15,15 @@ class QuestinaryScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 108.0, 0.0, 1.0),
-                  child: Text('Responda!',
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Text('Responda para concluir o seu cadastro!',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
@@ -30,66 +32,79 @@ class QuestinaryScreen extends StatelessWidget {
                           fontSize: 24)),
                 ),
               ),
-            ),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 40,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta A',
                 hintText: 'Responda',
                 onChanged: (value) {},
               ),
-            ),
-            Align(
-                child: CustomTextFormField(
-              question: 'Pergunta B',
-              hintText: 'Responda',
-              onChanged: (value) {},
-            )),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
+                question: 'Pergunta B',
+                hintText: 'Responda',
+                onChanged: (value) {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta C',
                 hintText: 'Responda',
                 onChanged: (value) {},
               ),
-            ),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta D',
                 hintText: 'Responda',
-                onChanged: (value) {
-                  //print(value);
-                },
+                onChanged: (value) {},
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 28.0, 33.0, 2.0),
-                  child: Text(
-                    'Responda o quiz com base nos TERMOS para obter acesso!',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'DM Sans',
-                        letterSpacing: 0.4,
-                        fontSize: 14),
-                  ),
+              SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: RichText(
+                  text: TextSpan(
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontFamily: 'DM Sans',
+                          letterSpacing: 0.4,
+                          fontSize: 14),
+                      children: [
+                        TextSpan(
+                            text:
+                                'Clique aqui para acessar as informações dos  '),
+                        TextSpan(
+                            text: 'Termos e Condições',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        TextSpan(text: " do banco do tempo!")
+                      ]),
                 ),
               ),
-            ),
-            Align(
-              child: CustomFormSubmitButton(onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  final showSnackBar = ScaffoldMessenger.of(context)
-                      .showSnackBar(
-                          SnackBar(content: Text('Analisando respostas...')));
-                }
-              }),
-            ),
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              RoundedButton(
+                text: "ACESSE",
+                onpress: () {
+                  if (_formKey.currentState.validate()) {
+                    final showSnackBar = ScaffoldMessenger.of(context)
+                        .showSnackBar(
+                            SnackBar(content: Text('Analisando respostas...')));
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
