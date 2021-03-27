@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                     color: kPrimaryLightColor,
                     textColor: Colors.black,
                     press: () {
-                      authBloc.add(SignupEvent());
+                      authBloc.add(QuestionaryEvent());
                     },
                   ),
                 ],
