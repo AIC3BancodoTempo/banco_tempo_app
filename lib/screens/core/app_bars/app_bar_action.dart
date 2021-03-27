@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../colors.dart';
 
 class AppBarAction extends StatelessWidget {
   final VoidCallback onPressEvent;
@@ -16,7 +16,7 @@ class AppBarAction extends StatelessWidget {
         child: IconButton(
           color: Colors.white,
           icon: Icon(icon),
-          iconSize: 30.0,
+          iconSize: 25.0,
           onPressed: () {
             onPressEvent();
           },

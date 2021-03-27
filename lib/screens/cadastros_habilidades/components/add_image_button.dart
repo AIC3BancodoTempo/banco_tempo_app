@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -36,7 +37,7 @@ class _ImageIncludeState extends State<ImageInclude> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 100.0,
+      spacing: 120.0,
       children: <Widget>[
         new Text('Anexe uma Foto',
             style: TextStyle(
@@ -47,7 +48,7 @@ class _ImageIncludeState extends State<ImageInclude> {
                 fontSize: 16)),
         new FloatingActionButton(
           heroTag: "btn",
-          backgroundColor: Color(0xFFBA7AFF),
+          backgroundColor: kPrimaryColor,
           child: Icon(Icons.add),
           onPressed: () {
             _showPicker(context);

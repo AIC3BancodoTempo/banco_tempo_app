@@ -45,12 +45,12 @@ class _ServicesPageState extends State<ServicesPage> {
     servicesBloc = BlocProvider.of<ServicesBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeColor,
+        backgroundColor: kPrimaryColor,
         centerTitle: true,
         title: const Text('Serviços/Habilidades'),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             onPressed: () {},
           ),
         ],
@@ -69,6 +69,7 @@ class _ServicesPageState extends State<ServicesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: kPrimaryColor,
         onPressed: () {
           navigateToSkillHabilit(context);
         },

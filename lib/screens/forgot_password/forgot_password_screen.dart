@@ -1,5 +1,4 @@
 import '../../core/validations.dart';
-import '../login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -64,7 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                     RoundedButton(
                       text: "RECEBER INSTRUÇÕES",
-                      press: () {
+                      onpress: () {
                         if (validateAndSave(formKey)) {
                           authBloc.add(
                               RequestNewPasswordEvent(email: emailCntrlr.text));
