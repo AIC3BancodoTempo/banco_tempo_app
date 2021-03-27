@@ -1,7 +1,7 @@
-import 'package:banco_do_tempo_app/core/models/troca_model.dart';
 import 'package:flutter/material.dart';
 
-import 'navigation.dart';
+import '../../../core/models/troca_model.dart';
+import '../../core/navigation.dart';
 
 class CardTrocas extends StatelessWidget {
   final String fotoContato, nome, ultimaMensagem;

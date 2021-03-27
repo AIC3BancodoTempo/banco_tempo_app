@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import '../../blocs/auth/auth_bloc.dart';
 import '../core/custom_form_submit_button.dart';
 import '../core/custom_text_form_field.dart';
 
 class QuestinaryScreen extends StatelessWidget {
+  final AuthBloc authBloc;
+
+  QuestinaryScreen({Key key, @required this.authBloc}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
 
@@ -83,9 +87,7 @@ class QuestinaryScreen extends StatelessWidget {
             Align(
               child: CustomFormSubmitButton(onPressed: () {
                 if (_formKey.currentState.validate()) {
-                  final showSnackBar = ScaffoldMessenger.of(context)
-                      .showSnackBar(
-                          SnackBar(content: Text('Analisando respostas...')));
+                  authBloc.add(SignupEvent());
                 }
               }),
             ),

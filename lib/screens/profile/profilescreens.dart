@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../core/models/user_model.dart';
 import 'components/button.dart';
 import 'components/header.dart';
 import 'components/textfield.dart';
 
 class Profilescreen extends StatefulWidget {
-  Profilescreen({Key key, this.title}) : super(key: key);
+  final UserModel userModel;
+  Profilescreen({Key key, @required this.userModel}) : super(key: key);
 
-  final String title;
   @override
   _ProfilescreenState createState() => _ProfilescreenState();
 }

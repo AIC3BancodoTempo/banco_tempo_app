@@ -8,7 +8,6 @@ import '../core/forgot_password.dart';
 import '../core/rounded_button.dart';
 import '../core/rounded_input.dart';
 import '../core/rounded_password_field.dart';
-import '../forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -69,13 +68,6 @@ class LoginScreen extends StatelessWidget {
                     ForgotPassword(
                       press: () {
                         authBloc.add(ForgotEvent());
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ForgotPasswordScreen(
-                                    authBloc: authBloc,
-                                  )),
-                        );
                       },
                     ),
                     SizedBox(height: size.height * 0.03),

@@ -9,6 +9,7 @@ class TrocaModel {
   String productId;
   String productName;
   int status;
+  int amount;
   String salaId;
 
   TrocaModel(
@@ -20,6 +21,7 @@ class TrocaModel {
       this.productId,
       this.productName,
       this.status,
+      this.amount,
       this.salaId});
 
   TrocaModel.fromSnapshot(QueryDocumentSnapshot documentSnapshot) {
@@ -34,7 +36,21 @@ class TrocaModel {
     productId = data['productId'] != null ? data['productId'] : '';
     productName = data['productName'] != null ? data['productName'] : '';
     status = data['status'] != null ? data['status'] : 0;
-
+    amount = data['amount'] != null ? data['amount'] : 0;
     salaId = data['salaId'] != null ? data['salaId'] : '';
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userPostId': userPostId,
+      'userPostName': userPostName,
+      'userConsumerId': userConsumerId,
+      'userConsumerName': userConsumerName,
+      'productId': productId,
+      'productName': productName,
+      'status': status,
+      'amount': amount,
+      'salaId': salaId,
+    };
   }
 }

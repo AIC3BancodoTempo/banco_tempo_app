@@ -1,12 +1,13 @@
-import 'package:banco_do_tempo_app/blocs/services/services_bloc.dart';
-import 'package:banco_do_tempo_app/screens/core/loading.dart';
-import 'package:banco_do_tempo_app/screens/core/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/services/services_bloc.dart';
 import '../core/colors.dart';
+import '../core/drawer/sidebar_admin.dart';
 import '../core/drawer/sidebar_user.dart';
+import '../core/loading.dart';
+import '../core/navigation.dart';
 import 'components/cards.dart';
 
 class Services extends StatelessWidget {
@@ -17,13 +18,28 @@ class Services extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ServicesBloc(),
-      child: ServicesPage(),
+      child: ServicesPage(authBloc: authBloc),
     );
   }
 }
 
-class ServicesPage extends StatelessWidget {
+class ServicesPage extends StatefulWidget {
+  final AuthBloc authBloc;
+
+  const ServicesPage({Key key, this.authBloc}) : super(key: key);
+  @override
+  _ServicesPageState createState() => _ServicesPageState();
+}
+
+class _ServicesPageState extends State<ServicesPage> {
   ServicesBloc servicesBloc;
+
+  @override
+  void dispose() {
+    servicesBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     servicesBloc = BlocProvider.of<ServicesBloc>(context);
@@ -39,7 +55,7 @@ class ServicesPage extends StatelessWidget {
           ),
         ],
       ),
-      drawer: SideBarGeral(),
+      drawer: widget.authBloc.userModel.isAdmin ? SideBarAdm() : SideBarGeral(),
       body: BlocListener<ServicesBloc, ServicesState>(
         listener: (contextListener, state) {},
         child:
