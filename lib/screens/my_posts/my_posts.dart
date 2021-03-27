@@ -1,6 +1,6 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../core/colors.dart';
 import '../core/my_post_card.dart';
 
 class MyPosts extends StatefulWidget {

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../core/models/produto_model.dart';
 import '../../core/models/troca_model.dart';
 
 void navigateToChatScreen(BuildContext context, TrocaModel trocaModel) {
   Navigator.of(context).pushNamed('/chat', arguments: trocaModel);
 }
 
-void navigateToExchangeDetailsScreen(BuildContext context) {
-  Navigator.of(context).pushNamed('/descricaoHabilidades');
+void navigateToExchangeDetailsScreen(
+    BuildContext context, ProdutoModel produtoModel) {
+  Navigator.of(context)
+      .pushNamed('/descricaoHabilidades', arguments: produtoModel);
 }
 
 void navigateToProfileScreen(BuildContext context) {

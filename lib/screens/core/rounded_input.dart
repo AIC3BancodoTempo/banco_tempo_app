@@ -9,14 +9,16 @@ class RoundedInput extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
   final Function validator;
-  const RoundedInput({
-    Key key,
-    this.hintText,
-    this.icon,
-    this.onChanged,
-    this.controller,
-    this.validator,
-  }) : super(key: key);
+  final TextInputType keyboardType;
+  const RoundedInput(
+      {Key key,
+      this.hintText,
+      this.icon,
+      this.onChanged,
+      this.controller,
+      this.validator,
+      this.keyboardType = TextInputType.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class RoundedInput extends StatelessWidget {
         onChanged: onChanged,
         validator: validator,
         cursorColor: kPrimaryColor,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           icon: Icon(
             icon,

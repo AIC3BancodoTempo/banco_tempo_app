@@ -20,6 +20,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final User user;
   final TrocaModel trocaModel;
   String tokenuser;
+  bool noMore = false;
   List<ChatModel> chatList = [];
   StreamSubscription _subscription;
   ChatBloc({
@@ -86,9 +87,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       //     timestamp: DateTime.now().millisecondsSinceEpoch.toString());
       // _chatRepository.addChat(trocaModel.salaId, chat);
     } else if (event is GetMoreMessagesEvent) {
-      chatList += await _chatRepository.getMoreMessages(
-          trocaModel.salaId, chatList.last.documentSnapshot);
-      yield UpdateMessagesState();
+      int lenght = chatList.length;
+      if (!noMore) {
+        chatList += await _chatRepository.getMoreMessages(
+            trocaModel.salaId, chatList.last.documentSnapshot);
+        yield UpdateMessagesState();
+      }
+      if (lenght == chatList.length) noMore = true;
       yield ShowMessagesState();
     }
   }

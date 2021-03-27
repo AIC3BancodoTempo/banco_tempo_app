@@ -1,12 +1,13 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'core/models/user_model.dart';
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
 import 'screens/chat/chat_screen.dart';
-import 'screens/descricao_habilidade/descricao_card.dart';
+import 'screens/core/colors.dart';
+import 'screens/descricao_habilidade/descricao_habilidade.dart';
 import 'screens/my_posts/my_posts.dart';
 import 'screens/pending_posts/pending_posts.dart';
 import 'screens/profile/profilescreens.dart';
@@ -19,10 +20,12 @@ void main() async {
 }
 
 class Run extends StatelessWidget {
-  User user;
+  User _user;
+  UserModel _userModel;
 
-  setUser(User value) {
-    user = value;
+  setUser(User value, UserModel model) {
+    _user = value;
+    _userModel = model;
   }
 
   @override
@@ -38,11 +41,15 @@ class Run extends StatelessWidget {
       routes: {
         '/trocasAndamento': (context) => TrocasAndamento(),
         '/chat': (context) => Chat(
-              user: user,
+              user: _user,
             ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
-        '/descricaoHabilidades': (context) => AbilityDescriptionPage(),
-        '/profile': (context) => Profilescreen(),
+        '/descricaoHabilidades': (context) => HabilityDescription(
+              user: _user,
+            ),
+        '/profile': (context) => Profilescreen(
+              userModel: _userModel,
+            ),
         '/myPosts': (context) => MyPosts(),
         '/pendingPosts': (context) => PendingPosts(),
       },
