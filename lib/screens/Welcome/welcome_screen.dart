@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
                   SizedBox(height: size.height * 0.05),
                   RoundedButton(
                     text: "LOGIN",
-                    press: () {
+                    onpress: () {
                       authBloc.add(LoginEvent());
                     },
                   ),
@@ -51,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                     text: "CADASTRE-SE",
                     color: kPrimaryLightColor,
                     textColor: Colors.black,
-                    press: () {
+                    onpress: () {
                       authBloc.add(QuestionaryEvent());
                     },
                   ),

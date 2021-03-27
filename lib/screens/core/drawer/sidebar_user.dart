@@ -31,9 +31,10 @@ class SideBarGeral extends StatelessWidget {
               navigateToProfileScreen(context);
             },
           ),
+
           ListTile(
-            trailing: Icon(Icons.notifications_none),
-            title: Text("Perguntas Frequentes"),
+            trailing: Icon(Icons.logout),
+            title: Text("Sair"),
             onTap: () {},
           ),
         ],
