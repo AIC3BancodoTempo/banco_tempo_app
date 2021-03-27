@@ -1,9 +1,9 @@
-import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-import '../core/custom_form_submit_button.dart';
 import '../core/custom_text_form_field.dart';
+import '../core/rounded_button.dart';
+import 'components/terms_button.dart';
 
 class QuestinaryScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -67,28 +67,8 @@ class QuestinaryScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              TextButton(
-                onPressed: () {},
-                child: RichText(
-                  text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'DM Sans',
-                          letterSpacing: 0.4,
-                          fontSize: 14),
-                      children: [
-                        TextSpan(
-                            text:
-                                'Clique aqui para acessar as informações dos  '),
-                        TextSpan(
-                            text: 'Termos e Condições',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
-                        TextSpan(text: " do banco do tempo!")
-                      ]),
-                ),
+              TermsButton(
+                onpress: () {},
               ),
               SizedBox(
                 height: 20,
