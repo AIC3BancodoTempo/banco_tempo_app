@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

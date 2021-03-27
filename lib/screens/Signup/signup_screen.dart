@@ -1,4 +1,4 @@
-import 'package:banco_do_tempo_app/core/validations.dart';
+import '../../core/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

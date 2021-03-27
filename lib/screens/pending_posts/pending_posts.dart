@@ -1,5 +1,6 @@
-import '../core/my_post_card.dart';
 import 'package:flutter/material.dart';
+
+import '../core/my_post_card.dart';
 
 class PendingPosts extends StatelessWidget {
   final List<Map<String, dynamic>> _mockupPosts = [

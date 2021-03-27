@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/core/models/troca_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../core/models/troca_model.dart';
 
 class TrocaRepository {
   FirebaseFirestore firestoreInstance;

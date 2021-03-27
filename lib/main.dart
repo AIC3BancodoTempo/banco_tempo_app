@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'core/models/user_model.dart';
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
 import 'screens/chat/chat_screen.dart';
+import 'screens/core/colors.dart';
 import 'screens/descricao_habilidade/descricao_habilidade.dart';
 import 'screens/my_posts/my_posts.dart';
 import 'screens/pending_posts/pending_posts.dart';
