@@ -74,7 +74,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     RoundedButton(
                       text: "CADASTRAR",
-                      press: () {
+                      onpress: () {
                         if (validateAndSave(formKey)) {
                           authBloc.add(CreateLoginEmailEvent(
                               email: emailCntrlr.text,
