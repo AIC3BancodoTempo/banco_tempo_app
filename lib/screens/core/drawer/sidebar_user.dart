@@ -2,7 +2,7 @@ import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../navigation.dart';
-import 'drawerHeaderGeral.dart';
+import 'drawer_header_geral.dart';
 
 class SideBarGeral extends StatelessWidget {
 

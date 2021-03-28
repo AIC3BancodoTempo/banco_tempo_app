@@ -16,9 +16,9 @@ class DrawerHeaderGeral extends StatelessWidget {
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 35.0,
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          size: 35.0,
                         ),//CircleAvatar
                         ),//Align
                         Align(

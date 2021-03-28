@@ -2,7 +2,7 @@ import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../navigation.dart';
-import 'drawerHeaderGeral.dart';
+import 'drawer_header_geral.dart';
 
 class SideBarAdm extends StatelessWidget {
 
@@ -52,7 +52,7 @@ class SideBarAdm extends StatelessWidget {
             onTap: () {},
           ),
           ListTile(
-            trailing: Icon(Icons.notifications_none),
+            trailing: Icon(Icons.logout),
             title: Text("Sair"),
             onTap: () {
               authBloc.add(LogoutEvent());
