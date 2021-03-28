@@ -1,15 +1,21 @@
+import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../navigation.dart';
 import 'drawerHeaderGeral.dart';
 
 class SideBarGeral extends StatelessWidget {
+
+    final AuthBloc authBloc;
+
+  const SideBarGeral({Key key, this.authBloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          DrawerHeaderGeral(), //DrawerHeader
+          DrawerHeaderGeral(userModel: authBloc.userModel), //DrawerHeader
           ListTile(
             trailing: Icon(Icons.article_outlined),
             title: Text("Meus cadastros", style: TextStyle()),
@@ -35,7 +41,9 @@ class SideBarGeral extends StatelessWidget {
           ListTile(
             trailing: Icon(Icons.logout),
             title: Text("Sair"),
-            onTap: () {},
+            onTap: () {
+              authBloc.add(LogoutEvent());
+            },
           ),
         ],
       ),
