@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+
 import '../../blocs/auth/auth_bloc.dart';
 import '../core/custom_form_submit_button.dart';
+
 import '../core/custom_text_form_field.dart';
+import '../core/rounded_button.dart';
+import 'components/terms_button.dart';
 
 class QuestinaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -18,14 +22,15 @@ class QuestinaryScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 108.0, 0.0, 1.0),
-                  child: Text('Responda!',
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Text('Responda para concluir o seu cadastro!',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
@@ -34,55 +39,61 @@ class QuestinaryScreen extends StatelessWidget {
                           fontSize: 24)),
                 ),
               ),
-            ),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 40,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta A',
                 hintText: 'Responda',
                 onChanged: (value) {},
               ),
-            ),
-            Align(
-                child: CustomTextFormField(
-              question: 'Pergunta B',
-              hintText: 'Responda',
-              onChanged: (value) {},
-            )),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
+                question: 'Pergunta B',
+                hintText: 'Responda',
+                onChanged: (value) {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta C',
                 hintText: 'Responda',
                 onChanged: (value) {},
               ),
-            ),
-            Align(
-              child: CustomTextFormField(
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
                 question: 'Pergunta D',
                 hintText: 'Responda',
-                onChanged: (value) {
-                  //print(value);
+                onChanged: (value) {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TermsButton(
+                onpress: () {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RoundedButton(
+                text: "ACESSE",
+                onpress: () {
+                  if (_formKey.currentState.validate()) {
+                    final showSnackBar = ScaffoldMessenger.of(context)
+                        .showSnackBar(
+                            SnackBar(content: Text('Analisando respostas...')));
+                  }
                 },
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 28.0, 33.0, 2.0),
-                  child: Text(
-                    'Responda o quiz com base nos TERMOS para obter acesso!',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'DM Sans',
-                        letterSpacing: 0.4,
-                        fontSize: 14),
-                  ),
-                ),
-              ),
+
+            ],
+          ),
+
             ),
             Align(
               child: CustomFormSubmitButton(onPressed: () {
