@@ -4,17 +4,20 @@ import 'package:flutter/painting.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../core/custom_form_submit_button.dart';
 import '../core/custom_text_form_field.dart';
+import 'questions.dart';
 
-class QuestinaryScreen extends StatelessWidget {
+class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  QuestinaryScreen({Key key, @required this.authBloc}) : super(key: key);
+  QuestionaryScreen({Key key, @required this.authBloc}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
+  final String pergunta = "Quem descobriu o Brasil?";
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+    String selectedSalutation;
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -35,37 +38,29 @@ class QuestinaryScreen extends StatelessWidget {
                 ),
               ),
             ),
+
+
+
+            
             Align(
-              child: CustomTextFormField(
-                question: 'Pergunta A',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
+              alignment: Alignment.center,
+              child: CustomDropdown()           
             ),
+            //  Align(
+            //   alignment: Alignment.center,
+            //   child: CustomDropdown()           
+            // ),
+            //  Align(
+            //   alignment: Alignment.center,
+            //   child: CustomDropdown()           
+            // ),
+            //  Align(
+            //   alignment: Alignment.center,
+            //   child: CustomDropdown()           
+            // ),
+            
             Align(
-                child: CustomTextFormField(
-              question: 'Pergunta B',
-              hintText: 'Responda',
-              onChanged: (value) {},
-            )),
-            Align(
-              child: CustomTextFormField(
-                question: 'Pergunta C',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
-            ),
-            Align(
-              child: CustomTextFormField(
-                question: 'Pergunta D',
-                hintText: 'Responda',
-                onChanged: (value) {
-                  //print(value);
-                },
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.bottomLeft,
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(33.0, 28.0, 33.0, 2.0),
