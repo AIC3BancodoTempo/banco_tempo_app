@@ -55,7 +55,7 @@ class _ServicesPageState extends State<ServicesPage> {
           ),
         ],
       ),
-      drawer: widget.authBloc.userModel.isAdmin ? SideBarAdm() : SideBarGeral(),
+      drawer: widget.authBloc.userModel.isAdmin ? SideBarAdm(authBloc: widget.authBloc) : SideBarGeral(authBloc: widget.authBloc),
       body: BlocListener<ServicesBloc, ServicesState>(
         listener: (contextListener, state) {},
         child:
