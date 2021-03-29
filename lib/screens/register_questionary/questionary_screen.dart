@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
-import '../core/custom_form_submit_button.dart';
-import '../core/custom_text_form_field.dart';
-import 'questions.dart';
+
+import 'components/questions.dart';
+import 'components/terms_button.dart';
+import '../core/rounded_button.dart';
+
+
 
 class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -17,18 +20,19 @@ class QuestionaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
-    String selectedSalutation;
+    
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 108.0, 0.0, 1.0),
-                  child: Text('Responda!',
+                  padding: const EdgeInsets.only(top: 100),
+                  child: Text('Responda para concluir o seu cadastro!',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
@@ -37,58 +41,49 @@ class QuestionaryScreen extends StatelessWidget {
                           fontSize: 24)),
                 ),
               ),
-            ),
-
-
-
-            
-            Align(
-              alignment: Alignment.center,
-              child: CustomDropdown()           
-            ),
-            //  Align(
-            //   alignment: Alignment.center,
-            //   child: CustomDropdown()           
-            // ),
-            //  Align(
-            //   alignment: Alignment.center,
-            //   child: CustomDropdown()           
-            // ),
-            //  Align(
-            //   alignment: Alignment.center,
-            //   child: CustomDropdown()           
-            // ),
-            
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(33.0, 28.0, 33.0, 2.0),
-                  child: Text(
-                    'Responda o quiz com base nos TERMOS para obter acesso!',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'DM Sans',
-                        letterSpacing: 0.4,
-                        fontSize: 14),
-                  ),
-                ),
+              SizedBox(
+                height: 40,
               ),
+              CustomDropdown(),
+              SizedBox(
+                height: 20,
+              ),         
+              CustomDropdown(),          
+              SizedBox(
+                height: 20,
+              ),
+              CustomDropdown(),
+              SizedBox(
+                height: 20,
+              ),
+              CustomDropdown(),
+              SizedBox(
+                height: 20,
+              ),
+              CustomDropdown(),
+              SizedBox(
+                height: 20,
+              ),
+              TermsButton(
+                onpress: () {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RoundedButton(
+                text: "ACESSE",
+                onpress: () {
+                  if (_formKey.currentState.validate()) {
+                    final showSnackBar = ScaffoldMessenger.of(context)
+                        .showSnackBar(
+                            SnackBar(content: Text('Analisando respostas...')));
+                  }
+                },
+              ),          
+              ],
             ),
-            Align(
-              child: CustomFormSubmitButton(onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  authBloc.add(SignupEvent());
-                }
-              }),
-            ),
-          ],
-        ),
-      ),
+        )
+      )
     );
   }
 }

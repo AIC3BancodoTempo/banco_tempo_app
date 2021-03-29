@@ -15,16 +15,28 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return Container (
       child: Padding (
         padding: const EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
-        child: Column(      
+        child: Column(
+              
               children: <Widget>[
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Quem descobriu o Brasil?", 
+                        textScaleFactor: 1.4, 
+                        style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold
+                      )
+                    )
+                  ),
                   DropdownButtonFormField<String>(              
                     value: selectedSalutation,              
                     hint: Text(
-                      'Quem Descobriu o Brasil?',
+                      'Escolha uma das opções.',
                     ),
                     onChanged: (salutation) =>
                         setState(() => selectedSalutation = salutation),
-                    validator: (value) => value == null ? 'field required' : null,
+                    validator: (value) => value == null ? 'Campo Obrigatório' : null,
                     items:
                         ['A', 'B', 'C', 'D', 'E'].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
