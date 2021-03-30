@@ -6,6 +6,7 @@ import '../../blocs/auth/auth_bloc.dart';
 import 'components/questions.dart';
 import 'components/terms_button.dart';
 import '../core/rounded_button.dart';
+import '../core/custom_form_submit_button.dart';
 
 
 
@@ -78,8 +79,11 @@ class QuestionaryScreen extends StatelessWidget {
                         .showSnackBar(
                             SnackBar(content: Text('Analisando respostas...')));
                   }
+                  if (_formKey.currentState.validate()) {
+                    authBloc.add(SignupEvent());
+                  }
                 },
-              ),          
+              ),
               ],
             ),
         )
