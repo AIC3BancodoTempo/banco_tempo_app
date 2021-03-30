@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-
 import '../../blocs/auth/auth_bloc.dart';
+
+import 'components/questions.dart';
+import 'components/terms_button.dart';
+import '../core/rounded_button.dart';
 import '../core/custom_form_submit_button.dart';
 
-import '../core/custom_text_form_field.dart';
-import '../core/rounded_button.dart';
-import 'components/terms_button.dart';
 
-class QuestinaryScreen extends StatelessWidget {
+
+class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
 
-  QuestinaryScreen({Key key, @required this.authBloc}) : super(key: key);
+  QuestionaryScreen({Key key, @required this.authBloc}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
+  final String pergunta = "Quem descobriu o Brasil?";
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+    
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -42,35 +45,23 @@ class QuestinaryScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              CustomTextFormField(
-                question: 'Pergunta A',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
+              CustomDropdown(),
+              SizedBox(
+                height: 20,
+              ),         
+              CustomDropdown(),          
               SizedBox(
                 height: 20,
               ),
-              CustomTextFormField(
-                question: 'Pergunta B',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
+              CustomDropdown(),
               SizedBox(
                 height: 20,
               ),
-              CustomTextFormField(
-                question: 'Pergunta C',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
+              CustomDropdown(),
               SizedBox(
                 height: 20,
               ),
-              CustomTextFormField(
-                question: 'Pergunta D',
-                hintText: 'Responda',
-                onChanged: (value) {},
-              ),
+              CustomDropdown(),
               SizedBox(
                 height: 20,
               ),
@@ -88,23 +79,15 @@ class QuestinaryScreen extends StatelessWidget {
                         .showSnackBar(
                             SnackBar(content: Text('Analisando respostas...')));
                   }
+                  if (_formKey.currentState.validate()) {
+                    authBloc.add(SignupEvent());
+                  }
                 },
               ),
-
-            ],
-          ),
-
+              ],
             ),
-            Align(
-              child: CustomFormSubmitButton(onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  authBloc.add(SignupEvent());
-                }
-              }),
-            ),
-          ],
-        ),
-      ),
+        )
+      )
     );
   }
 }

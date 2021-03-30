@@ -66,7 +66,7 @@ class _AppPageState extends State<AppPage> {
               authBloc: authBloc,
             );
           } else if (state is QuestionaryState) {
-            return QuestinaryScreen(
+            return QuestionaryScreen(
               authBloc: authBloc,
             );
           } else if (state is SignupState) {
