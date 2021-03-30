@@ -6,20 +6,23 @@ class AnuncianteText extends StatelessWidget {
   const AnuncianteText({Key key, @required this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Anunciante: ' + text,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2F2F3E)),
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 40.0),
+      child: Row(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Anunciante: ' + text,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2F2F3E)),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

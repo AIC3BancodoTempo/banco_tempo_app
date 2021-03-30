@@ -49,7 +49,7 @@ class _ImageIncludeState extends State<ImageInclude> {
                 fontSize: 16)),
         new FloatingActionButton(
           heroTag: "btn",
-          backgroundColor: kPrimaryColor,
+          backgroundColor: themeColor,
           child: Icon(Icons.add),
           onPressed: () {
             _showPicker(context);

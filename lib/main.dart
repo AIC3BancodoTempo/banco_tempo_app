@@ -33,7 +33,7 @@ class Run extends StatelessWidget {
     return MaterialApp(
       title: 'Banco do Tempo',
       theme: ThemeData(
-        primaryColor: kPrimaryColor,
+        primaryColor: themeColor,
         primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

@@ -16,14 +16,14 @@ class ForgotPassword extends StatelessWidget {
       children: [
         Text(
           "Esqueceu a sua senha? ",
-          style: TextStyle(color: kPrimaryColor),
+          style: TextStyle(color: themeColor),
         ),
         GestureDetector(
           onTap: press,
           child: Text(
             "Clique aqui",
             style: TextStyle(
-              color: kPrimaryColor,
+              color: themeColor,
               fontWeight: FontWeight.bold,
             ),
           ),

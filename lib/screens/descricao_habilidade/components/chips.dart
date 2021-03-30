@@ -24,6 +24,7 @@ class _ChipsState extends State<Chips> {
         //   label: Text('1 Unidade'),
         // ),
         Container(
+          height: 35,
           padding: EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
               border: Border.all(
@@ -43,8 +44,18 @@ class _ChipsState extends State<Chips> {
             },
           ),
         ),
-        Chip(
-          label: Text(widget.hora + ' Hora'),
+        Container(
+          height: 35,
+          padding: EdgeInsets.only(left: 5, right: 5),
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey[350],
+              ),
+              color: Colors.grey[350],
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Chip(
+            label: Text(widget.hora + ' Hora'),
+          ),
         ),
       ],
     );

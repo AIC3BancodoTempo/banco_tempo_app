@@ -20,6 +20,9 @@ class MainTitle extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2F2F3E)),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Text(
             tempo + " Hora",
             style: TextStyle(

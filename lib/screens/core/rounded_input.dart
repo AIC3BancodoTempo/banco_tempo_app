@@ -27,12 +27,12 @@ class RoundedInput extends StatelessWidget {
         controller: controller,
         onChanged: onChanged,
         validator: validator,
-        cursorColor: kPrimaryColor,
+        cursorColor: themeColor,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           icon: Icon(
             icon,
-            color: kPrimaryColor,
+            color: themeColor,
           ),
           hintText: hintText,
           border: InputBorder.none,
