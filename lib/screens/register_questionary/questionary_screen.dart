@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-
 import '../../blocs/auth/auth_bloc.dart';
-import '../core/custom_form_submit_button.dart';
-
 import '../core/custom_text_form_field.dart';
 import '../core/rounded_button.dart';
 import 'components/terms_button.dart';
@@ -84,25 +81,14 @@ class QuestinaryScreen extends StatelessWidget {
                 text: "ACESSE",
                 onpress: () {
                   if (_formKey.currentState.validate()) {
-                    final showSnackBar = ScaffoldMessenger.of(context)
-                        .showSnackBar(
-                            SnackBar(content: Text('Analisando respostas...')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Analisando respostas...')));
+                    authBloc.add(SignupEvent());
                   }
                 },
               ),
-
             ],
           ),
-
-            ),
-            Align(
-              child: CustomFormSubmitButton(onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  authBloc.add(SignupEvent());
-                }
-              }),
-            ),
-          ],
         ),
       ),
     );

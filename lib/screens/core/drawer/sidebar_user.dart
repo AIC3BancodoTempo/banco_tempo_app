@@ -1,12 +1,11 @@
-import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../../../blocs/auth/auth_bloc.dart';
 import '../navigation.dart';
 import 'drawer_header_geral.dart';
 
 class SideBarGeral extends StatelessWidget {
-
-    final AuthBloc authBloc;
+  final AuthBloc authBloc;
 
   const SideBarGeral({Key key, this.authBloc}) : super(key: key);
 
