@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
-
 import 'components/questions.dart';
 import 'components/terms_button.dart';
 import '../core/rounded_button.dart';
@@ -74,20 +73,17 @@ class QuestionaryScreen extends StatelessWidget {
               RoundedButton(
                 text: "ACESSE",
                 onpress: () {
-                  if (_formKey.currentState.validate()) {
-                    final showSnackBar = ScaffoldMessenger.of(context)
-                        .showSnackBar(
-                            SnackBar(content: Text('Analisando respostas...')));
-                  }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Analisando respostas...')));
                   if (_formKey.currentState.validate()) {
                     authBloc.add(SignupEvent());
                   }
                 },
               ),
-              ],
-            ),
-        )
-      )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

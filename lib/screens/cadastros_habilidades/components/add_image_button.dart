@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import '../../core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../core/colors.dart';
 
 class ImageInclude extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _ImageIncludeState extends State<ImageInclude> {
 
   void _imgFromCamera() async {
     PickedFile pickedFile = await ImagePicker()
-        .getImage(source: ImageSource.gallery, imageQuality: 50);
+        .getImage(source: ImageSource.camera, imageQuality: 50);
     File file = File(pickedFile.path);
     if (file != null) {
       setState(() {
@@ -25,7 +26,7 @@ class _ImageIncludeState extends State<ImageInclude> {
 
   void _imgFromGallery() async {
     PickedFile pickedFile = await ImagePicker()
-        .getImage(source: ImageSource.camera, imageQuality: 50);
+        .getImage(source: ImageSource.gallery, imageQuality: 50);
     File file = File(pickedFile.path);
     if (file != null) {
       setState(() {
