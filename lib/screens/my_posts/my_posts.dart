@@ -62,7 +62,7 @@ class _MyPostsState extends State<MyPosts> {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: themeColor,
         title: Text("Meus Cadastros"),
         centerTitle: true,
       ),

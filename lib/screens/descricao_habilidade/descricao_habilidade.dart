@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -86,8 +87,8 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                       imageList: habilityDescriptionBloc.produtoModel.images),
                 ),
                 Container(
-                  padding: EdgeInsets.all(25),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       MainTitle(
                         title: habilityDescriptionBloc.produtoModel.productName,
@@ -100,7 +101,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                         textAlign: TextAlign.justify,
                         style: TextStyle(height: 1.5, color: Color(0xFF6F8398)),
                       ),
-                      spaceVertical(20),
+                      spaceVertical(30),
                       Chips(
                         hora: habilityDescriptionBloc.produtoModel.custoHoras
                             .toString(),
@@ -109,18 +110,17 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                           habilityDescriptionBloc.setAmount(value);
                         },
                       ),
-                      spaceVertical(20),
+                      spaceVertical(30),
                       AnuncianteText(
                         text: habilityDescriptionBloc.produtoModel.userPostName,
                       ),
                       spaceVertical(20),
-                      ButtonDescriptionAndAdd(
-                        iconData: Icons.chat,
+                      RoundedButton(
+                        text: "TENHO INTERESSE",
                         onpress: () {
                           habilityDescriptionBloc.add(ChatPressedEvent());
                         },
-                        text: "TENHO INTERESSE",
-                      ),
+                      )
                     ],
                   ),
                 ),

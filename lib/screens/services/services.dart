@@ -45,7 +45,7 @@ class _ServicesPageState extends State<ServicesPage> {
     servicesBloc = BlocProvider.of<ServicesBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: themeColor,
         centerTitle: true,
         title: const Text('Serviços/Habilidades'),
         actions: <Widget>[
@@ -55,7 +55,9 @@ class _ServicesPageState extends State<ServicesPage> {
           ),
         ],
       ),
-      drawer: widget.authBloc.userModel.isAdmin ? SideBarAdm(authBloc: widget.authBloc) : SideBarGeral(authBloc: widget.authBloc),
+      drawer: widget.authBloc.userModel.isAdmin
+          ? SideBarAdm(authBloc: widget.authBloc)
+          : SideBarGeral(authBloc: widget.authBloc),
       body: BlocListener<ServicesBloc, ServicesState>(
         listener: (contextListener, state) {},
         child:
@@ -69,7 +71,7 @@ class _ServicesPageState extends State<ServicesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: themeColor,
         onPressed: () {
           navigateToSkillHabilit(context);
         },

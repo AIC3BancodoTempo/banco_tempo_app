@@ -30,7 +30,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
           },
         ),
         centerTitle: true,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: themeColor,
         title: Text(
           "Descrição",
         ),
