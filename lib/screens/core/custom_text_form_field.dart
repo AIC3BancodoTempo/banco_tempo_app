@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
+      children: [
         Align(
           alignment: Alignment.center,
           child: Container(

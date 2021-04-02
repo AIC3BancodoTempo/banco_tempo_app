@@ -9,7 +9,7 @@ class ChatProfileDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+      children: [
         Text(
           nome,
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),

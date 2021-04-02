@@ -44,7 +44,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: [
                     Text(
                       "RECUPERAR SENHA",
                       style: TextStyle(fontWeight: FontWeight.bold),

@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           alignment: Alignment.center,
-          children: <Widget>[
+          children: [
             Positioned(
               bottom: 0,
               left: 0,
@@ -30,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Text(
                     "BEM VINDO AO BANCO DO TEMPO",
                     style: TextStyle(fontWeight: FontWeight.bold),

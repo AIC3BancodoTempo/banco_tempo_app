@@ -18,13 +18,13 @@ class _ProfilescreenState extends State<Profilescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: <Widget>[
+        children: [
           ProfileHeader(),
           SizedBox(height: 5),
           Container(
             padding: EdgeInsets.fromLTRB(2, 20, 2, 15),
             child: Column(
-              children: <Widget>[
+              children: [
                 ProfileTextField(
                   inputType: TextInputType.text,
                   label: "Nome de Usuário",

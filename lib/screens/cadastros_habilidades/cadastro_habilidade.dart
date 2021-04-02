@@ -39,7 +39,7 @@ class AddAbilityPageState extends State<AddAbilityPage> {
         child: Form(
           key: _formKey,
           child: Column(
-            children: <Widget>[
+            children: [
               TitleAddText(
                 insertTitleHere:
                     'Adicione uma habilidade, serviço ou o que está procurando!',
