@@ -46,9 +46,7 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<State> keyLoader = new GlobalKey<State>();
     authBloc = BlocProvider.of<AuthBloc>(context);
-    UiBuilder uiBuilder = UiBuilder(keyLoader: keyLoader);
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (contextListener, state) {
@@ -57,7 +55,7 @@ class _AppPageState extends State<AppPage> {
               widget.setUser(state.user, state.userModel);
             }
           } else if (state is ExceptionState) {
-            uiBuilder.buildSnackBarUi(context, state.message);
+            buildSnackBarUi(context, state.message);
           }
         },
         child: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {

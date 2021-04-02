@@ -17,10 +17,6 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(70);
 
-  void onCloseEvent() {
-    chatBloc.close();
-  }
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -36,9 +32,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      ReturnButton(
-                        onPressEvent: onCloseEvent,
-                      ),
+                      ReturnButton(),
                       SizedBox(
                         width: 2,
                       ),
@@ -70,7 +64,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    chatBloc.trocaModel.userConsumerId == chatBloc.user.uid
+                    chatBloc.trocaModel.userPostId == chatBloc.user.uid
                         ? AppBarAction(
                             onPressEvent: () {
                               buildExchangeDialog(context, chatBloc);

@@ -97,10 +97,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     } catch (e) {
       if (e is FirebaseAuthException) {
-        yield ExceptionState(message: authErrorHandler(e));
+        //yield ExceptionState(message: authErrorHandler(e));
         yield UnauthenticatedState();
       } else {
-        yield ExceptionState(message: e.toString());
+        //yield ExceptionState(message: e.toString());
         yield UnauthenticatedState();
       }
     }

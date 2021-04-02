@@ -8,7 +8,7 @@ class ChatMessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade400,
         borderRadius: BorderRadius.circular(10.0),
       ),
       padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),

@@ -82,7 +82,7 @@ class ExchangeDialogBody extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: TextButton(
                 onPressed: () {
-                  chatBloc.add(ExchangeEvent());
+                  chatBloc.add(RequestExchangeEvent());
                   Navigator.of(context).pop();
                 },
                 child: Text(

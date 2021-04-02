@@ -7,7 +7,6 @@ import '../../blocs/hability_description/hability_description_bloc.dart';
 import '../../core/models/produto_model.dart';
 import '../core/colors.dart';
 import '../core/loading.dart';
-import '../core/main_button.dart';
 import '../core/navigation.dart';
 import '../core/ui.dart';
 import 'components/anunciante_text.dart';
@@ -53,7 +52,6 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     habilityDescriptionBloc = BlocProvider.of<HabilityDescriptionBloc>(context);
-    UiBuilder uiBuilder = UiBuilder(keyLoader: keyLoader);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -73,7 +71,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
           if (state is ChatPressedState) {
             navigateToChatScreen(context, state.trocaModel);
           } else if (state is WarningState) {
-            uiBuilder.buildSnackBarUi(context, state.message);
+            buildSnackBarUi(context, state.message);
           }
         },
         child: BlocBuilder<HabilityDescriptionBloc, HabilityDescriptionState>(
@@ -106,6 +104,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                         hora: habilityDescriptionBloc.produtoModel.custoHoras
                             .toString(),
                         dropList: habilityDescriptionBloc.getDrop(),
+                        defaultValue: habilityDescriptionBloc.getAmount(),
                         onChanged: (value) {
                           habilityDescriptionBloc.setAmount(value);
                         },

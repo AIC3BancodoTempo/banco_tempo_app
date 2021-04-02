@@ -17,3 +17,9 @@ class LoadingState extends ChatState {
 class ShowMessagesState extends ChatState {}
 
 class UpdateMessagesState extends ChatState {}
+
+class WarningState extends ChatState {
+  final String message;
+
+  WarningState({this.message});
+}

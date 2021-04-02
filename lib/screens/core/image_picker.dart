@@ -22,7 +22,6 @@ void showImagePicker(BuildContext context, Function function) {
                         File _image = File(pickedFile.path);
                         function(_image);
                       }
-
                       Navigator.of(context).pop();
                     }),
                 new ListTile(
