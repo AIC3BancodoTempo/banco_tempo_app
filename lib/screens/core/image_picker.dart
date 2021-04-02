@@ -11,7 +11,7 @@ void showImagePicker(BuildContext context, Function function) {
         return SafeArea(
           child: Container(
             child: new Wrap(
-              children: <Widget>[
+              children: [
                 new ListTile(
                     leading: new Icon(Icons.photo_library),
                     title: new Text('Galeria'),

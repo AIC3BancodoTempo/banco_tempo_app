@@ -25,7 +25,7 @@ class ChatMessageArea extends StatelessWidget {
       child: Column(
         crossAxisAlignment:
             recebidoEnviado ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: <Widget>[
+        children: [
           ChatMessageDate(
             date: datetime,
             recebidoEnviado: recebidoEnviado,

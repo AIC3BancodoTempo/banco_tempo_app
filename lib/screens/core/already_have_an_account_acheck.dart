@@ -15,7 +15,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+      children: [
         Text(
           login ? "Ainda não possui uma conta ? " : "Ja possui uma conta ? ",
           style: TextStyle(color: themeColor),

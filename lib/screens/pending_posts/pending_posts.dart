@@ -27,8 +27,12 @@ class PendingPosts extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Divulgações pendentes"),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }),
         centerTitle: true,
-        actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})],
       ),
       body: ListView.builder(
           itemCount: _mockupPosts.length,

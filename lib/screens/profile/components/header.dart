@@ -39,7 +39,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               title: Text("Imagem"),
               content: SingleChildScrollView(
                   child: ListBody(
-                children: <Widget>[
+                children: [
                   GestureDetector(
                     child: Text("Dados"),
                     onTap: () {
@@ -70,13 +70,13 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         ),
       ),
       child: Column(
-        children: <Widget>[
+        children: [
           SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               Column(
-                children: <Widget>[
+                children: [
                   ImageProfile(imageFile: imageFile),
                 ],
               )

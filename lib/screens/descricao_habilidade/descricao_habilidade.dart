@@ -7,7 +7,6 @@ import '../../blocs/hability_description/hability_description_bloc.dart';
 import '../../core/models/produto_model.dart';
 import '../core/colors.dart';
 import '../core/loading.dart';
-import '../core/main_button.dart';
 import '../core/navigation.dart';
 import '../core/ui.dart';
 import 'components/anunciante_text.dart';
@@ -80,7 +79,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
             builder: (context, state) {
           if (state is ShowScreenState) {
             return ListView(
-              children: <Widget>[
+              children: [
                 Padding(
                   padding: EdgeInsets.all(7),
                   child: ImageCarousel(
@@ -89,7 +88,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
+                    children: [
                       MainTitle(
                         title: habilityDescriptionBloc.produtoModel.productName,
                         tempo: habilityDescriptionBloc.produtoModel.custoHoras

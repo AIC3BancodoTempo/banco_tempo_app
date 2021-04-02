@@ -6,7 +6,6 @@ import '../../blocs/auth/auth_bloc.dart';
 import 'components/questions.dart';
 import 'components/terms_button.dart';
 import '../core/rounded_button.dart';
-import '../core/custom_form_submit_button.dart';
 
 class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -25,7 +24,7 @@ class QuestionaryScreen extends StatelessWidget {
         leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.of(context).pop();
+              authBloc.add(ExitEvent());
             }),
         centerTitle: true,
         backgroundColor: themeColor,

@@ -30,54 +30,50 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: SafeArea(
         child: Container(
           padding: EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      ReturnButton(
-                        onPressEvent: onCloseEvent,
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      ProfileImage(
-                          radius: 20,
-                          image:
-                              "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg"),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      ChatProfileDescription(
-                          nome: chatBloc.trocaModel.userConsumerId ==
-                                  chatBloc.user.uid
-                              ? chatBloc.trocaModel.userPostName
-                              : chatBloc.trocaModel.userConsumerName,
-                          descricao: chatBloc.trocaModel.productName),
-                      SizedBox(
-                        width: 12,
-                      ),
-                    ]),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    AppBarAction(
-                        onPressEvent: () {
-                          buildReportDialog(context, chatBloc);
-                        },
-                        icon: Icons.warning),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    AppBarAction(
-                        onPressEvent: () {
-                          buildExchangeDialog(context, chatBloc);
-                        },
-                        icon: Icons.multiple_stop_sharp)
-                  ],
-                )
-              ]),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              ReturnButton(
+                onPressEvent: onCloseEvent,
+              ),
+              SizedBox(
+                width: 2,
+              ),
+              ProfileImage(
+                  radius: 20,
+                  image:
+                      "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg"),
+              SizedBox(
+                width: 12,
+              ),
+              ChatProfileDescription(
+                  nome: chatBloc.trocaModel.userConsumerId == chatBloc.user.uid
+                      ? chatBloc.trocaModel.userPostName
+                      : chatBloc.trocaModel.userConsumerName,
+                  descricao: chatBloc.trocaModel.productName),
+              SizedBox(
+                width: 12,
+              ),
+            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                AppBarAction(
+                    onPressEvent: () {
+                      buildReportDialog(context, chatBloc);
+                    },
+                    icon: Icons.warning),
+                SizedBox(
+                  width: 5,
+                ),
+                AppBarAction(
+                    onPressEvent: () {
+                      buildExchangeDialog(context, chatBloc);
+                    },
+                    icon: Icons.multiple_stop_sharp)
+              ],
+            )
+          ]),
         ),
       ),
     );
