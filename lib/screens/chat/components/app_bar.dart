@@ -70,11 +70,13 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    AppBarAction(
-                        onPressEvent: () {
-                          buildExchangeDialog(context, chatBloc);
-                        },
-                        icon: Icons.multiple_stop_sharp)
+                    chatBloc.trocaModel.userConsumerId == chatBloc.user.uid
+                        ? AppBarAction(
+                            onPressEvent: () {
+                              buildExchangeDialog(context, chatBloc);
+                            },
+                            icon: Icons.multiple_stop_sharp)
+                        : Container()
                   ],
                 )
               ]),

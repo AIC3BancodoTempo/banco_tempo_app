@@ -11,7 +11,7 @@ class ExchangeDialogBody extends StatelessWidget {
   final ChatBloc chatBloc;
   final String nome;
   final int unidade;
-  final int horasUtilizadas;
+  final double horasUtilizadas;
 
   ExchangeDialogBody(
       {@required this.chatBloc,

@@ -67,6 +67,7 @@ class HabilityDescriptionBloc
             salaId: uid.v1(),
             status: 0,
             amount: amount,
+            cost: produtoModel.custoHoras,
             userPostId: produtoModel.userPostId,
             userPostName: produtoModel.userPostName);
         await _trocaRepository.insertTroca(troca);
