@@ -42,6 +42,7 @@ class Run extends StatelessWidget {
         '/trocasAndamento': (context) => TrocasAndamento(),
         '/chat': (context) => Chat(
               user: _user,
+              userModel: _userModel,
             ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => HabilityDescription(

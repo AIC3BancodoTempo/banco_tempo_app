@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import '../../resources/report/firebase_report.dart';
+import 'package:banco_do_tempo_app/core/models/produto_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -9,16 +9,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/models/chat_model.dart';
 import '../../core/models/troca_model.dart';
+import '../../core/models/user_model.dart';
+import '../../resources/caixa/firestore_caixa.dart';
 import '../../resources/chat/firestore_chat.dart';
+import '../../resources/report/firebase_report.dart';
 import '../../resources/storage/firebase_storage.dart';
+import '../../resources/troca/firestore_troca.dart';
+import '../../resources/user/firebase_user.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ChatRepository _chatRepository = ChatRepository();
+  final UsersRepository _usersRepository = UsersRepository();
   final StorageRepository _storageRepository = StorageRepository();
   final ReportRepository _reportRepository = ReportRepository();
+  final TrocaRepository _trocaRepository = TrocaRepository();
+  final CaixaRepository _caixaRepository = CaixaRepository();
+  final ProdutoRepository _produtoRepository = ProdutoRepository();
+  final UserModel userModel;
   final User user;
   final TrocaModel trocaModel;
   File imageFile;
@@ -29,6 +39,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   List<ChatModel> chatList = [];
   StreamSubscription _subscription;
   ChatBloc({
+    this.userModel,
     this.user,
     this.trocaModel,
   }) : super(ChatInitial());
@@ -137,7 +148,32 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               message: "Requisição de troca só pode ser feito uma vez!");
         }
       } else if (event is ExchangeEvent) {
-        //TODO UPDATE STATUS SET HOURS FOR PARTICIPANTS
+        double horasTroca = trocaModel.cost * trocaModel.amount;
+        if (userModel.horas >= horasTroca) {
+          await _caixaRepository.addCaixa();
+          ProdutoModel produto =
+              await _produtoRepository.getProduto(trocaModel.productId);
+          int restante = produto.productQuantity - trocaModel.amount;
+          if (restante >= 0) {
+            await _usersRepository.addHoras(trocaModel.userPostId, horasTroca);
+            await _usersRepository.removeHoras(
+                trocaModel.userConsumerId, horasTroca);
+            userModel.horas -= horasTroca;
+            await _trocaRepository.concluiTroca(trocaModel.key);
+            if (restante == 0) {
+              await _produtoRepository.updateStatus(trocaModel.productId);
+            } else {
+              await _produtoRepository.removeQuantidade(
+                  trocaModel.productId, trocaModel.amount);
+            }
+          } else {
+            yield WarningState(
+                message: "O produto não tem mais a quantidade desejada!");
+          }
+        } else {
+          yield WarningState(
+              message: "Você não tem horas suficientes para realizar a troca!");
+        }
       }
     } catch (e) {
       print(e.toString());

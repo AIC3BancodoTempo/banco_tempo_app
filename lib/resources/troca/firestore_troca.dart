@@ -18,6 +18,15 @@ class TrocaRepository {
     }).catchError((error) => throw Exception(error));
   }
 
+  Future<bool> concluiTroca(String docId) async {
+    return await firestoreInstance
+        .collection('troca')
+        .doc(docId)
+        .update({'status': 1}).then((value) {
+      return true;
+    }).catchError((error) => throw Exception(error));
+  }
+
   Future<TrocaModel> getTrocaById(String productId, String consumerId) async {
     TrocaModel model;
     try {

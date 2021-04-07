@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../core/colors.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../core/colors.dart';
+import '../core/rounded_button.dart';
 import 'components/questions.dart';
 import 'components/terms_button.dart';
-import '../core/rounded_button.dart';
 
 class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
