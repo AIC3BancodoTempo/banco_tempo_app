@@ -13,7 +13,7 @@ class SideBarAdm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: <Widget>[
+        children: [
           DrawerHeaderGeral(userModel: authBloc.userModel), //DrawerHeader
 
           ListTile(

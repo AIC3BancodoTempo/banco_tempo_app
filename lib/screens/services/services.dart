@@ -48,7 +48,7 @@ class _ServicesPageState extends State<ServicesPage> {
         backgroundColor: themeColor,
         centerTitle: true,
         title: const Text('Serviços/Habilidades'),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {},

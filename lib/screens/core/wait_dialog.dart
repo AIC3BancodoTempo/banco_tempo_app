@@ -14,7 +14,7 @@ class Dialogs {
             child: SimpleDialog(
               key: key,
               backgroundColor: Colors.white,
-              children: <Widget>[
+              children: [
                 Center(
                   child: Column(children: [
                     CircularProgressIndicator(),

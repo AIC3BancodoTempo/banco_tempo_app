@@ -39,7 +39,7 @@ class _ImageIncludeState extends State<ImageInclude> {
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 120.0,
-      children: <Widget>[
+      children: [
         new Text('Anexe uma Foto',
             style: TextStyle(
                 color: Colors.black,
@@ -66,7 +66,7 @@ class _ImageIncludeState extends State<ImageInclude> {
         return SafeArea(
           child: Container(
             child: new Wrap(
-              children: <Widget>[
+              children: [
                 new ListTile(
                     leading: new Icon(Icons.photo_library),
                     title: new Text('Photo Library'),

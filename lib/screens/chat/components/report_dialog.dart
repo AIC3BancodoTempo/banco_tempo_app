@@ -34,7 +34,7 @@ class CustomDialog extends StatelessWidget {
   dialogContent(BuildContext context) {
     const double padding = 16.0;
     const double avatarRadius = 40.0;
-    return Stack(children: <Widget>[
+    return Stack(children: [
       Container(
         padding: EdgeInsets.only(
           top: avatarRadius + padding,

@@ -70,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
             return Loading();
           } else {
             return Column(
-              children: <Widget>[
+              children: [
                 Expanded(
                     child: ChatMessageList(
                   listScrollController: listScrollController,

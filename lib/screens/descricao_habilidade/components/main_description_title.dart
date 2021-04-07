@@ -12,7 +12,7 @@ class MainTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: <Widget>[
+        children: [
           Text(
             title,
             style: TextStyle(

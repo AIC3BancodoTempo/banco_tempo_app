@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
         height: size.height,
         child: Stack(
           alignment: Alignment.center,
-          children: <Widget>[
+          children: [
             Positioned(
               top: 0,
               left: 0,
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: [
                     Text(
                       "LOGIN",
                       style: TextStyle(fontWeight: FontWeight.bold),

@@ -13,7 +13,7 @@ class SideBarGeral extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: <Widget>[
+        children: [
           DrawerHeaderGeral(userModel: authBloc.userModel), //DrawerHeader
           ListTile(
             trailing: Icon(Icons.article_outlined),
@@ -35,6 +35,11 @@ class SideBarGeral extends StatelessWidget {
             onTap: () {
               navigateToProfileScreen(context);
             },
+          ),
+          ListTile(
+            trailing: Icon(Icons.notifications_none),
+            title: Text("Perguntas Frequentes"),
+            onTap: () {},
           ),
 
           ListTile(
