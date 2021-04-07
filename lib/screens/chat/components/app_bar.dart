@@ -42,7 +42,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               ProfileImage(
                   radius: 20,
                   image:
-                      "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg"),
+                      "assets/images/profile.png"),
               SizedBox(
                 width: 12,
               ),
