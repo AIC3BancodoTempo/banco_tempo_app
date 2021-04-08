@@ -25,7 +25,7 @@ class ProfileForm extends StatelessWidget {
             question: "Nome de Usuário",
           ),
           SizedBox(
-            height: 20,
+            height: 50,
           ),
           CustomFormSubmitButton(
             onPressed: null,

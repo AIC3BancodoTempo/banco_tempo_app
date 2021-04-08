@@ -39,12 +39,12 @@ class _ProfilescreenState extends State<Profilescreen> {
             ),
             ProfileForm(),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Divider(
               thickness: 4,
-              endIndent: 80,
-              indent: 80,
+              endIndent: 100,
+              indent: 100,
             ),
           ],
         ),
