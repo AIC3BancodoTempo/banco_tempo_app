@@ -10,6 +10,7 @@ class ProfileForm extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
+            icon: Icon(Icons.email),
             hintText: "E-mail",
             onChanged: null,
             question: "Digite seu E-mail",
@@ -18,6 +19,7 @@ class ProfileForm extends StatelessWidget {
             height: 20,
           ),
           CustomTextFormField(
+            icon: Icon(Icons.person),
             hintText: "myusername",
             onChanged: null,
             question: "Nome de Usuário",

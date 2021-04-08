@@ -7,10 +7,12 @@ class CustomTextFormField extends StatelessWidget {
   final String question;
   final String hintText;
   final Function onChanged;
+  final Icon icon;
   CustomTextFormField(
       {@required this.question,
       @required this.hintText,
-      @required this.onChanged});
+      @required this.onChanged,
+      this.icon});
   final myFocusNode = new FocusNode();
 
   @override
@@ -31,9 +33,11 @@ class CustomTextFormField extends StatelessWidget {
                     ),
                   ),
                   focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                    color: themeSimpleColor,
-                  )),
+                    borderSide: BorderSide(
+                      color: themeSimpleColor,
+                    ),
+                  ),
+                  prefixIcon: icon,
                   labelText: this.question,
                   labelStyle: TextStyle(
                       color:
