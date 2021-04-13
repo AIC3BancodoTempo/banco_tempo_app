@@ -50,7 +50,8 @@ class ProdutoModel {
         images: images ?? this.images);
   }
 
-  ProdutoModel.fromSnapshot(QueryDocumentSnapshot documentSnapshot) {
+  ProdutoModel.fromSnapshot(
+      Map<String, dynamic> data, QueryDocumentSnapshot doc) {
     Map<String, dynamic> data = documentSnapshot.data();
     productId = documentSnapshot.id;
     userPostId = data['user_post'] != null ? data['user_post'] : '';
