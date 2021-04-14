@@ -9,11 +9,6 @@ abstract class HabilityState extends Equatable {
 
 class HabilityInitial extends HabilityState {}
 
-class LoadingState extends HabilityState {
-  @override
-  List<Object> get props => [];
-}
+class LoadingHabilityState extends HabilityState {}
 
 class ShowHabilityState extends HabilityState {}
-
-class updateHabilityState extends HabilityState {}

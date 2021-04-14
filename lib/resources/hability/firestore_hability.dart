@@ -9,7 +9,7 @@ class HabilityRepository {
     this.firestoreInstance = FirebaseFirestore.instance;
   }
 
-  Future<List<ProdutoModel>> receiveHability(int status) async {
+  Future<List<ProdutoModel>> getLastHability(int status) async {
     List<ProdutoModel> productList = [];
     QuerySnapshot snapshot = await firestoreInstance
         .collection('produto')

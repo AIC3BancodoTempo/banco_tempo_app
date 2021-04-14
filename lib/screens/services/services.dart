@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/blocs/hability/hability_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class Services extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ServicesBloc(),
+      create: (context) => HabilityBloc()..add(HabilityStartedEvent()),
       child: ServicesPage(authBloc: authBloc),
     );
   }
@@ -32,17 +33,17 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
-  ServicesBloc servicesBloc;
+  HabilityBloc habilityBloc;
 
   @override
   void dispose() {
-    servicesBloc.close();
+    habilityBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    servicesBloc = BlocProvider.of<ServicesBloc>(context);
+    habilityBloc = BlocProvider.of<HabilityBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: themeColor,
@@ -58,11 +59,11 @@ class _ServicesPageState extends State<ServicesPage> {
       drawer: widget.authBloc.userModel.isAdmin
           ? SideBarAdm(authBloc: widget.authBloc)
           : SideBarGeral(authBloc: widget.authBloc),
-      body: BlocListener<ServicesBloc, ServicesState>(
+      body: BlocListener<HabilityBloc, HabilityState>(
         listener: (contextListener, state) {},
         child:
-            BlocBuilder<ServicesBloc, ServicesState>(builder: (context, state) {
-          if (state is LoadingState) {
+            BlocBuilder<HabilityBloc, HabilityState>(builder: (context, state) {
+          if (state is LoadingHabilityState) {
             return Loading();
           } else {
             return Cards();
