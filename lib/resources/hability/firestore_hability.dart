@@ -25,4 +25,32 @@ class HabilityRepository {
 
     return productList;
   }
+
+  Future<ProdutoModel> getHabilityById(String docId) async {
+    ProdutoModel product;
+    DocumentSnapshot snapshot =
+        await firestoreInstance.collection('produto').doc(docId).get();
+    if (snapshot != null) {
+      Map<String, dynamic> data = snapshot.data();
+      product = ProdutoModel.fromSnapshot(data, snapshot);
+    }
+    return product;
+  }
+
+  Future<bool> updateStatus(String docId, int status) async {
+    return await firestoreInstance
+        .collection('produto')
+        .doc(docId)
+        .update({'status': status}).then((value) {
+      return true;
+    }).catchError((error) => throw Exception(error));
+  }
+
+  Future<bool> decrementaQuantidade(String userId, int qtd) async {
+    return await firestoreInstance.collection('produto').doc(userId).set({
+      'productQuantity': FieldValue.increment(-qtd),
+    }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
+  }
 }
