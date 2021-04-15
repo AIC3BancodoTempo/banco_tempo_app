@@ -56,12 +56,14 @@ class ProdutoModel {
     productId = documentSnapshot.id;
     userPostId = data['user_post'] != null ? data['user_post'] : '';
     userPostName = data['user_name_post'] != null ? data['user_name_post'] : '';
-    productQuantity = data['quantidade'] != null ? data['quantidade'] : '';
+    productQuantity =
+        data['quantidade'] != null ? data['quantidade'].toString() : 0;
     productDescritpion = data['descricao'] != null ? data['descricao'] : '';
     data = data['data'] != null ? data['data'] : '';
     productName = data['nome'] != null ? data['nome'] : '';
     status = data['status'] != null ? data['status'] : 0;
-    custoHoras = data['valor_em_horas'] != null ? data['valor_em_horas'] : 0;
+    custoHoras =
+        data['valor_em_horas'] != null ? data['valor_em_horas'].toDouble() : 0;
     images =
         data['valor_em_horas'] != null ? List<String>.from(data['imagem']) : [];
   }

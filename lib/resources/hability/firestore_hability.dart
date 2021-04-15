@@ -14,7 +14,6 @@ class HabilityRepository {
     QuerySnapshot snapshot = await firestoreInstance
         .collection('produto')
         .where('status', isEqualTo: status)
-        .orderBy('timestamp', descending: true)
         .limit(20)
         .get();
     if (snapshot.size > 0) {
