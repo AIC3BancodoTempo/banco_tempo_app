@@ -27,6 +27,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   style: TextStyle(
                       fontFamily: 'Roboto', fontWeight: FontWeight.bold))),
           DropdownButtonFormField<String>(
+            isExpanded: true,
             value: selectedSalutation,
             hint: Text(
               'Escolha uma das opções.',
@@ -34,11 +35,13 @@ class _CustomDropdownState extends State<CustomDropdown> {
             onChanged: (salutation) =>
                 setState(() => selectedSalutation = salutation),
             validator: (value) =>
-                value == widget.resposta ? 'Resposta Inválida' : null,
+                value == widget.resposta ? 'Resposta incorreta' : null,
             items: widget.opcoes.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(
+                  value,
+                ),
               );
             }).toList(),
           )

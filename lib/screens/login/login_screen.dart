@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: size.height * 0.03),
                     AlreadyHaveAnAccountCheck(
                       press: () {
-                        authBloc.add(SignupEvent());
+                        authBloc.add(QuestionaryEvent());
                       },
                     ),
                   ],

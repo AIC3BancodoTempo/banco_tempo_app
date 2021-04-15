@@ -35,7 +35,7 @@ class QuestionaryScreen extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
