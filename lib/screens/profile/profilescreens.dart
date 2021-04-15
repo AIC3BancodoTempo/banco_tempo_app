@@ -22,15 +22,13 @@ class _ProfilescreenState extends State<Profilescreen> {
           children: [
             Stack(
               clipBehavior: Clip.none,
-              alignment: Alignment.topLeft,
-              children: <Widget>[
+              //alignment: Alignment.topLeft,
+              children: [
                 BackgroundImage(
                   image:
                       'https://ak.picdn.net/shutterstock/videos/12573827/thumb/1.jpg',
                 ),
-                PerfilImage(
-                  image: 'https://avatarfiles.alphacoders.com/197/197076.jpg',
-                ),
+                PerfilImage(),
               ],
             ),
             RightTextProfile(

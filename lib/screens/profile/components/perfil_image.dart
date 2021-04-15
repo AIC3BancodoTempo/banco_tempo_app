@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PerfilImage extends StatelessWidget {
-  final String image;
-
-  const PerfilImage({Key key, @required this.image}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: 30,
+      left: 95,
       bottom: -60.0,
       child: Container(
         width: 200.0,
@@ -15,7 +12,7 @@ class PerfilImage extends StatelessWidget {
         child: CircleAvatar(
           radius: 80,
           backgroundColor: Colors.white,
-          backgroundImage: NetworkImage(image),
+          backgroundImage: AssetImage("assets/images/profile.png"),
         ),
         decoration: new BoxDecoration(
           color: const Color(0xff7c94b6),

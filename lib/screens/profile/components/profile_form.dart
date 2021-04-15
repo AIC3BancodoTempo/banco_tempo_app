@@ -1,5 +1,5 @@
-import 'package:banco_do_tempo_app/screens/core/custom_form_submit_button.dart';
 import 'package:banco_do_tempo_app/screens/core/custom_text_form_field.dart';
+import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileForm extends StatelessWidget {
@@ -27,9 +27,9 @@ class ProfileForm extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          CustomFormSubmitButton(
-            onPressed: null,
+          RoundedButton(
             text: "Redefinir Senha",
+            onpress: null,
           ),
         ],
       ),
