@@ -53,18 +53,18 @@ class ProdutoModel {
   ProdutoModel.fromSnapshot(
       Map<String, dynamic> info, QueryDocumentSnapshot doc) {
     productId = info['productId'] != null ? info['productId'] : '';
-    userPostId = info['user_post'] != null ? info['user_post'] : '';
-    userPostName = info['user_name_post'] != null ? info['user_name_post'] : '';
-    productQuantity =
-        info['quantidade'] != null ? info['quantidade'].toString() : 0;
-    productDescritpion = info['descricao'] != null ? info['descricao'] : '';
+    userPostId = info['userPostId'] != null ? info['userPostId'] : '';
+    userPostName = info['userPostName'] != null ? info['userPostName'] : '';
+    productQuantity = info['productQuantity'] != null
+        ? info['productQuantity'].toString()
+        : 0;
+    productDescritpion =
+        info['productDescritpion'] != null ? info['productDescritpion'] : '';
     data = info['data'] != null ? info['data'] : '';
-    productName = info['nome'] != null ? info['nome'] : '';
+    productName = info['productName'] != null ? info['productName'] : '';
     status = info['status'] != null ? info['status'] : 0;
-    custoHoras =
-        info['valor_em_horas'] != null ? info['valor_em_horas'].toDouble() : 0;
-    images =
-        info['valor_em_horas'] != null ? List<String>.from(info['imagem']) : [];
+    custoHoras = info['custoHoras'] != null ? info['custoHoras'].toDouble() : 0;
+    images = info['images'] != null ? List<String>.from(info['images']) : [];
   }
 
   factory ProdutoModel.fromMap(Map<String, dynamic> map) {

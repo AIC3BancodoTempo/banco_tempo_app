@@ -40,9 +40,7 @@ class ChatMessageArea extends StatelessWidget {
                         widthFactor: 0.2,
                         heightFactor: 0.5,
                         child: ProfileImage(
-                            radius: 10,
-                            image:
-                                "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg"),
+                            radius: 10, image: "assets/images/profile.png"),
                       ),
                 SizedBox(width: 10.0),
                 recebidoEnviado

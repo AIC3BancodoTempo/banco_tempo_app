@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:banco_do_tempo_app/core/models/produto_model.dart';
+import 'package:banco_do_tempo_app/resources/hability/firestore_hability.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -27,7 +28,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ReportRepository _reportRepository = ReportRepository();
   final TrocaRepository _trocaRepository = TrocaRepository();
   final CaixaRepository _caixaRepository = CaixaRepository();
-  final ProdutoRepository _produtoRepository = ProdutoRepository();
+  final HabilityRepository _habilityRepository = HabilityRepository();
   final UserModel userModel;
   final User user;
   final TrocaModel trocaModel;
@@ -152,23 +153,30 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         if (userModel.horas >= horasTroca) {
           await _caixaRepository.addCaixa();
           ProdutoModel produto =
-              await _produtoRepository.getProduto(trocaModel.productId);
-          int restante = produto.productQuantity - trocaModel.amount;
-          if (restante >= 0) {
-            await _usersRepository.addHoras(trocaModel.userPostId, horasTroca);
-            await _usersRepository.removeHoras(
-                trocaModel.userConsumerId, horasTroca);
-            userModel.horas -= horasTroca;
-            await _trocaRepository.concluiTroca(trocaModel.key);
-            if (restante == 0) {
-              await _produtoRepository.updateStatus(trocaModel.productId);
+              await _habilityRepository.getHabilityById(trocaModel.productId);
+          if (produto != null) {
+            int restante = produto.productQuantity - trocaModel.amount;
+            if (restante >= 0) {
+              await _usersRepository.addHoras(
+                  trocaModel.userPostId, horasTroca);
+              await _usersRepository.removeHoras(
+                  trocaModel.userConsumerId, horasTroca);
+              userModel.horas -= horasTroca;
+              await _trocaRepository.concluiTroca(trocaModel.key);
+              if (restante == 0) {
+                await _habilityRepository.updateStatus(trocaModel.productId, 2);
+              } else {
+                await _habilityRepository.decrementaQuantidade(
+                    trocaModel.productId, trocaModel.amount);
+              }
             } else {
-              await _produtoRepository.removeQuantidade(
-                  trocaModel.productId, trocaModel.amount);
+              yield WarningState(
+                  message: "O produto não tem mais a quantidade desejada!");
             }
           } else {
             yield WarningState(
-                message: "O produto não tem mais a quantidade desejada!");
+                message:
+                    "O produto não foi encontrado, pode ter sido removido!");
           }
         } else {
           yield WarningState(
