@@ -7,9 +7,9 @@ import 'image_card.dart';
 
 class ItemCard extends StatelessWidget {
   final String title;
-  final String hour;
-  final String amount;
-  final String imgUrl;
+  final double hour;
+  final int amount;
+  final List<String> imgUrl;
   final Function press;
 
   const ItemCard(
@@ -53,7 +53,7 @@ class ItemCard extends StatelessWidget {
           },
           child: Column(
             children: [
-              ImageCard(imgUrl: imgUrl),
+              ImageCard(imgUrl: imgUrl[0]),
               CardDetails(title: title, hour: hour, amount: amount),
             ],
           ),

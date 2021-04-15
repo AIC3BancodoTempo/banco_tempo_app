@@ -28,10 +28,10 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
+              children: [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
+                    children:[
                       ReturnButton(),
                       SizedBox(
                         width: 2,
@@ -39,7 +39,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ProfileImage(
                           radius: 20,
                           image:
-                              "https://i.pinimg.com/originals/fa/34/07/fa3407bbfc876fd7e1019238c5b6984f.jpg"),
+                              "assets/images/profile.png"),
                       SizedBox(
                         width: 12,
                       ),
@@ -55,7 +55,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                  children: [
                     AppBarAction(
                         onPressEvent: () {
                           buildReportDialog(context, chatBloc);
