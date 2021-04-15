@@ -37,6 +37,8 @@ class SendImageEvent extends ChatEvent {
 
 class ExchangeEvent extends ChatEvent {}
 
+class RequestExchangeEvent extends ChatEvent {}
+
 class ReportEvent extends ChatEvent {
   final String report;
 

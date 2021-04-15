@@ -8,7 +8,6 @@ class ReturnButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        onPressEvent();
         Navigator.pop(context);
       },
       icon: Icon(

@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/models/user_model.dart';
 
 class DrawerHeaderGeral extends StatelessWidget {
   final UserModel userModel;
