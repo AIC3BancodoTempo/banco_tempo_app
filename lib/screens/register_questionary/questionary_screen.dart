@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/core/models/questionary_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../core/colors.dart';
@@ -13,7 +14,7 @@ class QuestionaryScreen extends StatelessWidget {
   QuestionaryScreen({Key key, @required this.authBloc}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   final myFocusNode = new FocusNode();
-  final String pergunta = "Quem descobriu o Brasil?";
+  final QuestionaryModel questionaryModel = QuestionaryModel();
 
   @override
   Widget build(BuildContext context) {
@@ -53,23 +54,43 @@ class QuestionaryScreen extends StatelessWidget {
                 SizedBox(
                   height: 40,
                 ),
-                CustomDropdown(),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes,
+                  pergunta: questionaryModel.perguntas[0],
+                  resposta: questionaryModel.respostas[0],
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                CustomDropdown(),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes,
+                  pergunta: questionaryModel.perguntas[1],
+                  resposta: questionaryModel.respostas[1],
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                CustomDropdown(),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes,
+                  pergunta: questionaryModel.perguntas[2],
+                  resposta: questionaryModel.respostas[2],
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                CustomDropdown(),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes,
+                  pergunta: questionaryModel.perguntas[3],
+                  resposta: questionaryModel.respostas[3],
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                CustomDropdown(),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes,
+                  pergunta: questionaryModel.perguntas[4],
+                  resposta: questionaryModel.respostas[4],
+                ),
                 SizedBox(
                   height: 20,
                 ),
