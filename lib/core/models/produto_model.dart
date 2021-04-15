@@ -51,21 +51,20 @@ class ProdutoModel {
   }
 
   ProdutoModel.fromSnapshot(
-      Map<String, dynamic> data, QueryDocumentSnapshot doc) {
-    Map<String, dynamic> data = documentSnapshot.data();
-    productId = documentSnapshot.id;
-    userPostId = data['user_post'] != null ? data['user_post'] : '';
-    userPostName = data['user_name_post'] != null ? data['user_name_post'] : '';
+      Map<String, dynamic> info, QueryDocumentSnapshot doc) {
+    productId = info['productId'] != null ? info['productId'] : '';
+    userPostId = info['user_post'] != null ? info['user_post'] : '';
+    userPostName = info['user_name_post'] != null ? info['user_name_post'] : '';
     productQuantity =
-        data['quantidade'] != null ? data['quantidade'].toString() : 0;
-    productDescritpion = data['descricao'] != null ? data['descricao'] : '';
-    data = data['data'] != null ? data['data'] : '';
-    productName = data['nome'] != null ? data['nome'] : '';
-    status = data['status'] != null ? data['status'] : 0;
+        info['quantidade'] != null ? info['quantidade'].toString() : 0;
+    productDescritpion = info['descricao'] != null ? info['descricao'] : '';
+    data = info['data'] != null ? info['data'] : '';
+    productName = info['nome'] != null ? info['nome'] : '';
+    status = info['status'] != null ? info['status'] : 0;
     custoHoras =
-        data['valor_em_horas'] != null ? data['valor_em_horas'].toDouble() : 0;
+        info['valor_em_horas'] != null ? info['valor_em_horas'].toDouble() : 0;
     images =
-        data['valor_em_horas'] != null ? List<String>.from(data['imagem']) : [];
+        info['valor_em_horas'] != null ? List<String>.from(info['imagem']) : [];
   }
 
   factory ProdutoModel.fromMap(Map<String, dynamic> map) {

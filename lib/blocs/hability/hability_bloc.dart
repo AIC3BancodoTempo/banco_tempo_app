@@ -22,9 +22,7 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
   ) async* {
     if (event is HabilityStartedEvent) {
       yield LoadingHabilityState();
-      if (productModel.productId.isEmpty) {
-        habilityList = await _habilityRepository.getLastHability(1);
-      }
+      habilityList = await _habilityRepository.getLastHability(1);
       yield ShowHabilityState();
     }
   }
