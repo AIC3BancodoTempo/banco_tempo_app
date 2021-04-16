@@ -9,7 +9,7 @@ class QuestionaryModel {
   List<String> respostas = [
     "Garantir a qualidade dos produtos e serviços oferecidos",
     "Não esteja acompanhado durante os encontros presenciais",
-    " Indicar me postagem produto/serviço de outro membro do BT",
+    "Indicar me postagem produto/serviço de outro membro do BT",
     "São aceitos: babá/cuidador/petsitter/banho/tosa/companhia",
     "Deve ser incluído no valor da troca o tempo de deslocamento"
   ];
