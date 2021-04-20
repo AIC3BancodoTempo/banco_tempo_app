@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 class Chips extends StatefulWidget {
   final String hora;
+  final int defaultValue;
   final List<DropdownMenuItem> dropList;
   final Function onChanged;
 
   const Chips(
-      {Key key, @required this.hora, @required this.dropList, this.onChanged})
+      {Key key,
+      @required this.hora,
+      @required this.dropList,
+      this.onChanged,
+      this.defaultValue})
       : super(key: key);
 
   @override
@@ -15,8 +20,10 @@ class Chips extends StatefulWidget {
 
 class _ChipsState extends State<Chips> {
   String defValue;
+
   @override
   Widget build(BuildContext context) {
+    defValue = widget.defaultValue > 0 ? widget.defaultValue.toString() : null;
     return Wrap(
       spacing: 100.0,
       children: [

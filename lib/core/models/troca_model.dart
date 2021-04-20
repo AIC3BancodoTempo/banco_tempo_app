@@ -16,6 +16,7 @@ class TrocaModel {
   String timestamp;
   int status;
   int amount;
+  double cost;
   String salaId;
   ChatModel mensagem;
   DocumentSnapshot doc;
@@ -30,6 +31,7 @@ class TrocaModel {
       this.productName,
       this.status,
       this.amount,
+      this.cost,
       this.salaId});
 
   TrocaModel.fromSnapshot(DocumentSnapshot documentSnapshot) {
@@ -46,6 +48,7 @@ class TrocaModel {
     productName = data['productName'] != null ? data['productName'] : '';
     status = data['status'] != null ? data['status'] : 0;
     amount = data['amount'] != null ? data['amount'] : 0;
+    cost = data['cost'] != null ? data['cost'].toDouble() : 0;
     salaId = data['salaId'] != null ? data['salaId'] : '';
     timestamp = data['timestamp'] != null ? data['timestamp'] : '';
   }
@@ -60,6 +63,7 @@ class TrocaModel {
       'productName': productName,
       'status': status,
       'amount': amount,
+      'cost': cost,
       'salaId': salaId,
       'timestamp': DateTime.now().millisecondsSinceEpoch.toString()
     };

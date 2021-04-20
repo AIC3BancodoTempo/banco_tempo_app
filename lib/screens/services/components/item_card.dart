@@ -6,18 +6,11 @@ import 'card_detail.dart';
 import 'image_card.dart';
 
 class ItemCard extends StatelessWidget {
-  final String title;
-  final String hour;
-  final String amount;
-  final String imgUrl;
-  final Function press;
+  final ProdutoModel product;
 
-  const ItemCard(
-      {@required this.hour,
-      @required this.title,
-      @required this.amount,
-      @required this.imgUrl,
-      this.press});
+  const ItemCard({
+    @required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +26,16 @@ class ItemCard extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: InkWell(
           onTap: () {
-            //O ProdutoModel deve vir do bloc e não daqui
-            navigateToExchangeDetailsScreen(
-                context,
-                ProdutoModel(
-                    data: '15/03/2021',
-                    productQuantity: 5,
-                    custoHoras: 1,
-                    productDescritpion: "abacaxi com pão é bom",
-                    productId: "O25Ja6si2ewzCbeQI5IV",
-                    productName: "Bolo chocolate",
-                    status: 1,
-                    userPostId: "Gh8ClGJ2Jjd3KtnJnGu37yA774u2",
-                    userPostName: "Junior",
-                    images: [
-                      "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpciUyMHByb2R1Y3R8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-                      "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1542062283%2Fchocolate-and-cream-layer-cake-1812-cover.jpg%3Fitok%3DR_xDiShk"
-                    ]));
+            navigateToExchangeDetailsScreen(context, product);
           },
           child: Column(
             children: [
-              ImageCard(imgUrl: imgUrl),
-              CardDetails(title: title, hour: hour, amount: amount),
+              ImageCard(
+                  imgUrl: product.images.length > 0 ? product.images[0] : ""),
+              CardDetails(
+                  title: product.productName,
+                  hour: product.custoHoras,
+                  amount: product.productQuantity),
             ],
           ),
         ),

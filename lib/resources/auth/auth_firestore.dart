@@ -17,7 +17,7 @@ class AuthRepository {
       authResult.user.sendEmailVerification();
       return authResult.user;
     } on PlatformException catch (e) {
-      throw Exception(e);
+      throw e;
     }
   }
 
@@ -30,7 +30,7 @@ class AuthRepository {
       );
       return authresult.user;
     } on PlatformException catch (e) {
-      throw Exception(e);
+      throw e;
     }
   }
 
@@ -38,8 +38,13 @@ class AuthRepository {
     await _firebaseAuth.signOut();
   }
 
-  Future<void> requestNewPassword(String email) async {
-    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  Future<bool> requestNewPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return true;
+    } on PlatformException catch (e) {
+      throw e;
+    }
   }
 
   Future<UserCredential> signInWithCredential(AuthCredential credential) =>

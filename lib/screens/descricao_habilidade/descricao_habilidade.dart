@@ -52,7 +52,6 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     habilityDescriptionBloc = BlocProvider.of<HabilityDescriptionBloc>(context);
-    UiBuilder uiBuilder = UiBuilder(keyLoader: keyLoader);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -72,7 +71,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
           if (state is ChatPressedState) {
             navigateToChatScreen(context, state.trocaModel);
           } else if (state is WarningState) {
-            uiBuilder.buildSnackBarUi(context, state.message);
+            buildSnackBarUi(context, state.message);
           }
         },
         child: BlocBuilder<HabilityDescriptionBloc, HabilityDescriptionState>(
@@ -105,6 +104,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                         hora: habilityDescriptionBloc.produtoModel.custoHoras
                             .toString(),
                         dropList: habilityDescriptionBloc.getDrop(),
+                        defaultValue: habilityDescriptionBloc.getAmount(),
                         onChanged: (value) {
                           habilityDescriptionBloc.setAmount(value);
                         },
