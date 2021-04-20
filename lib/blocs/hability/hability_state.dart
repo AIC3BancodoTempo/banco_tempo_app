@@ -12,3 +12,5 @@ class HabilityInitial extends HabilityState {}
 class LoadingHabilityState extends HabilityState {}
 
 class ShowHabilityState extends HabilityState {}
+
+class UpdateHabilityState extends HabilityState {}

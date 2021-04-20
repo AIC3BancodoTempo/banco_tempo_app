@@ -26,6 +26,15 @@ class HabilityRepository {
     return productList;
   }
 
+  Stream<QuerySnapshot> getStreamLastHability(int status) {
+    return firestoreInstance
+        .collection('produto')
+        .where('status', isEqualTo: status)
+        .orderBy('data', descending: true)
+        .limit(1)
+        .snapshots();
+  }
+
   Future<List<ProdutoModel>> getMoreHability(
       int status, DocumentSnapshot docRef) async {
     List<ProdutoModel> productList = [];

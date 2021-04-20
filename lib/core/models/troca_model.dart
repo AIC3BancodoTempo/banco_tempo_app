@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:banco_do_tempo_app/resources/chat/firestore_chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'chat_model.dart';
 
 class TrocaModel {
   String key;
@@ -8,11 +13,14 @@ class TrocaModel {
   String userConsumerName;
   String productId;
   String productName;
+  String timestamp;
   int status;
   int amount;
   double cost;
   String salaId;
-
+  ChatModel mensagem;
+  DocumentSnapshot doc;
+  StreamSubscription subscription;
   TrocaModel(
       {this.key,
       this.userPostId,
@@ -26,9 +34,10 @@ class TrocaModel {
       this.cost,
       this.salaId});
 
-  TrocaModel.fromSnapshot(QueryDocumentSnapshot documentSnapshot) {
+  TrocaModel.fromSnapshot(DocumentSnapshot documentSnapshot) {
     Map<String, dynamic> data = documentSnapshot.data();
     key = documentSnapshot.id;
+    doc = documentSnapshot;
     userPostId = data['userPostId'] != null ? data['userPostId'] : '';
     userPostName = data['userPostName'] != null ? data['userPostName'] : '';
     userConsumerId =
@@ -41,6 +50,7 @@ class TrocaModel {
     amount = data['amount'] != null ? data['amount'] : 0;
     cost = data['cost'] != null ? data['cost'].toDouble() : 0;
     salaId = data['salaId'] != null ? data['salaId'] : '';
+    timestamp = data['timestamp'] != null ? data['timestamp'] : '';
   }
 
   Map<String, dynamic> toMap() {
@@ -55,6 +65,23 @@ class TrocaModel {
       'amount': amount,
       'cost': cost,
       'salaId': salaId,
+      'timestamp': DateTime.now().millisecondsSinceEpoch.toString()
     };
+  }
+
+  Future<void> subscribe() async {
+    final ChatRepository _chatRepository = ChatRepository();
+    Stream<QuerySnapshot> messages =
+        await _chatRepository.receiveOneMessage(salaId);
+    subscription = messages.listen((event) {
+      event.docs.forEach((element) {
+        Map<String, dynamic> data = element.data();
+        mensagem = ChatModel.fromSnapshot(data, element);
+      });
+    });
+  }
+
+  close() {
+    if (subscription != null) subscription.cancel();
   }
 }
