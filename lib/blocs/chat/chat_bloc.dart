@@ -11,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../core/models/chat_model.dart';
 import '../../core/models/troca_model.dart';
 import '../../core/models/user_model.dart';
-import '../../resources/caixa/firestore_caixa.dart';
 import '../../resources/chat/firestore_chat.dart';
 import '../../resources/report/firebase_report.dart';
 import '../../resources/storage/firebase_storage.dart';
@@ -27,7 +26,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final StorageRepository _storageRepository = StorageRepository();
   final ReportRepository _reportRepository = ReportRepository();
   final TrocaRepository _trocaRepository = TrocaRepository();
-  final CaixaRepository _caixaRepository = CaixaRepository();
+
   final HabilityRepository _habilityRepository = HabilityRepository();
   final UserModel userModel;
   final User user;
@@ -151,7 +150,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       } else if (event is ExchangeEvent) {
         double horasTroca = trocaModel.cost * trocaModel.amount;
         if (userModel.horas >= horasTroca) {
-          await _caixaRepository.addCaixa();
           ProdutoModel produto =
               await _habilityRepository.getHabilityById(trocaModel.productId);
           if (produto != null) {

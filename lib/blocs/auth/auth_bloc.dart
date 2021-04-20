@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 import '../../core/models/user_model.dart';
+import '../../resources/caixa/firestore_caixa.dart';
 import '../../resources/auth/auth_firestore.dart';
 import '../../resources/user/firebase_user.dart';
 
@@ -14,6 +15,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository = AuthRepository();
   final UsersRepository _usersRepository = UsersRepository();
+  final CaixaRepository _caixaRepository = CaixaRepository();
   AuthBloc() : super(AuthInitial());
   User user;
   UserModel userModel;
@@ -87,6 +89,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (userModel == null) {
           yield UnauthenticatedState();
         } else {
+          await _caixaRepository.addCaixa();
           yield AuthenticatedState(user: user, userModel: userModel);
         }
       } else if (event is QuestionaryEvent) {
