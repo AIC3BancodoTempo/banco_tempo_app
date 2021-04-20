@@ -23,6 +23,17 @@ class TrocasAndamentoBloc
   bool noMorePost = false;
 
   @override
+  Future<void> close() {
+    for (var i = 0; i < trocasConsumerList.length; i++) {
+      trocasConsumerList[i].close();
+    }
+    for (var i = 0; i < trocasPostList.length; i++) {
+      trocasPostList[i].close();
+    }
+    return super.close();
+  }
+
+  @override
   Stream<TrocasAndamentoState> mapEventToState(
     TrocasAndamentoEvent event,
   ) async* {

@@ -22,3 +22,5 @@ class ReceivedEvent extends HabilityEvent {
 }
 
 class GetMoreProductsEvent extends HabilityEvent {}
+
+class NewHabilityEvent extends HabilityEvent {}
