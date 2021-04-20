@@ -1,14 +1,14 @@
+import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/models/user_model.dart';
-import 'components/button.dart';
-import 'components/header.dart';
-import 'components/textfield.dart';
+import 'components/background_image.dart';
+import 'components/perfil_image.dart';
+import 'components/right_side_text.dart';
+import 'components/profile_form.dart';
 
 class Profilescreen extends StatefulWidget {
   final UserModel userModel;
-  Profilescreen({Key key, @required this.userModel}) : super(key: key);
 
+  const Profilescreen({Key key, @required this.userModel}) : super(key: key);
   @override
   _ProfilescreenState createState() => _ProfilescreenState();
 }
@@ -17,45 +17,32 @@ class _ProfilescreenState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          ProfileHeader(),
-          SizedBox(height: 5),
-          Container(
-            padding: EdgeInsets.fromLTRB(2, 20, 2, 15),
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              //alignment: Alignment.topLeft,
               children: [
-                ProfileTextField(
-                  inputType: TextInputType.text,
-                  label: "Nome de Usuário",
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  leadingIcon: Icons.person,
-                ),
-                ProfileTextField(
-                  inputType: TextInputType.emailAddress,
-                  label: "E-mail",
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  leadingIcon: Icons.mail,
-                ),
-                ProfileTextField(
-                  inputType: TextInputType.text,
-                  label: "Senha",
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  leadingIcon: Icons.lock,
-                ),
+                BackgroundImage(),
+                PerfilImage(),
               ],
             ),
-          ),
-          ProfileButton(
-            onPressed: () {},
-          ),
-        ],
+            RightTextProfile(
+              name: "Sofia Oliveira",
+              acumulatedHours: "12.5 horas acumuladas",
+            ),
+            ProfileForm(),
+            SizedBox(
+              height: 10,
+            ),
+            Divider(
+              thickness: 4,
+              endIndent: 100,
+              indent: 100,
+            ),
+          ],
+        ),
       ),
     );
   }

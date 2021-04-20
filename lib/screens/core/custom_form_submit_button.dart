@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 class CustomFormSubmitButton extends StatelessWidget {
-
   final VoidCallback onPressed;
-  const CustomFormSubmitButton({Key key, @required this.onPressed}) : super(key: key);
+  final String text;
+  const CustomFormSubmitButton(
+      {Key key, @required this.onPressed, @required this.text})
+      : super(key: key);
   //final _formKey = GlobalKey<FormState>();
 
   @override
@@ -15,20 +17,19 @@ class CustomFormSubmitButton extends StatelessWidget {
         height: 44,
         width: 305,
         child: RawMaterialButton(
-            fillColor: Color.fromRGBO(169,94,250,1),
-            splashColor: Color.fromRGBO(138,73,247,1),
+            fillColor: Color.fromRGBO(169, 94, 250, 1),
+            splashColor: Color.fromRGBO(138, 73, 247, 1),
             shape: const StadiumBorder(),
             onPressed: () {
               onPressed();
               // Validate returns true if the form is valid, or false
               // otherwise.
-              },
-
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'ACESSE',
+                  text,
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
@@ -38,10 +39,8 @@ class CustomFormSubmitButton extends StatelessWidget {
                   color: Colors.white,
                 ),
               ],
-            )
-        ),
+            )),
       ),
     );
   }
-
 }
