@@ -65,7 +65,9 @@ class _ServicesPageState extends State<ServicesPage> {
           if (state is LoadingHabilityState) {
             return Loading();
           } else {
-            return Cards();
+            return Cards(
+              mockupPosts: habilityBloc.habilityList,
+            );
           }
         }),
       ),

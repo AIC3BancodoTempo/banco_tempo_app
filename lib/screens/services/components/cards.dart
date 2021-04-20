@@ -14,11 +14,7 @@ class Cards extends StatelessWidget {
           crossAxisCount: 2, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
       itemCount: (mockupPosts.length <= 20) ? mockupPosts.length : 20,
       itemBuilder: (BuildContext context, int index) {
-        return ItemCard(
-            title: mockupPosts[index].productName,
-            hour: mockupPosts[index].custoHoras,
-            amount: mockupPosts[index].productQuantity,
-            imgUrl: mockupPosts[index].images);
+        return ItemCard(product: mockupPosts[index]);
       },
     );
   }

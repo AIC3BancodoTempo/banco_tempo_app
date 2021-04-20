@@ -52,7 +52,8 @@ class ProdutoModel {
 
   ProdutoModel.fromSnapshot(
       Map<String, dynamic> info, QueryDocumentSnapshot doc) {
-    productId = info['productId'] != null ? info['productId'] : '';
+    productId = doc.id;
+    documentSnapshot = doc;
     userPostId = info['userPostId'] != null ? info['userPostId'] : '';
     userPostName = info['userPostName'] != null ? info['userPostName'] : '';
     productQuantity =
@@ -63,7 +64,7 @@ class ProdutoModel {
     productName = info['productName'] != null ? info['productName'] : '';
     status = info['status'] != null ? info['status'] : 0;
     custoHoras = info['custoHoras'] != null ? info['custoHoras'].toDouble() : 0;
-    images = info['images'] != null ? List<String>.from(info['images']) : [];
+    images = info['imagens'] != null ? List<String>.from(info['imagens']) : [];
   }
 
   factory ProdutoModel.fromMap(Map<String, dynamic> map) {
