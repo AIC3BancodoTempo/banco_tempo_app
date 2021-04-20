@@ -35,4 +35,96 @@ class TrocaRepository {
     }
     return model;
   }
+
+  Future<List<TrocaModel>> getTrocasPostUser(String userId) async {
+    List<TrocaModel> modelList = [];
+    try {
+      QuerySnapshot snapshot = await firestoreInstance
+          .collection('troca')
+          .where("userPostId", isEqualTo: userId)
+          .orderBy('timestamp', descending: true)
+          .limit(10)
+          .get();
+      if (snapshot.size > 0) {
+        snapshot.docs.forEach((element) async {
+          TrocaModel model = TrocaModel.fromSnapshot(element);
+          await model.subscribe();
+          modelList.add(model);
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+    return modelList;
+  }
+
+  Future<List<TrocaModel>> getMoreTrocasPostUser(
+      String userId, DocumentSnapshot docRef) async {
+    List<TrocaModel> modelList = [];
+    try {
+      QuerySnapshot snapshot = await firestoreInstance
+          .collection('troca')
+          .where("userPostId", isEqualTo: userId)
+          .orderBy('timestamp', descending: true)
+          .startAfterDocument(docRef)
+          .limit(10)
+          .get();
+      if (snapshot.size > 0) {
+        snapshot.docs.forEach((element) async {
+          TrocaModel model = TrocaModel.fromSnapshot(element);
+          await model.subscribe();
+          modelList.add(model);
+        });
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+    return modelList;
+  }
+
+  Future<List<TrocaModel>> getTrocasConsumerUser(String userId) async {
+    List<TrocaModel> modelList = [];
+    try {
+      QuerySnapshot snapshot = await firestoreInstance
+          .collection('troca')
+          .where("userConsumerId", isEqualTo: userId)
+          .orderBy('timestamp', descending: true)
+          .limit(10)
+          .get();
+      if (snapshot.size > 0) {
+        snapshot.docs.forEach((element) async {
+          TrocaModel model = TrocaModel.fromSnapshot(element);
+          await model.subscribe();
+          modelList.add(model);
+        });
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+    return modelList;
+  }
+
+  Future<List<TrocaModel>> getMoreTrocasConsumerUser(
+      String userId, DocumentSnapshot docRef) async {
+    List<TrocaModel> modelList = [];
+    try {
+      QuerySnapshot snapshot = await firestoreInstance
+          .collection('troca')
+          .where("userConsumerId", isEqualTo: userId)
+          .orderBy('timestamp', descending: true)
+          .startAfterDocument(docRef)
+          .limit(10)
+          .get();
+      if (snapshot.size > 0) {
+        snapshot.docs.forEach((element) async {
+          TrocaModel model = TrocaModel.fromSnapshot(element);
+          await model.subscribe();
+          modelList.add(model);
+        });
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+    return modelList;
+  }
 }

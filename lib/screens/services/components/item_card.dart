@@ -1,6 +1,6 @@
-import '../../../core/models/produto_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/models/produto_model.dart';
 import '../../core/navigation.dart';
 import 'card_detail.dart';
 import 'image_card.dart';

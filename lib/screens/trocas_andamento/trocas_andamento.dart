@@ -1,56 +1,114 @@
+import '../core/loading.dart';
+
+import '../../blocs/trocas_andamento/trocas_andamento_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/card_trocas_andamento.dart';
 
-class TrocasAndamento extends StatefulWidget {
+class TrocasAndamento extends StatelessWidget {
+  final User user;
+
+  const TrocasAndamento({Key key, @required this.user}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          TrocasAndamentoBloc(user: user)..add(TrocasAndamentoStartedEvent()),
+      child: TrocasAndamentoPage(),
+    );
+  }
+}
+
+class TrocasAndamentoPage extends StatefulWidget {
   @override
   _TrocasAndamento createState() => _TrocasAndamento();
 }
 
-class _TrocasAndamento extends State<TrocasAndamento> {
-  final List<Map<String, dynamic>> _mockupContato = [
-    {
-      'fotoContato':
-          'https://pbs.twimg.com/profile_images/1293925081542995971/s2la3KS9.png',
-      'nome': 'Edinaldo Pereira',
-      'ultimaMensagem': 'Você não vale nada, você vale tudo.'
-    },
-    {
-      'fotoContato':
-          'https://pbs.twimg.com/profile_images/1293925081542995971/s2la3KS9.png',
-      'nome': 'Edinaldo Pereira',
-      'ultimaMensagem': 'Jogue somente para ganhar, e não para perder.'
-    },
-    {
-      'fotoContato':
-          'https://studiosol-a.akamaihd.net/uploadfile/letras/fotos/c/4/e/9/c4e987143a79ddc7769d979b49d86456.jpg',
-      'nome': 'Edinaldo Pereira',
-      'ultimaMensagem': 'Banido desbanido, Banido.'
+class _TrocasAndamento extends State<TrocasAndamentoPage> {
+  TrocasAndamentoBloc trocasAndamentoBloc;
+  final ScrollController listPostScrollController = ScrollController();
+  final ScrollController listConsumeScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    trocasAndamentoBloc.close();
+    listPostScrollController.dispose();
+    listConsumeScrollController.dispose();
+    super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    listPostScrollController.addListener(_scrollListenerPost);
+    listConsumeScrollController.addListener(_scrollListenerConsumer);
+  }
+
+  void _scrollListenerConsumer() {
+    if (listConsumeScrollController.offset >=
+            listConsumeScrollController.position.minScrollExtent &&
+        !listConsumeScrollController.position.outOfRange) {
+      trocasAndamentoBloc.add(GetMoreConsumerTrocasEvent());
     }
-  ];
+  }
+
+  void _scrollListenerPost() {
+    if (listPostScrollController.offset >=
+            listPostScrollController.position.minScrollExtent &&
+        !listPostScrollController.position.outOfRange) {
+      trocasAndamentoBloc.add(GetMorePostTrocasEvent());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            }),
-        title: Text("Trocas em andamento"),
-        centerTitle: true,
+    trocasAndamentoBloc = BlocProvider.of<TrocasAndamentoBloc>(context);
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Oferta'),
+              Tab(text: 'Consumo'),
+            ],
+          ),
+          title: Text("Trocas em andamento"),
+          centerTitle: true,
+        ),
+        body: BlocBuilder<TrocasAndamentoBloc, TrocasAndamentoState>(
+            builder: (context, state) {
+          if (state is LoadingTrocasState) {
+            return TabBarView(children: [Loading(), Loading()]);
+          } else {
+            return TabBarView(children: [
+              ListView.builder(
+                  controller: listPostScrollController,
+                  itemCount: trocasAndamentoBloc.trocasPostList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardTrocas(
+                      trocaModel: trocasAndamentoBloc.trocasPostList[index],
+                    );
+                  }),
+              ListView.builder(
+                  controller: listConsumeScrollController,
+                  itemCount: trocasAndamentoBloc.trocasConsumerList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardTrocas(
+                      trocaModel: trocasAndamentoBloc.trocasConsumerList[index],
+                    );
+                  }),
+            ]);
+          }
+        }),
       ),
-      body: ListView.builder(
-          itemCount: _mockupContato.length,
-          itemBuilder: (BuildContext context, int index) {
-            return CardTrocas(
-              fotoContato: _mockupContato[index]["fotoContato"],
-              nome: _mockupContato[index]["nome"],
-              ultimaMensagem: _mockupContato[index]["ultimaMensagem"],
-            );
-          }),
     );
   }
 }

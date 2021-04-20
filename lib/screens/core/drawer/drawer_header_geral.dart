@@ -1,5 +1,6 @@
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/models/user_model.dart';
 
 class DrawerHeaderGeral extends StatelessWidget {
   final UserModel userModel;
@@ -15,7 +16,8 @@ class DrawerHeaderGeral extends StatelessWidget {
       accountEmail: Text('Horas acumuladas: ${userModel.horas}'),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(
-          child: Image(image:AssetImage('assets/images/profile.png'),
+          child: Image(
+            image: AssetImage('assets/images/profile.png'),
             fit: BoxFit.cover,
             width: 90,
             height: 90,
@@ -23,11 +25,11 @@ class DrawerHeaderGeral extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        color: Colors.blue,
-        image: new DecorationImage(image:AssetImage('assets/images/background.jpg'),
+          color: Colors.blue,
+          image: new DecorationImage(
+            image: AssetImage('assets/images/background.jpg'),
             fit: BoxFit.cover,
-          )
-      ),
+          )),
     );
   }
 }

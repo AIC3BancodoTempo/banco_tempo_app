@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import '../../core/models/produto_model.dart';
 import '../core/colors.dart';
 import '../core/loading.dart';
 import '../core/navigation.dart';
+import '../core/rounded_button.dart';
 import '../core/ui.dart';
 import 'components/anunciante_text.dart';
 import 'components/carousel_image.dart';
