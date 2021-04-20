@@ -33,11 +33,25 @@ class ServicesPage extends StatefulWidget {
 
 class _ServicesPageState extends State<ServicesPage> {
   HabilityBloc habilityBloc;
+  final ScrollController controller = ScrollController();
 
   @override
   void dispose() {
+    controller.dispose();
     habilityBloc.close();
     super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      habilityBloc.add(GetMoreProductsEvent());
+    }
   }
 
   @override
@@ -66,6 +80,7 @@ class _ServicesPageState extends State<ServicesPage> {
             return Loading();
           } else {
             return Cards(
+              scrollController: controller,
               mockupPosts: habilityBloc.habilityList,
             );
           }

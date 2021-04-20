@@ -20,3 +20,5 @@ class ReceivedEvent extends HabilityEvent {
   @override
   List<Object> get props => [productName, custoHoras, productQuantity, images];
 }
+
+class GetMoreProductsEvent extends HabilityEvent {}

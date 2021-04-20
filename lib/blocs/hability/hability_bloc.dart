@@ -14,6 +14,7 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
   final ProdutoModel productModel;
 
   List<ProdutoModel> habilityList = [];
+  bool noMore;
   HabilityBloc({this.productModel}) : super(HabilityInitial());
 
   @override
@@ -25,6 +26,13 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
         yield LoadingHabilityState();
         habilityList = await _habilityRepository.getLastHability(1);
         yield ShowHabilityState();
+      } else if (event is GetMoreProductsEvent) {
+        if (!noMore) {
+          List<ProdutoModel> modelList = await _habilityRepository
+              .getMoreHability(1, habilityList.last.documentSnapshot);
+          habilityList += modelList;
+          if (modelList.length <= 0) noMore = true;
+        }
       }
     } catch (e) {
       yield ShowHabilityState();
