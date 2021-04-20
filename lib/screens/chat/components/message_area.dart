@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/models/chat_model.dart';
 import '../../core/profile_image.dart';
 import 'message_bubble.dart';
 import 'message_date.dart';
 
 class ChatMessageArea extends StatelessWidget {
-  final String message;
-  final DateTime datetime;
-  final bool recebidoEnviado;
-  final bool visualizado;
-  final String fromImageUrl;
+  final ChatModel chatModel;
+  final String userId;
 
-  ChatMessageArea(
-      {@required this.message,
-      @required this.datetime,
-      @required this.recebidoEnviado,
-      @required this.visualizado,
-      @required this.fromImageUrl});
+  ChatMessageArea({
+    @required this.chatModel,
+    @required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    bool recebidoEnviado = chatModel.fromId == userId;
     return Container(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 5),
+      padding: EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 7),
       child: Column(
         crossAxisAlignment:
             recebidoEnviado ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           ChatMessageDate(
-            date: datetime,
+            date: DateTime.fromMillisecondsSinceEpoch(
+                int.parse(chatModel.timestamp)),
             recebidoEnviado: recebidoEnviado,
           ),
           Stack(
@@ -35,21 +33,24 @@ class ChatMessageArea extends StatelessWidget {
                   ? Alignment.bottomRight
                   : Alignment.bottomLeft,
               children: [
-                ChatMessageBubble(message: message),
+                ChatMessageBubble(message: chatModel.content),
                 recebidoEnviado
                     ? Container()
                     : Align(
                         widthFactor: 0.2,
                         heightFactor: 0.5,
-                        child: ProfileImage(radius: 10, image: fromImageUrl),
+                        child: ProfileImage(
+                            radius: 10, image: "assets/images/profile.png"),
                       ),
                 SizedBox(width: 10.0),
                 recebidoEnviado
                     ? Align(
                         widthFactor: 0.4,
-                        heightFactor: 0.1,
+                        heightFactor: 0,
                         child: Icon(Icons.check,
-                            color: visualizado ? Colors.blue : Colors.grey),
+                            color: chatModel.visualizado
+                                ? Colors.blue
+                                : Colors.grey),
                       )
                     : Container()
               ]),

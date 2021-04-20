@@ -11,7 +11,7 @@ class UsersRepository {
 
   Future<UserModel> insertUser(String userId, String email, String nome) async {
     return await firestoreInstance.collection('users').doc(userId).set({
-      'horas': 22,
+      'horas': 4,
       'email': email,
       'is_admin': false,
       'nome': nome,
@@ -19,7 +19,7 @@ class UsersRepository {
     }).then((value) {
       return UserModel(
           email: email, horas: 22, isAdmin: false, nome: nome, reports: 0);
-    }).catchError((error) => throw Exception(error));
+    }).catchError((error) => throw error);
   }
 
   Future<UserModel> getUserById(String id) async {
@@ -31,8 +31,24 @@ class UsersRepository {
         model = UserModel.fromSnapshot(snapshot.data(), snapshot.id);
       }
     } catch (error) {
-      throw Exception(error);
+      throw error;
     }
     return model;
+  }
+
+  Future<bool> addHoras(String userId, double horas) async {
+    return await firestoreInstance.collection('users').doc(userId).set({
+      'horas': FieldValue.increment(horas),
+    }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
+  }
+
+  Future<bool> removeHoras(String userId, double horas) async {
+    return await firestoreInstance.collection('users').doc(userId).set({
+      'horas': FieldValue.increment(-horas),
+    }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
   }
 }

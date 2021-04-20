@@ -15,7 +15,10 @@ class ImageCard extends StatelessWidget {
       child: Container(
         decoration: ShapeDecoration(
           image: DecorationImage(
-              image: NetworkImage(imgUrl), fit: BoxFit.fitHeight),
+              image: imgUrl.isNotEmpty
+                  ? NetworkImage(imgUrl)
+                  : AssetImage('assets/images/noimage.jpg'),
+              fit: BoxFit.fitHeight),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusDirectional.only(
               topEnd: Radius.circular(15),

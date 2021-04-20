@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import '../../core/models/produto_model.dart';
 import '../core/colors.dart';
 import '../core/loading.dart';
 import '../core/navigation.dart';
+import '../core/rounded_button.dart';
 import '../core/ui.dart';
 import 'components/anunciante_text.dart';
 import 'components/carousel_image.dart';
@@ -52,7 +52,6 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     habilityDescriptionBloc = BlocProvider.of<HabilityDescriptionBloc>(context);
-    UiBuilder uiBuilder = UiBuilder(keyLoader: keyLoader);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -72,7 +71,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
           if (state is ChatPressedState) {
             navigateToChatScreen(context, state.trocaModel);
           } else if (state is WarningState) {
-            uiBuilder.buildSnackBarUi(context, state.message);
+            buildSnackBarUi(context, state.message);
           }
         },
         child: BlocBuilder<HabilityDescriptionBloc, HabilityDescriptionState>(
@@ -105,6 +104,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                         hora: habilityDescriptionBloc.produtoModel.custoHoras
                             .toString(),
                         dropList: habilityDescriptionBloc.getDrop(),
+                        defaultValue: habilityDescriptionBloc.getAmount(),
                         onChanged: (value) {
                           habilityDescriptionBloc.setAmount(value);
                         },

@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:banco_do_tempo_app/core/errors/auth_error.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
-import '../../core/errors/auth_error.dart';
 import '../../core/models/user_model.dart';
+import '../../resources/caixa/firestore_caixa.dart';
 import '../../resources/auth/auth_firestore.dart';
 import '../../resources/user/firebase_user.dart';
 
@@ -15,6 +16,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository = AuthRepository();
   final UsersRepository _usersRepository = UsersRepository();
+  final CaixaRepository _caixaRepository = CaixaRepository();
   AuthBloc() : super(AuthInitial());
   User user;
   UserModel userModel;
@@ -72,10 +74,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is ForgotEvent) {
         yield ForgotState();
       } else if (event is RequestNewPasswordEvent) {
-        _authRepository.requestNewPassword(event.email);
-        yield UnauthenticatedState();
-        yield ExceptionState(
-            message: "Um e-mail foi enviado para a recuperação da senha");
+        bool success = await _authRepository.requestNewPassword(event.email);
+        if (success) {
+          yield UnauthenticatedState();
+          yield ExceptionState(
+              message: "Um e-mail foi enviado para a recuperação da senha");
+        }
       } else if (event is CreateLoginEmailEvent) {
         user = await _authRepository.createUserWithEmailPass(
             event.email, event.senha);
@@ -88,6 +92,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (userModel == null) {
           yield UnauthenticatedState();
         } else {
+          await _caixaRepository.addCaixa();
           yield AuthenticatedState(user: user, userModel: userModel);
         }
       } else if (event is QuestionaryEvent) {
@@ -100,7 +105,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield ExceptionState(message: authErrorHandler(e));
         yield UnauthenticatedState();
       } else {
-        yield ExceptionState(message: e.toString());
+        //yield ExceptionState(message: e.toString());
         yield UnauthenticatedState();
       }
     }
