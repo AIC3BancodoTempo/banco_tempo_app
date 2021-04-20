@@ -20,9 +20,13 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
   Stream<HabilityState> mapEventToState(
     HabilityEvent event,
   ) async* {
-    if (event is HabilityStartedEvent) {
-      yield LoadingHabilityState();
-      habilityList = await _habilityRepository.getLastHability(1);
+    try {
+      if (event is HabilityStartedEvent) {
+        yield LoadingHabilityState();
+        habilityList = await _habilityRepository.getLastHability(1);
+        yield ShowHabilityState();
+      }
+    } catch (e) {
       yield ShowHabilityState();
     }
   }

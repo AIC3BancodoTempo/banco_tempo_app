@@ -55,9 +55,8 @@ class ProdutoModel {
     productId = info['productId'] != null ? info['productId'] : '';
     userPostId = info['userPostId'] != null ? info['userPostId'] : '';
     userPostName = info['userPostName'] != null ? info['userPostName'] : '';
-    productQuantity = info['productQuantity'] != null
-        ? info['productQuantity'].toString()
-        : 0;
+    productQuantity =
+        info['productQuantity'] != null ? info['productQuantity'] : 0;
     productDescritpion =
         info['productDescritpion'] != null ? info['productDescritpion'] : '';
     data = info['data'] != null ? info['data'] : '';

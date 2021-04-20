@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:banco_do_tempo_app/core/errors/auth_error.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -73,10 +74,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is ForgotEvent) {
         yield ForgotState();
       } else if (event is RequestNewPasswordEvent) {
-        _authRepository.requestNewPassword(event.email);
-        yield UnauthenticatedState();
-        yield ExceptionState(
-            message: "Um e-mail foi enviado para a recuperação da senha");
+        bool success = await _authRepository.requestNewPassword(event.email);
+        if (success) {
+          yield UnauthenticatedState();
+          yield ExceptionState(
+              message: "Um e-mail foi enviado para a recuperação da senha");
+        }
       } else if (event is CreateLoginEmailEvent) {
         user = await _authRepository.createUserWithEmailPass(
             event.email, event.senha);
@@ -99,7 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     } catch (e) {
       if (e is FirebaseAuthException) {
-        //yield ExceptionState(message: authErrorHandler(e));
+        yield ExceptionState(message: authErrorHandler(e));
         yield UnauthenticatedState();
       } else {
         //yield ExceptionState(message: e.toString());
