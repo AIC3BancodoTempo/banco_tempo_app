@@ -4,9 +4,13 @@ import '../../../core/models/produto_model.dart';
 
 class PendingItemCard extends StatelessWidget {
   final ProdutoModel product;
+  final Function acceptPressed;
+  final Function rejectPressed;
 
   const PendingItemCard({
     @required this.product,
+    this.acceptPressed,
+    this.rejectPressed,
   });
 
   @override
@@ -44,9 +48,17 @@ class PendingItemCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  TextButton(onPressed: () {}, child: Text("Aceitar")),
+                  TextButton(
+                      onPressed: () {
+                        acceptPressed(product.productId);
+                      },
+                      child: Text("Aceitar")),
                   SizedBox(width: 30.0),
-                  TextButton(onPressed: () {}, child: Text("Rejeitar")),
+                  TextButton(
+                      onPressed: () {
+                        rejectPressed(product.productId);
+                      },
+                      child: Text("Rejeitar")),
                 ],
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ProdutoModel {
   String userPostId;
@@ -60,7 +61,10 @@ class ProdutoModel {
         info['productQuantity'] != null ? info['productQuantity'] : 0;
     productDescritpion =
         info['productDescritpion'] != null ? info['productDescritpion'] : '';
-    data = info['data'] != null ? info['data'] : '';
+    data = info['data'] != null
+        ? DateFormat('dd/MM/yyyy kk:mm')
+            .format(DateTime.fromMillisecondsSinceEpoch(info['data']))
+        : '';
     productName = info['productName'] != null ? info['productName'] : '';
     status = info['status'] != null ? info['status'] : 0;
     custoHoras = info['custoHoras'] != null ? info['custoHoras'].toDouble() : 0;

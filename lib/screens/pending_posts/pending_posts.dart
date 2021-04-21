@@ -1,30 +1,21 @@
-import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
-
-import 'package:banco_do_tempo_app/blocs/pending_posts/pending_post_bloc.dart';
-import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'components.dart/pending_card.dart';
+import '../../blocs/pending_posts/pending_post_bloc.dart';
+import '../core/loading.dart';
+import 'components.dart/pending_item_card.dart';
 
 class PendingPost extends StatelessWidget {
-  @override
-  final AuthBloc authBloc;
-
-  PendingPost({Key key, this.authBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PendingPostBloc()..add(PendingPostStartedEvent()),
-      child: PendingPostPage(authBloc: authBloc),
+      child: PendingPostPage(),
     );
   }
 }
 
 class PendingPostPage extends StatefulWidget {
-  final AuthBloc authBloc;
-  @override
-  const PendingPostPage({Key key, this.authBloc}) : super(key: key);
   @override
   _PendingPostPageState createState() => _PendingPostPageState();
 }
@@ -54,6 +45,7 @@ class _PendingPostPageState extends State<PendingPostPage> {
 
   @override
   Widget build(BuildContext context) {
+    pendingPostBloc = BlocProvider.of<PendingPostBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Divulgações pendentes"),
@@ -64,20 +56,27 @@ class _PendingPostPageState extends State<PendingPostPage> {
             }),
         centerTitle: true,
       ),
-      body: BlocListener<PendingPostBloc, PendingPostState>(
-        listener: (contextListener, state) {},
-        child: BlocBuilder<PendingPostBloc, PendingPostState>(
-            builder: (context, state) {
-          if (state is LoadingPendingPostState) {
-            return Loading();
-          } else {
-            return PendingCard(
-              scrollController: controller,
-              mockupPosts: pendingPostBloc.habilityList,
-            );
-          }
-        }),
-      ),
+      body: BlocBuilder<PendingPostBloc, PendingPostState>(
+          builder: (context, state) {
+        if (state is LoadingPendingPostState) {
+          return Loading();
+        } else {
+          return ListView.builder(
+              controller: controller,
+              itemCount: pendingPostBloc.habilityList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return PendingItemCard(
+                  product: pendingPostBloc.habilityList[index],
+                  acceptPressed: (value) {
+                    pendingPostBloc.add(AcceptPendingPostEvent(docId: value));
+                  },
+                  rejectPressed: (value) {
+                    pendingPostBloc.add(RejectPendingPostEvent(docId: value));
+                  },
+                );
+              });
+        }
+      }),
     );
   }
 }

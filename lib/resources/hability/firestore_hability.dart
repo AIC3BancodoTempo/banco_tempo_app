@@ -66,12 +66,22 @@ class HabilityRepository {
   }
 
   Future<bool> updateStatus(String docId, int status) async {
+    return await firestoreInstance.collection('produto').doc(docId).update({
+      'status': status,
+      'data': DateTime.now().millisecondsSinceEpoch
+    }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
+  }
+
+  Future<bool> delete(String docId) async {
     return await firestoreInstance
         .collection('produto')
         .doc(docId)
-        .update({'status': status}).then((value) {
+        .delete()
+        .then((value) {
       return true;
-    }).catchError((error) => throw Exception(error));
+    }).catchError((error) => throw error);
   }
 
   Future<bool> decrementaQuantidade(String userId, int qtd) async {

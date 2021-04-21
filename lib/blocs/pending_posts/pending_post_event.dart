@@ -24,3 +24,15 @@ class ReceivedEvent extends PendingPostEvent {
 class GetMorePendingPostsEvent extends PendingPostEvent {}
 
 class NewPendingPostEvent extends PendingPostEvent {}
+
+class AcceptPendingPostEvent extends PendingPostEvent {
+  final String docId;
+
+  AcceptPendingPostEvent({this.docId});
+}
+
+class RejectPendingPostEvent extends PendingPostEvent {
+  final String docId;
+
+  RejectPendingPostEvent({this.docId});
+}
