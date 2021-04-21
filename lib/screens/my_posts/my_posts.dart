@@ -75,7 +75,6 @@ class _MyPostsState extends State<MyPosts> {
               imageUrl: _mockupPosts[index]["imageUrl"],
               amount: _mockupPosts[index]["amount"],
               timeAmount: _mockupPosts[index]["timeAmount"],
-              renderActionButtons: false,
             );
           }),
     );

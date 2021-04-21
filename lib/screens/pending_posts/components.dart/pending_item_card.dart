@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PostCard extends StatelessWidget {
-  final String title, subtitle, imageUrl;
-  final int amount, timeAmount;
+import '../../../core/models/produto_model.dart';
 
-  PostCard({
-    Key key,
-    this.title,
-    this.subtitle,
-    this.imageUrl,
-    this.amount,
-    this.timeAmount,
-  }) : super(key: key);
+class PendingItemCard extends StatelessWidget {
+  final ProdutoModel product;
+
+  const PendingItemCard({
+    @required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +27,14 @@ class PostCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                product.userPostName,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
               ),
               SizedBox(height: 5.0),
               Text(
-                subtitle,
+                product.productName,
                 style: TextStyle(
                   color: Colors.grey,
                 ),
@@ -48,9 +44,9 @@ class PostCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text(amount.toString() + " und"),
+                  TextButton(onPressed: () {}, child: Text("Aceitar")),
                   SizedBox(width: 30.0),
-                  Text(timeAmount.toString() + " hora"),
+                  TextButton(onPressed: () {}, child: Text("Rejeitar")),
                 ],
               ),
             ],
@@ -58,7 +54,19 @@ class PostCard extends StatelessWidget {
           Column(
             children: [
               CircleAvatar(
-                  radius: 40.0, backgroundImage: NetworkImage(this.imageUrl)),
+                  radius: 40.0,
+                  backgroundImage: NetworkImage(
+                      product.images.length > 0 ? product.images[0] : "")),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(product.productQuantity.toString() + " und"),
+                  SizedBox(width: 30.0),
+                  Text(product.custoHoras.toString() + " hora"),
+                ],
+              ),
             ],
           ),
         ],

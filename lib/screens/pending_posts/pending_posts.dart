@@ -1,26 +1,56 @@
+import 'package:banco_do_tempo_app/blocs/auth/auth_bloc.dart';
+
+import 'package:banco_do_tempo_app/blocs/pending_posts/pending_post_bloc.dart';
+import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../core/my_post_card.dart';
+import 'components.dart/pending_card.dart';
 
-class PendingPosts extends StatelessWidget {
-  final List<Map<String, dynamic>> _mockupPosts = [
-    {
-      'title': 'Sofia Oliveira',
-      'subtitle': 'Ensino de Programação',
-      'imageUrl':
-          'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      'amount': 1,
-      'timeAmount': 1
-    },
-    {
-      'title': 'Marta Kawasaki',
-      'subtitle': 'Ensino de piano',
-      'imageUrl':
-          'https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      'amount': 2,
-      'timeAmount': 4,
-    },
-  ];
+class PendingPost extends StatelessWidget {
+  @override
+  final AuthBloc authBloc;
+
+  PendingPost({Key key, this.authBloc}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => PendingPostBloc()..add(PendingPostStartedEvent()),
+      child: PendingPostPage(authBloc: authBloc),
+    );
+  }
+}
+
+class PendingPostPage extends StatefulWidget {
+  final AuthBloc authBloc;
+  @override
+  const PendingPostPage({Key key, this.authBloc}) : super(key: key);
+  @override
+  _PendingPostPageState createState() => _PendingPostPageState();
+}
+
+class _PendingPostPageState extends State<PendingPostPage> {
+  PendingPostBloc pendingPostBloc;
+  final ScrollController controller = ScrollController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    pendingPostBloc.close();
+    super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      pendingPostBloc.add(GetMorePendingPostsEvent());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +64,20 @@ class PendingPosts extends StatelessWidget {
             }),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: _mockupPosts.length,
-          itemBuilder: (BuildContext context, int index) {
-            return PostCard(
-              title: _mockupPosts[index]["title"],
-              subtitle: _mockupPosts[index]["subtitle"],
-              imageUrl: _mockupPosts[index]["imageUrl"],
-              amount: _mockupPosts[index]["amount"],
-              timeAmount: _mockupPosts[index]["timeAmount"],
-              renderActionButtons: true,
+      body: BlocListener<PendingPostBloc, PendingPostState>(
+        listener: (contextListener, state) {},
+        child: BlocBuilder<PendingPostBloc, PendingPostState>(
+            builder: (context, state) {
+          if (state is LoadingPendingPostState) {
+            return Loading();
+          } else {
+            return PendingCard(
+              scrollController: controller,
+              mockupPosts: pendingPostBloc.habilityList,
             );
-          }),
+          }
+        }),
+      ),
     );
   }
 }
