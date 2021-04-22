@@ -46,11 +46,6 @@ class SideBarAdm extends StatelessWidget {
             },
           ),
           ListTile(
-            trailing: Icon(Icons.notifications_none),
-            title: Text("Perguntas Frequentes"),
-            onTap: () {},
-          ),
-          ListTile(
             trailing: Icon(Icons.logout),
             title: Text("Sair"),
             onTap: () {

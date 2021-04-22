@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'text_field_container.dart';
 
-class RoundedPasswordField extends StatelessWidget {
+class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final TextEditingController controller;
   final Function validator;
-  const RoundedPasswordField({
+  RoundedPasswordField({
     Key key,
     this.onChanged,
     this.controller,
@@ -15,25 +15,36 @@ class RoundedPasswordField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
+}
+
+class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+  bool _obscureText = true;
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        controller: controller,
-        obscureText: true,
-        validator: validator,
-        onChanged: onChanged,
+        controller: widget.controller,
+        obscureText: _obscureText,
+        validator: widget.validator,
+        onChanged: widget.onChanged,
         cursorColor: themeColor,
         decoration: InputDecoration(
+          border: InputBorder.none,
           hintText: "Senha",
           icon: Icon(
             Icons.lock,
             color: themeColor,
           ),
-          suffixIcon: Icon(
-            Icons.visibility,
-            color: themeColor,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+            child: new Icon(
+                _obscureText ? Icons.visibility : Icons.visibility_off),
           ),
-          border: InputBorder.none,
         ),
       ),
     );

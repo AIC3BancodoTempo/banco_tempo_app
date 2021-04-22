@@ -35,15 +35,18 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
         Stream<QuerySnapshot> stream =
             _habilityRepository.getStreamLastHability(1);
         _subscription = stream.listen((event) {
-          Map<String, dynamic> data = event.docs.first.data();
-          ProdutoModel prod = ProdutoModel.fromSnapshot(data, event.docs.first);
-          int index = habilityList
-              .indexWhere((element) => prod.productId == element.productId);
-          if (index >= 0)
-            habilityList[index] = prod;
-          else
-            habilityList.insert(0, prod);
-          add(NewHabilityEvent());
+          if (event.docs.length > 0) {
+            Map<String, dynamic> data = event.docs.first.data();
+            ProdutoModel prod =
+                ProdutoModel.fromSnapshot(data, event.docs.first);
+            int index = habilityList
+                .indexWhere((element) => prod.productId == element.productId);
+            if (index >= 0)
+              habilityList[index] = prod;
+            else
+              habilityList.insert(0, prod);
+            add(NewHabilityEvent());
+          }
         });
         yield ShowHabilityState();
       } else if (event is GetMoreProductsEvent) {
@@ -59,6 +62,7 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
         yield ShowHabilityState();
       }
     } catch (e) {
+      print(e.toString());
       yield ShowHabilityState();
     }
   }
