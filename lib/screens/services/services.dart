@@ -10,6 +10,10 @@ import '../core/loading.dart';
 import '../core/navigation.dart';
 import 'components/cards.dart';
 
+
+
+
+
 class Services extends StatelessWidget {
   final AuthBloc authBloc;
 
@@ -26,6 +30,8 @@ class Services extends StatelessWidget {
 class ServicesPage extends StatefulWidget {
   final AuthBloc authBloc;
 
+
+
   const ServicesPage({Key key, this.authBloc}) : super(key: key);
   @override
   _ServicesPageState createState() => _ServicesPageState();
@@ -34,7 +40,7 @@ class ServicesPage extends StatefulWidget {
 class _ServicesPageState extends State<ServicesPage> {
   HabilityBloc habilityBloc;
   final ScrollController controller = ScrollController();
-
+  
   @override
   void dispose() {
     controller.dispose();
@@ -56,6 +62,18 @@ class _ServicesPageState extends State<ServicesPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Lista inicial 
+    // TODO: Substituir a lista por uma lista contendo os nomes dos itens
+    // do firebase
+    final List<String> searchNames = [
+          "Bolo de Chocolate", 
+          "Aula de Guitarra",
+          "Aula de Física" 
+          "Coach de Coaching"
+          "Yoga",
+          "Bolo de Aipim",
+          "Brownie",
+    ];
     habilityBloc = BlocProvider.of<HabilityBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +83,9 @@ class _ServicesPageState extends State<ServicesPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: CustomSearchDelegate(searchNames));
+              },
           ),
         ],
       ),
@@ -96,3 +116,72 @@ class _ServicesPageState extends State<ServicesPage> {
     );
   }
 }
+
+class CustomSearchDelegate extends SearchDelegate{
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+          },
+        ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  String selectedResult = "";
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectedResult),
+      ),
+    );
+  }
+
+  final List<String> listExample;
+  CustomSearchDelegate(this.listExample);
+
+  List<String> recentList = ["Bolo de Chocolate ", "Pilates", "Meditação"];
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> suggestionList = [];
+    query.isEmpty
+        ? suggestionList = recentList //In the true case
+        : suggestionList.addAll(listExample.where(
+            // In the false case
+            (element) => element.contains(query),
+          ));
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(
+            suggestionList[index],
+          ),
+          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
+          onTap: (){
+            selectedResult = suggestionList[index];
+            showResults(context);
+          },
+        );
+      },
+    );
+  }
+
+}
+
