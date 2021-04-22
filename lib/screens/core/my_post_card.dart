@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'my_pending_card.dart';
-
 class PostCard extends StatelessWidget {
   final String title, subtitle, imageUrl;
   final int amount, timeAmount;
-  final bool renderActionButtons;
 
   PostCard({
     Key key,
@@ -14,7 +11,6 @@ class PostCard extends StatelessWidget {
     this.imageUrl,
     this.amount,
     this.timeAmount,
-    this.renderActionButtons,
   }) : super(key: key);
 
   @override
@@ -35,25 +31,36 @@ class PostCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                this.title,
+                title,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
               ),
               SizedBox(height: 5.0),
-              Text(this.subtitle,
-                  style: TextStyle(
-                    color: Colors.grey,
-                  )),
-              PendingPostCard(
-                amount: this.amount,
-                renderActionButtons: this.renderActionButtons,
-                timeAmount: this.timeAmount,
+              Text(
+                subtitle,
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text(amount.toString() + " und"),
+                  SizedBox(width: 30.0),
+                  Text(timeAmount.toString() + " hora"),
+                ],
               ),
             ],
           ),
-          CircleAvatar(
-              radius: 40.0, backgroundImage: NetworkImage(this.imageUrl))
+          Column(
+            children: [
+              CircleAvatar(
+                  radius: 40.0, backgroundImage: NetworkImage(this.imageUrl)),
+            ],
+          ),
         ],
       ),
     );

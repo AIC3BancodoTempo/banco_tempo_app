@@ -50,7 +50,7 @@ class Run extends StatelessWidget {
               userModel: _userModel,
             ),
         '/myPosts': (context) => MyPosts(),
-        '/pendingPosts': (context) => PendingPosts(),
+        '/pendingPosts': (context) => PendingPost(),
       },
       initialRoute: '/',
     );
