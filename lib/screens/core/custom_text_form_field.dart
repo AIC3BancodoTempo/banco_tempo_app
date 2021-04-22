@@ -5,6 +5,7 @@ import 'colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String question;
+  final bool enabled;
   final String hintText;
   final Function onChanged;
   final Icon icon;
@@ -12,7 +13,8 @@ class CustomTextFormField extends StatelessWidget {
       {@required this.question,
       @required this.hintText,
       @required this.onChanged,
-      this.icon});
+      this.icon,
+      this.enabled = true});
   final myFocusNode = new FocusNode();
 
   @override
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
               onChanged: (value) {
                 onChanged(value);
               },
+              enabled: enabled,
               decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(

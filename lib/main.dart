@@ -10,7 +10,7 @@ import 'screens/core/colors.dart';
 import 'screens/descricao_habilidade/descricao_habilidade.dart';
 import 'screens/my_posts/my_posts.dart';
 import 'screens/pending_posts/pending_posts.dart';
-import 'screens/profile/profilescreens.dart';
+import 'screens/profile/profile_screen.dart';
 import 'screens/trocas_andamento/trocas_andamento.dart';
 
 void main() async {
@@ -46,7 +46,7 @@ class Run extends StatelessWidget {
             ),
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => HabilityDescription(user: _user),
-        '/profile': (context) => Profilescreen(
+        '/profile': (context) => ProfileScreen(
               userModel: _userModel,
             ),
         '/myPosts': (context) => MyPosts(),
