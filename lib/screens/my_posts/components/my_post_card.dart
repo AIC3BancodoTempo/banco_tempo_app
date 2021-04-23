@@ -26,6 +26,31 @@ class PostCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              product.status == 0
+                  ? Row(
+                      children: [
+                        Icon(Icons.timelapse),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text("Aguardando aprovação"),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text("Postado"),
+                      ],
+                    ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 product.productName,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
