@@ -1,17 +1,21 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../blocs/my_posts/my_posts_bloc.dart';
+import '../core/colors.dart';
 import '../core/loading.dart';
 import 'components/my_post_card.dart';
 
 class MyPosts extends StatelessWidget {
+  final User user;
+
+  const MyPosts({Key key, this.user}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyPostsBloc()..add(MyPostsStartedEvent()),
+      create: (context) => MyPostsBloc(user: user)..add(MyPostsStartedEvent()),
       child: MyPostsPage(),
     );
   }

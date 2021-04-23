@@ -49,7 +49,9 @@ class Run extends StatelessWidget {
         '/profile': (context) => Profilescreen(
               userModel: _userModel,
             ),
-        '/myPosts': (context) => MyPosts(),
+        '/myPosts': (context) => MyPosts(
+              user: _user,
+            ),
         '/pendingPosts': (context) => PendingPost(),
       },
       initialRoute: '/',
