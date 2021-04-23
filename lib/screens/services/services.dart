@@ -10,10 +10,6 @@ import '../core/loading.dart';
 import '../core/navigation.dart';
 import 'components/cards.dart';
 
-
-
-
-
 class Services extends StatelessWidget {
   final AuthBloc authBloc;
 
@@ -38,6 +34,9 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
+  List countries = [];
+  List filteredCountries = [];
+  bool isSearching = false;
   HabilityBloc habilityBloc;
   final ScrollController controller = ScrollController();
   
@@ -49,6 +48,7 @@ class _ServicesPageState extends State<ServicesPage> {
   }
 
   void initState() {
+    
     super.initState();
     controller.addListener(_scrollListener);
   }
@@ -60,33 +60,56 @@ class _ServicesPageState extends State<ServicesPage> {
     }
   }
 
+  void _filterCountries(value) {
+    setState(() {
+      filteredCountries = countries
+          .where((country) =>
+              country['name'].toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Lista inicial 
-    // TODO: Substituir a lista por uma lista contendo os nomes dos itens
-    // do firebase
-    final List<String> searchNames = [
-          "Bolo de Chocolate", 
-          "Aula de Guitarra",
-          "Aula de Física" 
-          "Coach de Coaching"
-          "Yoga",
-          "Bolo de Aipim",
-          "Brownie",
-    ];
     habilityBloc = BlocProvider.of<HabilityBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: themeColor,
         centerTitle: true,
-        title: const Text('Serviços/Habilidades'),
-        actions: [
-          IconButton(
+        title: !isSearching
+            ? Text('Serviços/Habilidades')
+            : TextField(
+                onChanged: (value) {
+                  _filterCountries(value);
+                },
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: "Pesquisar",
+                    hintStyle: TextStyle(color: Colors.white)),
+              ),
+        actions: <Widget>[
+          isSearching
+          ? IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: () {
+              setState(() {
+                this.isSearching = false;
+                filteredCountries = countries;
+              });
+            },
+          )
+          : IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              showSearch(context: context, delegate: CustomSearchDelegate(searchNames));
-              },
-          ),
+              setState(() {
+                this.isSearching = true;
+              });
+            } 
+          )
         ],
       ),
       drawer: widget.authBloc.userModel.isAdmin
@@ -116,72 +139,3 @@ class _ServicesPageState extends State<ServicesPage> {
     );
   }
 }
-
-class CustomSearchDelegate extends SearchDelegate{
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-          },
-        ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  String selectedResult = "";
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(selectedResult),
-      ),
-    );
-  }
-
-  final List<String> listExample;
-  CustomSearchDelegate(this.listExample);
-
-  List<String> recentList = ["Bolo de Chocolate ", "Pilates", "Meditação"];
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
-    query.isEmpty
-        ? suggestionList = recentList //In the true case
-        : suggestionList.addAll(listExample.where(
-            // In the false case
-            (element) => element.contains(query),
-          ));
-
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
-          onTap: (){
-            selectedResult = suggestionList[index];
-            showResults(context);
-          },
-        );
-      },
-    );
-  }
-
-}
-
