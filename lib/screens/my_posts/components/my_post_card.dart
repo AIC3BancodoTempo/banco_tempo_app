@@ -28,25 +28,22 @@ class PostCard extends StatelessWidget {
             children: [
               Text(
                 product.productName,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-              SizedBox(height: 5.0),
-              Text(
-                product.productDescritpion,
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
-                  Text(product.productQuantity.toString() + " und"),
+                  Text(
+                    product.productQuantity.toString() + " und",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                   SizedBox(width: 30.0),
-                  Text(product.custoHoras.toString() + " hora"),
+                  Text(
+                    product.custoHoras.toString() + " hora",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                 ],
               ),
             ],

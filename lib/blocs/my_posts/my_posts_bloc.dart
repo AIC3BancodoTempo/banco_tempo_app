@@ -23,6 +23,14 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
     return super.close();
   }
 
+  List<ProdutoModel> getProductList() {
+    return postsList;
+  }
+
+  getProductLength() {
+    return postsList.length;
+  }
+
   @override
   Stream<MyPostsState> mapEventToState(
     MyPostsEvent event,
@@ -48,6 +56,11 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
           }
         });
         yield ShowMyPostsState();
+      } else if (event is RemoveMyPostsEvent) {
+        yield MyPostsYetState();
+        postsList.removeAt(event.index);
+        await _habilityRepository.removeAbility(event.key);
+        yield ChangeProductState();
       } else if (event is GetMorePostsEvent) {
         if (!noMore) {
           List<ProdutoModel> modelList = await _habilityRepository

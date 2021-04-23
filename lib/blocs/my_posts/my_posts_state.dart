@@ -14,3 +14,7 @@ class LoadingMyPostsState extends MyPostsState {}
 class ShowMyPostsState extends MyPostsState {}
 
 class UpdateMyPostsState extends MyPostsState {}
+
+class MyPostsYetState extends MyPostsState {}
+
+class ChangeProductState extends MyPostsState {}

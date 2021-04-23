@@ -65,6 +65,10 @@ class HabilityRepository {
     return product;
   }
 
+  Future<void> removeAbility(String docId) async {
+    await firestoreInstance.collection('produto').doc(docId).delete();
+  }
+
   Future<bool> updateStatus(String docId, int status) async {
     return await firestoreInstance.collection('produto').doc(docId).update({
       'status': status,

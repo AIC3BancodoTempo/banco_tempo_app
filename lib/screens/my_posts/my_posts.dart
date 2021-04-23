@@ -1,5 +1,7 @@
+import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../blocs/my_posts/my_posts_bloc.dart';
 import '../core/loading.dart';
@@ -45,6 +47,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
 
   @override
   Widget build(BuildContext context) {
+    myPostsBloc = BlocProvider.of<MyPostsBloc>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -64,8 +67,25 @@ class _MyPostsPageState extends State<MyPostsPage> {
               controller: controller,
               itemCount: myPostsBloc.postsList.length,
               itemBuilder: (BuildContext context, int index) {
-                return PostCard(
-                  product: myPostsBloc.postsList[index],
+                return Slidable(
+                  actionPane: SlidableDrawerActionPane(),
+                  actionExtentRatio: 0.25,
+                  child: PostCard(
+                    product: myPostsBloc.postsList[index],
+                  ),
+                  actions: [
+                    IconSlideAction(
+                        caption: 'Delete',
+                        color: themeColor,
+                        icon: Icons.delete,
+                        onTap: () {
+                          myPostsBloc.add(RemoveMyPostsEvent(
+                              index: index,
+                              key: myPostsBloc
+                                  .getProductList()[index]
+                                  .productId));
+                        }),
+                  ],
                 );
               });
         }

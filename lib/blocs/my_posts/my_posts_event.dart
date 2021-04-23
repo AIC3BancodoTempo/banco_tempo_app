@@ -24,3 +24,10 @@ class ReceivedEvent extends MyPostsEvent {
 class GetMorePostsEvent extends MyPostsEvent {}
 
 class NewMyPostsEvent extends MyPostsEvent {}
+
+class RemoveMyPostsEvent extends MyPostsEvent {
+  final int index;
+  final String key;
+
+  RemoveMyPostsEvent({this.index, this.key});
+}
