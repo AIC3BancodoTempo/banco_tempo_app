@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'core/models/user_model.dart';
 import 'screens/app.dart';
-import 'screens/cadastros_habilidades/cadastro_habilidade.dart';
+import 'screens/cadastros_habilidades/add_service.dart';
 import 'screens/chat/chat_screen.dart';
 import 'screens/core/colors.dart';
 import 'screens/descricao_habilidade/descricao_habilidade.dart';
@@ -44,7 +44,7 @@ class Run extends StatelessWidget {
               user: _user,
               userModel: _userModel,
             ),
-        '/cadastroHabilidades': (context) => AddAbilityPage(),
+        '/cadastroHabilidades': (context) => AddAbility(user: _userModel),
         '/descricaoHabilidades': (context) => HabilityDescription(user: _user),
         '/profile': (context) => Profilescreen(
               userModel: _userModel,

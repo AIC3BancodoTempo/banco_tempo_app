@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter 
+
+  groovin_widgets: ^2.0.0
   flutter_slidable: ^0.5.7  
   firebase_picture_uploader: ^1.2.1
   firebase_auth: ^0.20.1

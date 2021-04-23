@@ -95,7 +95,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                       ),
                       spaceVertical(20),
                       Text(
-                        habilityDescriptionBloc.produtoModel.productDescritpion,
+                        habilityDescriptionBloc.produtoModel.productDescription,
                         textAlign: TextAlign.justify,
                         style: TextStyle(height: 1.5, color: Color(0xFF6F8398)),
                       ),

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class InsertInputs extends StatelessWidget {
+  final TextEditingController controller;
   final String insertLabel;
   final Function onChanged;
+  final TextInputType keyboardType;
   const InsertInputs(
-      {Key key, @required this.insertLabel, @required this.onChanged})
+      {Key key,
+      @required this.insertLabel,
+      this.onChanged,
+      this.controller,
+      this.keyboardType})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,7 @@ class InsertInputs extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
           child: TextFormField(
+            keyboardType: keyboardType,
             onChanged: (value) {
               onChanged(value);
             },
