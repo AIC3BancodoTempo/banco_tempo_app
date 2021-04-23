@@ -1,4 +1,5 @@
 import 'package:banco_do_tempo_app/blocs/hability/hability_bloc.dart';
+import 'package:banco_do_tempo_app/core/models/produto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,20 +27,17 @@ class Services extends StatelessWidget {
 class ServicesPage extends StatefulWidget {
   final AuthBloc authBloc;
 
-
-
   const ServicesPage({Key key, this.authBloc}) : super(key: key);
   @override
   _ServicesPageState createState() => _ServicesPageState();
 }
 
 class _ServicesPageState extends State<ServicesPage> {
-  List countries = [];
-  List filteredCountries = [];
   bool isSearching = false;
   HabilityBloc habilityBloc;
   final ScrollController controller = ScrollController();
-  
+  List<ProdutoModel> filteredProducts;
+
   @override
   void dispose() {
     controller.dispose();
@@ -48,9 +46,9 @@ class _ServicesPageState extends State<ServicesPage> {
   }
 
   void initState() {
-    
     super.initState();
     controller.addListener(_scrollListener);
+    filteredProducts.addAll(habilityBloc.habilityList);
   }
 
   void _scrollListener() {
@@ -60,12 +58,10 @@ class _ServicesPageState extends State<ServicesPage> {
     }
   }
 
-  void _filterCountries(value) {
+  void _filteredProducts(value) {
     setState(() {
-      filteredCountries = countries
-          .where((country) =>
-              country['name'].toLowerCase().contains(value.toLowerCase()))
-          .toList();
+      filteredProducts = filteredProducts.where((habil) =>
+          habil.productName.toLowerCase().contains(value.toLowerCase()));
     });
   }
 
@@ -80,7 +76,7 @@ class _ServicesPageState extends State<ServicesPage> {
             ? Text('Serviços/Habilidades')
             : TextField(
                 onChanged: (value) {
-                  _filterCountries(value);
+                  _filteredProducts(value);
                 },
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
@@ -93,23 +89,22 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
         actions: <Widget>[
           isSearching
-          ? IconButton(
-            icon: Icon(Icons.cancel),
-            onPressed: () {
-              setState(() {
-                this.isSearching = false;
-                filteredCountries = countries;
-              });
-            },
-          )
-          : IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              setState(() {
-                this.isSearching = true;
-              });
-            } 
-          )
+              ? IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = false;
+                      filteredProducts;
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = true;
+                    });
+                  })
         ],
       ),
       drawer: widget.authBloc.userModel.isAdmin
@@ -124,7 +119,7 @@ class _ServicesPageState extends State<ServicesPage> {
           } else {
             return Cards(
               scrollController: controller,
-              mockupPosts: habilityBloc.habilityList,
+              mockupPosts: filteredProducts,
             );
           }
         }),
