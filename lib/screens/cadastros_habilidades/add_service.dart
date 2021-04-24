@@ -8,6 +8,7 @@ import 'package:banco_do_tempo_app/screens/core/error.dart';
 import 'package:banco_do_tempo_app/screens/core/form/dropdown.dart';
 import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:banco_do_tempo_app/screens/core/success.dart';
+import 'package:banco_do_tempo_app/screens/register_questionary/components/questions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:flutter/material.dart';
@@ -137,30 +138,40 @@ class _AddAbilityPageState extends State<AddAbilityPage> {
                           addServiceBloc.setQuantity(value);
                         },
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(90, 25, 90, 25),
-                          child: FormDropDown(
-                            items: opcoes
-                                .map<DropdownMenuItem<String>>((double value) {
-                              return DropdownMenuItem<String>(
-                                value: value.toString(),
-                                child: Text(
-                                  value.toString() + " hrs",
-                                ),
-                              );
-                            }).toList(),
-                            validator: validateEmptyField,
-                            hint: "Quantia em Horas",
-                            onChanged: (value) {
-                              addServiceBloc.setCustoHoras(value);
-                            },
-                          ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
+                        child: FormDropDown(
+                          items: opcoes
+                              .map<DropdownMenuItem<String>>((double value) {
+                            return DropdownMenuItem<String>(
+                              value: value.toString(),
+                              child: Text(
+                                value.toString() + " hrs",
+                              ),
+                            );
+                          }).toList(),
+                          validator: validateEmptyField,
+                          hint: "Quantia em Horas",
+                          onChanged: (value) {
+                            addServiceBloc.setCustoHoras(value);
+                          },
                         ),
                       ),
-                      SizedBox(height: 50.0),
-                      Text("Ao selecionar a imagem, aguarde o carregamento!"),
+                      SizedBox(height: 20.0),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
+                        child: Text(
+                            "Ao selecionar a imagem, aguarde o carregamento!",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'DMSans',
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       PictureUploadWidget(
                         //initialImages: informativoBloc.getPictures(),
                         onPicturesChange: addServiceBloc.pictureCallback,

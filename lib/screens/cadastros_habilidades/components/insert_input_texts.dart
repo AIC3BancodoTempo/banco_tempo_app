@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class InsertInputs extends StatelessWidget {
   final TextEditingController controller;
+  final int maxlines;
   final String insertLabel;
   final Function onChanged;
   final TextInputType keyboardType;
@@ -10,7 +11,8 @@ class InsertInputs extends StatelessWidget {
       @required this.insertLabel,
       this.onChanged,
       this.controller,
-      this.keyboardType})
+      this.keyboardType,
+      this.maxlines})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class InsertInputs extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
           child: TextFormField(
+            maxLines: maxlines,
             keyboardType: keyboardType,
             onChanged: (value) {
               onChanged(value);

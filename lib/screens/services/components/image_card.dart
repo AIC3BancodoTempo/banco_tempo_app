@@ -18,7 +18,7 @@ class ImageCard extends StatelessWidget {
               image: imgUrl.isNotEmpty
                   ? NetworkImage(imgUrl)
                   : AssetImage('assets/images/noimage.jpg'),
-              fit: BoxFit.fitHeight),
+              fit: BoxFit.cover),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusDirectional.only(
               topEnd: Radius.circular(15),
