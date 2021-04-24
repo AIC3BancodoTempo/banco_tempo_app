@@ -26,6 +26,26 @@ class HabilityRepository {
     return productList;
   }
 
+  Future<List<ProdutoModel>> getAbilityByUser(
+    String userId,
+  ) async {
+    List<ProdutoModel> productList = [];
+    QuerySnapshot snapshot = await firestoreInstance
+        .collection('produto')
+        .where('status', whereIn: [0, 1])
+        .where('userPostId', isEqualTo: userId)
+        .orderBy('data', descending: true)
+        .limit(20)
+        .get();
+    if (snapshot.size > 0) {
+      snapshot.docs.forEach((element) {
+        Map<String, dynamic> data = element.data();
+        productList.add(ProdutoModel.fromSnapshot(data, element));
+      });
+    }
+    return productList;
+  }
+
   Stream<QuerySnapshot> getStreamLastHability(int status) {
     return firestoreInstance
         .collection('produto')
@@ -54,6 +74,26 @@ class HabilityRepository {
     return productList;
   }
 
+  Future<List<ProdutoModel>> getMoreMyPosts(
+      String userId, DocumentSnapshot docRef) async {
+    List<ProdutoModel> productList = [];
+    QuerySnapshot snapshot = await firestoreInstance
+        .collection('produto')
+        .where('status', whereIn: [0, 1])
+        .where('userPostId', isEqualTo: userId)
+        .orderBy('data', descending: true)
+        .startAfterDocument(docRef)
+        .limit(20)
+        .get();
+    if (snapshot.size > 0) {
+      snapshot.docs.forEach((element) {
+        Map<String, dynamic> data = element.data();
+        productList.add(ProdutoModel.fromSnapshot(data, element));
+      });
+    }
+    return productList;
+  }
+
   Future<ProdutoModel> getHabilityById(String docId) async {
     ProdutoModel product;
     DocumentSnapshot snapshot =
@@ -63,6 +103,10 @@ class HabilityRepository {
       product = ProdutoModel.fromSnapshot(data, snapshot);
     }
     return product;
+  }
+
+  Future<void> removeAbility(String docId) async {
+    await firestoreInstance.collection('produto').doc(docId).delete();
   }
 
   Future<bool> updateStatus(String docId, int status) async {
