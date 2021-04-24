@@ -60,7 +60,7 @@ class ProdutoModel {
     productQuantity =
         info['productQuantity'] != null ? info['productQuantity'] : 0;
     productDescritpion =
-        info['productDescritpion'] != null ? info['productDescritpion'] : '';
+        info['productDescription'] != null ? info['productDescription'] : '';
     data = info['data'] != null
         ? DateFormat('dd/MM/yyyy kk:mm')
             .format(DateTime.fromMillisecondsSinceEpoch(info['data']))
@@ -79,7 +79,7 @@ class ProdutoModel {
         userPostName: map['userPostName'],
         productId: map['productId'],
         productName: map['productName'],
-        productDescritpion: map['productDescritpion'],
+        productDescritpion: map['productDescription'],
         productQuantity: map['productQuantity'],
         custoHoras: map['custoHoras'],
         status: map['status'],
