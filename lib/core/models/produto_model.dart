@@ -6,7 +6,7 @@ class ProdutoModel {
   String userPostName;
   String productId;
   String productName;
-  String productDescritpion;
+  String productDescription;
   int productQuantity;
   double custoHoras;
   int status;
@@ -20,7 +20,7 @@ class ProdutoModel {
       this.productQuantity,
       this.productId,
       this.productName,
-      this.productDescritpion,
+      this.productDescription,
       this.status,
       this.images,
       this.custoHoras,
@@ -31,7 +31,7 @@ class ProdutoModel {
     String userPostName,
     String productId,
     String productName,
-    String productDescritpion,
+    String productDescription,
     int productQuantity,
     double custoHoras,
     int status,
@@ -43,7 +43,7 @@ class ProdutoModel {
         userPostName: userPostName ?? this.userPostName,
         productId: productId ?? this.productId,
         productName: productName ?? this.productName,
-        productDescritpion: productDescritpion ?? this.productDescritpion,
+        productDescription: productDescription ?? this.productDescription,
         productQuantity: productQuantity ?? this.productQuantity,
         custoHoras: custoHoras ?? this.custoHoras,
         status: status ?? this.status,
@@ -59,7 +59,7 @@ class ProdutoModel {
     userPostName = info['userPostName'] != null ? info['userPostName'] : '';
     productQuantity =
         info['productQuantity'] != null ? info['productQuantity'] : 0;
-    productDescritpion =
+    productDescription =
         info['productDescription'] != null ? info['productDescription'] : '';
     data = info['data'] != null
         ? DateFormat('dd/MM/yyyy kk:mm')
@@ -79,11 +79,24 @@ class ProdutoModel {
         userPostName: map['userPostName'],
         productId: map['productId'],
         productName: map['productName'],
-        productDescritpion: map['productDescription'],
+        productDescription: map['productDescription'],
         productQuantity: map['productQuantity'],
         custoHoras: map['custoHoras'],
         status: map['status'],
         data: map['data'],
-        images: map['images']);
+        images: map['imagens']);
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'custoHoras': custoHoras,
+      'data': DateTime.now().millisecondsSinceEpoch,
+      'imagens': images,
+      'productDescription': productDescription,
+      'productName': productName,
+      'productQuantity': productQuantity,
+      'status': status,
+      'userPostId': userPostId,
+      'userPostName': userPostName,
+    };
   }
 }

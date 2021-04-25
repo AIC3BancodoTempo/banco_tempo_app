@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 import '../../core/models/produto_model.dart';
 
@@ -128,10 +130,21 @@ class HabilityRepository {
     }).catchError((error) => throw error);
   }
 
-  Future<bool> decrementaQuantidade(String userId, int qtd) async {
-    return await firestoreInstance.collection('produto').doc(userId).set({
+  Future<bool> decrementaQuantidade(String docId, int qtd) async {
+    return await firestoreInstance.collection('produto').doc(docId).set({
       'productQuantity': FieldValue.increment(-qtd),
     }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
+  }
+
+  Future<bool> insertProduct(
+    ProdutoModel produtoModel,
+  ) async {
+    return await firestoreInstance
+        .collection('produto')
+        .add(produtoModel.toMap())
+        .then((value) {
       return true;
     }).catchError((error) => throw error);
   }

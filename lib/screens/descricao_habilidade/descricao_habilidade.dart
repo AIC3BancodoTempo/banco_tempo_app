@@ -81,8 +81,23 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(7),
-                  child: ImageCarousel(
-                      imageList: habilityDescriptionBloc.produtoModel.images),
+                  child: habilityDescriptionBloc.produtoModel.images.isNotEmpty
+                      ? ImageCarousel(
+                          imageList:
+                              habilityDescriptionBloc.produtoModel.images)
+                      : Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Container(
+                            height: 300,
+                            width: 200,
+                            child: ClipRRect(
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/images/noimage.jpg')),
+                            ),
+                          ),
+                        ),
                 ),
                 Container(
                   child: Column(
@@ -94,10 +109,15 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                             .toString(),
                       ),
                       spaceVertical(20),
-                      Text(
-                        habilityDescriptionBloc.produtoModel.productDescritpion,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(height: 1.5, color: Color(0xFF6F8398)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                        child: Text(
+                          habilityDescriptionBloc
+                              .produtoModel.productDescription,
+                          textAlign: TextAlign.justify,
+                          style:
+                              TextStyle(height: 1.5, color: Color(0xFF6F8398)),
+                        ),
                       ),
                       spaceVertical(30),
                       Chips(

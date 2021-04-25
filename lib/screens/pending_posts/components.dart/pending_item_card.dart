@@ -66,9 +66,11 @@ class PendingItemCard extends StatelessWidget {
           Column(
             children: [
               CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: NetworkImage(
-                      product.images.length > 0 ? product.images[0] : "")),
+                radius: 40.0,
+                backgroundImage: product.images.isNotEmpty
+                    ? NetworkImage(product.images[0])
+                    : AssetImage('assets/images/noimage.jpg'),
+              ),
               SizedBox(
                 height: 10,
               ),
