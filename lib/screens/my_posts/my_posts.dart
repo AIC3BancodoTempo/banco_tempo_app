@@ -1,59 +1,57 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../../blocs/my_posts/my_posts_bloc.dart';
 import '../core/colors.dart';
-import '../core/my_post_card.dart';
+import '../core/loading.dart';
+import 'components/my_post_card.dart';
 
-class MyPosts extends StatefulWidget {
+class MyPosts extends StatelessWidget {
+  final User user;
+
+  const MyPosts({Key key, this.user}) : super(key: key);
   @override
-  _MyPostsState createState() => _MyPostsState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => MyPostsBloc(user: user)..add(MyPostsStartedEvent()),
+      child: MyPostsPage(),
+    );
+  }
 }
 
-class _MyPostsState extends State<MyPosts> {
-  final List<Map<String, dynamic>> _mockupPosts = [
-    {
-      'title': 'Prato Italiano',
-      'subtitle': 'cozinha italiana',
-      'imageUrl':
-          'https://www.nicepng.com/png/detail/54-546030_food-top-view-png-jpg-black-and-white.png',
-      'amount': 5,
-      'timeAmount': 2
-    },
-    {
-      'title': 'Aulas de guitarra',
-      'subtitle': 'Instrumentos musicais',
-      'imageUrl':
-          'https://www.uberchord.com/wp-content/uploads/2017/03/guitar-1855798_1920.jpg',
-      'amount': 3,
-      'timeAmount': 8,
-    },
-    {
-      'title': 'Aulas de programação',
-      'subtitle': 'Tecnologia',
-      'imageUrl':
-          'https://ourcodeworld.com/public-media/articles/articleocw-5d07e6b3790af.jpg',
-      'amount': 2,
-      'timeAmount': 2
-    },
-    {
-      'title': 'Aulas de fotografia',
-      'subtitle': 'Fotografia',
-      'imageUrl':
-          'https://cdn.mos.cms.futurecdn.net/gvQ9NhQP8wbbM32jXy4V3j.jpg',
-      'amount': 2,
-      'timeAmount': 1
-    },
-    {
-      'title': 'Lorem Ipsum',
-      'subtitle': 'Lorem ipsum dolor sid',
-      'imageUrl':
-          'https://s2.glbimg.com/j3GJOR4Kwytj67-zCy7xJDEr6fA=/0x0:695x521/695x521/s.glbimg.com/po/tt2/f/original/2014/04/11/bliss.jpg',
-      'amount': 2,
-      'timeAmount': 2
-    },
-  ];
+class MyPostsPage extends StatefulWidget {
+  @override
+  _MyPostsPageState createState() => _MyPostsPageState();
+}
+
+class _MyPostsPageState extends State<MyPostsPage> {
+  MyPostsBloc myPostsBloc;
+  final ScrollController controller = ScrollController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    myPostsBloc.close();
+    super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      myPostsBloc.add(GetMorePostsEvent());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    myPostsBloc = BlocProvider.of<MyPostsBloc>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -62,21 +60,40 @@ class _MyPostsState extends State<MyPosts> {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: themeColor,
         title: Text("Meus Cadastros"),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: _mockupPosts.length,
-          itemBuilder: (BuildContext context, int index) {
-            return PostCard(
-              title: _mockupPosts[index]["title"],
-              subtitle: _mockupPosts[index]["subtitle"],
-              imageUrl: _mockupPosts[index]["imageUrl"],
-              amount: _mockupPosts[index]["amount"],
-              timeAmount: _mockupPosts[index]["timeAmount"],
-            );
-          }),
+      body: BlocBuilder<MyPostsBloc, MyPostsState>(builder: (context, state) {
+        if (state is LoadingMyPostsState) {
+          return Loading();
+        } else {
+          return ListView.builder(
+              controller: controller,
+              itemCount: myPostsBloc.postsList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Slidable(
+                  actionPane: SlidableDrawerActionPane(),
+                  actionExtentRatio: 0.25,
+                  child: PostCard(
+                    product: myPostsBloc.postsList[index],
+                  ),
+                  actions: [
+                    IconSlideAction(
+                        caption: 'Delete',
+                        color: themeColor,
+                        icon: Icons.delete,
+                        onTap: () {
+                          myPostsBloc.add(RemoveMyPostsEvent(
+                              index: index,
+                              key: myPostsBloc
+                                  .getProductList()[index]
+                                  .productId));
+                        }),
+                  ],
+                );
+              });
+        }
+      }),
     );
   }
 }

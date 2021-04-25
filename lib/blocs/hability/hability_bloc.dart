@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../core/models/produto_model.dart';
 import '../../resources/hability/firestore_hability.dart';
@@ -22,6 +23,13 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
   Future<void> close() {
     if (_subscription != null) _subscription.cancel();
     return super.close();
+  }
+
+  List<ProdutoModel> _filteredProducs(value) {
+    return habilityList
+          .where((prod) =>
+              prod.productName.toLowerCase().contains(value.toLowerCase()))
+          .toList();
   }
 
   @override
@@ -48,7 +56,7 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
             add(NewHabilityEvent());
           }
         });
-        yield ShowHabilityState();
+        yield ShowHabilityState(habilityList: habilityList);
       } else if (event is GetMoreProductsEvent) {
         if (!noMore) {
           List<ProdutoModel> modelList = await _habilityRepository
@@ -58,12 +66,24 @@ class HabilityBloc extends Bloc<HabilityEvent, HabilityState> {
           add(NewHabilityEvent());
         }
       } else if (event is NewHabilityEvent) {
-        yield UpdateHabilityState();
-        yield ShowHabilityState();
+        yield LoadingHabilityState();
+        yield ShowHabilityState(habilityList: habilityList);
+        
+      }
+      else if(event is SearchHabilityEvent){
+        
+        yield LoadingHabilityState();
+        if(event.search.isNotEmpty){
+          List<ProdutoModel> filterList = _filteredProducs(event.search);
+          yield ShowHabilityState(habilityList: filterList);
+        } else {
+          yield ShowHabilityState(habilityList: habilityList);
+        }
+
       }
     } catch (e) {
       print(e.toString());
-      yield ShowHabilityState();
+      yield ShowHabilityState(habilityList: habilityList);
     }
   }
 }
