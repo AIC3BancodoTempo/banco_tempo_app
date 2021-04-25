@@ -11,6 +11,14 @@ class HabilityInitial extends HabilityState {}
 
 class LoadingHabilityState extends HabilityState {}
 
-class ShowHabilityState extends HabilityState {}
+class ShowHabilityState extends HabilityState {
+  final List<ProdutoModel> habilityList;
 
-class UpdateHabilityState extends HabilityState {}
+  ShowHabilityState({@required this.habilityList});
+}
+
+class UpdateHabilityState extends HabilityState {
+  final List<ProdutoModel> habilityList;
+
+  UpdateHabilityState({@required this.habilityList});
+}

@@ -1,4 +1,5 @@
 import 'package:banco_do_tempo_app/blocs/hability/hability_bloc.dart';
+import 'package:banco_do_tempo_app/core/models/produto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,6 +34,7 @@ class ServicesPage extends StatefulWidget {
 
 class _ServicesPageState extends State<ServicesPage> {
   HabilityBloc habilityBloc;
+  bool isSearch = false;
   final ScrollController controller = ScrollController();
 
   @override
@@ -42,18 +44,6 @@ class _ServicesPageState extends State<ServicesPage> {
     super.dispose();
   }
 
-  void initState() {
-    super.initState();
-    controller.addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    if (controller.offset >= controller.position.maxScrollExtent &&
-        !controller.position.outOfRange) {
-      habilityBloc.add(GetMoreProductsEvent());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     habilityBloc = BlocProvider.of<HabilityBloc>(context);
@@ -61,31 +51,61 @@ class _ServicesPageState extends State<ServicesPage> {
       appBar: AppBar(
         backgroundColor: themeColor,
         centerTitle: true,
-        title: const Text('Serviços/Habilidades'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
+        title: !isSearch
+            ? Text('Serviços/Habilidades')
+            : TextField(
+                onChanged: (value) {
+                  habilityBloc.add(SearchHabilityEvent(search: value));
+                },
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: "Procurar",
+                    hintStyle: TextStyle(color: Colors.white)),
+              ),
+        actions: <Widget>[
+          isSearch
+              ? IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearch = false;
+                      
+                    });
+                    habilityBloc.add(NewHabilityEvent());
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearch = true;
+                    });
+                  },
+                )
         ],
       ),
       drawer: widget.authBloc.userModel.isAdmin
           ? SideBarAdm(authBloc: widget.authBloc)
           : SideBarGeral(authBloc: widget.authBloc),
-      body: BlocListener<HabilityBloc, HabilityState>(
-        listener: (contextListener, state) {},
-        child:
+      body: 
+                 
             BlocBuilder<HabilityBloc, HabilityState>(builder: (context, state) {
           if (state is LoadingHabilityState) {
+            //LOADING
             return Loading();
-          } else {
+          } else if(state is ShowHabilityState) {
             return Cards(
               scrollController: controller,
-              mockupPosts: habilityBloc.habilityList,
+              mockupPosts: state.habilityList,
             );
+          } else {
+            return Container();
           }
         }),
-      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: themeColor,
