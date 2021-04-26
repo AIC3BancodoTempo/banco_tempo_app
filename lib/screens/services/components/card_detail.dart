@@ -44,7 +44,7 @@ class CardDetails extends StatelessWidget {
                             fontWeight: FontWeight.normal),
                       ),
                       Text(
-                        ' unidades',
+                        ' und',
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black54,

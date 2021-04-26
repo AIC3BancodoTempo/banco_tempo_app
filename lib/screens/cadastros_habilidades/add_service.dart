@@ -6,6 +6,7 @@ import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/core/validations.dart';
 import 'package:banco_do_tempo_app/screens/core/error.dart';
 import 'package:banco_do_tempo_app/screens/core/form/dropdown.dart';
+import 'package:banco_do_tempo_app/screens/core/form/dropdown_underline.dart';
 import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:banco_do_tempo_app/screens/core/success.dart';
 import 'package:banco_do_tempo_app/screens/register_questionary/components/questions.dart';
@@ -140,7 +141,7 @@ class _AddAbilityPageState extends State<AddAbilityPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
-                        child: FormDropDown(
+                        child: FormDropDownUnderline(
                           items: opcoes
                               .map<DropdownMenuItem<String>>((double value) {
                             return DropdownMenuItem<String>(
