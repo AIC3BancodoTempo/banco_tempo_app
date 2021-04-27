@@ -35,7 +35,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             onChanged: (salutation) =>
                 setState(() => selectedSalutation = salutation),
             validator: (value) =>
-                value == widget.resposta ? 'Resposta incorreta' : null,
+                value != widget.resposta ? 'Resposta Incorreta' : null,
             items: widget.opcoes.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,

@@ -52,7 +52,7 @@ class QuestionaryScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes,
@@ -63,7 +63,7 @@ class QuestionaryScreen extends StatelessWidget {
                   height: 20,
                 ),
                 CustomDropdown(
-                  opcoes: questionaryModel.opcoes,
+                  opcoes: questionaryModel.opcoes1,
                   pergunta: questionaryModel.perguntas[1],
                   resposta: questionaryModel.respostas[1],
                 ),
@@ -71,7 +71,7 @@ class QuestionaryScreen extends StatelessWidget {
                   height: 20,
                 ),
                 CustomDropdown(
-                  opcoes: questionaryModel.opcoes,
+                  opcoes: questionaryModel.opcoes2,
                   pergunta: questionaryModel.perguntas[2],
                   resposta: questionaryModel.respostas[2],
                 ),
@@ -79,7 +79,7 @@ class QuestionaryScreen extends StatelessWidget {
                   height: 20,
                 ),
                 CustomDropdown(
-                  opcoes: questionaryModel.opcoes,
+                  opcoes: questionaryModel.opcoes3,
                   pergunta: questionaryModel.perguntas[3],
                   resposta: questionaryModel.respostas[3],
                 ),
@@ -87,7 +87,7 @@ class QuestionaryScreen extends StatelessWidget {
                   height: 20,
                 ),
                 CustomDropdown(
-                  opcoes: questionaryModel.opcoes,
+                  opcoes: questionaryModel.opcoes4,
                   pergunta: questionaryModel.perguntas[4],
                   resposta: questionaryModel.respostas[4],
                 ),
@@ -103,8 +103,6 @@ class QuestionaryScreen extends StatelessWidget {
                 RoundedButton(
                   text: "ACESSE",
                   onpress: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Analisando respostas...')));
                     if (_formKey.currentState.validate()) {
                       authBloc.add(SignupEvent());
                     }
