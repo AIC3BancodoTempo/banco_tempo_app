@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatefulWidget {
-  final String pergunta;
-  final String resposta;
+  final List<String> pergunta;
+  final List<String> resposta;
   final List<String> opcoes;
 
   const CustomDropdown({Key key, this.pergunta, this.resposta, this.opcoes})
@@ -27,6 +27,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   style: TextStyle(
                       fontFamily: 'Roboto', fontWeight: FontWeight.bold))),
           DropdownButtonFormField<String>(
+            isExpanded: true,
             value: selectedSalutation,
             hint: Text(
               'Escolha uma das opções.',

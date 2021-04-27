@@ -52,7 +52,7 @@ class QuestionaryScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes,

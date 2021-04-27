@@ -9,11 +9,7 @@ class QuestionaryModel {
   List<String> respostas = [
     "Garantir a qualidade dos produtos e serviços oferecidos",
     "Não esteja acompanhado durante os encontros presenciais",
-<<<<<<< Updated upstream
-    " Indicar me postagem produto/serviço de outro membro do BT",
-=======
-    "Indicar em postagem produto/serviço de outro membro do BT",
->>>>>>> Stashed changes
+    "Indicar me postagem produto/serviço de outro membro do BT",
     "São aceitos: babá/cuidador/petsitter/banho/tosa/companhia",
     "Deve ser incluído no valor da troca o tempo de deslocamento"
   ];
@@ -50,23 +46,24 @@ class QuestionaryModel {
     "O valor de um serviço é o tempo de serviço prestado",
     "Alguns serviços podem ser negociados até o limite de 10h"
   ];
-
   List<String> opcoes = [];
+  List<String> opcoes1 = [];
   List<String> opcoes2 = [];
   List<String> opcoes3 = [];
   List<String> opcoes4 = [];
   List<String> opcoes5 = [];
   QuestionaryModel() {
-    opcoes = respostasDeApoio;
+    opcoes = respostas;
+    opcoes1 = respostasDeApoio;
     opcoes2 = respostasDeApoio2;
     opcoes3 = respostasDeApoio3;
     opcoes4 = respostasDeApoio4;
     opcoes5 = respostasDeApoio5;
 
-    opcoes.shuffle();
-    opcoes2.shuffle();
-    opcoes3.shuffle();
-    opcoes4.shuffle();
-    opcoes5.shuffle();
+    //opcoes1.shuffle();
+    // opcoes2.shuffle();
+    // opcoes3.shuffle();
+    // opcoes4.shuffle();
+    // opcoes5.shuffle();
   }
 }
