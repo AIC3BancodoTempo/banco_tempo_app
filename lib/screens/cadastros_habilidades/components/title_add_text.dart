@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TitleAddText extends StatelessWidget {
-  final String insertTitleHere;
-
-  const TitleAddText({Key key, @required this.insertTitleHere})
-      : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -13,7 +8,8 @@ class TitleAddText extends StatelessWidget {
       child: Container(
         child: Padding(
           padding: EdgeInsets.all(25),
-          child: Text(insertTitleHere,
+          child: Text(
+              "Adicione uma habilidade, serviço ou o que está procurando!",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,

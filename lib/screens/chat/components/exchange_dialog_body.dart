@@ -11,7 +11,7 @@ class ExchangeDialogBody extends StatelessWidget {
   final ChatBloc chatBloc;
   final String nome;
   final int unidade;
-  final int horasUtilizadas;
+  final double horasUtilizadas;
 
   ExchangeDialogBody(
       {@required this.chatBloc,
@@ -82,7 +82,7 @@ class ExchangeDialogBody extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: TextButton(
                 onPressed: () {
-                  chatBloc.add(ExchangeEvent());
+                  chatBloc.add(RequestExchangeEvent());
                   Navigator.of(context).pop();
                 },
                 child: Text(

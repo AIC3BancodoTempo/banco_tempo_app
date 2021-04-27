@@ -48,6 +48,9 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       "LOGIN",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -83,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: size.height * 0.03),
                     AlreadyHaveAnAccountCheck(
                       press: () {
-                        authBloc.add(SignupEvent());
+                        authBloc.add(QuestionaryEvent());
                       },
                     ),
                   ],

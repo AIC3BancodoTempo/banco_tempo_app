@@ -12,14 +12,17 @@ class ImageCarousel extends StatelessWidget {
       padding: EdgeInsets.only(top: 20),
       child: CarouselSlider(
         options: CarouselOptions(
-            height: 290, autoPlay: true, enlargeCenterPage: true),
+            height: 250, autoPlay: true, enlargeCenterPage: true),
         items: imageList.map((i) {
           return Builder(builder: (BuildContext context) {
-            return Column(children: [
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.network(i)),
-            ]);
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                i,
+                fit: BoxFit.fitHeight,
+                filterQuality: FilterQuality.high,
+              ),
+            );
           });
         }).toList(),
       ),

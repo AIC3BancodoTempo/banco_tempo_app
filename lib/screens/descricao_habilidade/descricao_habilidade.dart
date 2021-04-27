@@ -1,4 +1,3 @@
-import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import '../../core/models/produto_model.dart';
 import '../core/colors.dart';
 import '../core/loading.dart';
 import '../core/navigation.dart';
+import '../core/rounded_button.dart';
 import '../core/ui.dart';
 import 'components/anunciante_text.dart';
 import 'components/carousel_image.dart';
@@ -52,7 +52,6 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
   @override
   Widget build(BuildContext context) {
     habilityDescriptionBloc = BlocProvider.of<HabilityDescriptionBloc>(context);
-    UiBuilder uiBuilder = UiBuilder(keyLoader: keyLoader);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -72,7 +71,7 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
           if (state is ChatPressedState) {
             navigateToChatScreen(context, state.trocaModel);
           } else if (state is WarningState) {
-            uiBuilder.buildSnackBarUi(context, state.message);
+            buildSnackBarUi(context, state.message);
           }
         },
         child: BlocBuilder<HabilityDescriptionBloc, HabilityDescriptionState>(
@@ -82,8 +81,23 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(7),
-                  child: ImageCarousel(
-                      imageList: habilityDescriptionBloc.produtoModel.images),
+                  child: habilityDescriptionBloc.produtoModel.images.isNotEmpty
+                      ? ImageCarousel(
+                          imageList:
+                              habilityDescriptionBloc.produtoModel.images)
+                      : Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Container(
+                            height: 300,
+                            width: 200,
+                            child: ClipRRect(
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/images/noimage.jpg')),
+                            ),
+                          ),
+                        ),
                 ),
                 Container(
                   child: Column(
@@ -95,16 +109,22 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                             .toString(),
                       ),
                       spaceVertical(20),
-                      Text(
-                        habilityDescriptionBloc.produtoModel.productDescritpion,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(height: 1.5, color: Color(0xFF6F8398)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                        child: Text(
+                          habilityDescriptionBloc
+                              .produtoModel.productDescription,
+                          textAlign: TextAlign.justify,
+                          style:
+                              TextStyle(height: 1.5, color: Color(0xFF6F8398)),
+                        ),
                       ),
                       spaceVertical(30),
                       Chips(
                         hora: habilityDescriptionBloc.produtoModel.custoHoras
                             .toString(),
                         dropList: habilityDescriptionBloc.getDrop(),
+                        defaultValue: habilityDescriptionBloc.getAmount(),
                         onChanged: (value) {
                           habilityDescriptionBloc.setAmount(value);
                         },

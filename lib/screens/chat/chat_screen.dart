@@ -4,21 +4,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/chat/chat_bloc.dart';
 import '../../core/models/troca_model.dart';
+import '../../core/models/user_model.dart';
 import '../core/loading.dart';
+import '../core/ui.dart';
 import 'components/app_bar.dart';
 import 'components/input_area.dart';
 import 'components/message_list.dart';
 
 class Chat extends StatelessWidget {
   final User user;
+  final UserModel userModel;
 
-  const Chat({Key key, @required this.user}) : super(key: key);
+  const Chat({Key key, @required this.user, @required this.userModel})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final TrocaModel trocasModel = ModalRoute.of(context).settings.arguments;
     return BlocProvider(
-      create: (context) => ChatBloc(user: user, trocaModel: trocasModel)
-        ..add(ChatStartedEvent()),
+      create: (context) =>
+          ChatBloc(user: user, trocaModel: trocasModel, userModel: userModel)
+            ..add(ChatStartedEvent()),
       child: ChatPage(),
     );
   }
@@ -59,7 +64,11 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: ChatAppBar(chatBloc: chatBloc),
       body: BlocListener<ChatBloc, ChatState>(
-        listener: (contextListener, state) {},
+        listener: (contextListener, state) {
+          if (state is WarningState) {
+            buildSnackBarUi(context, state.message);
+          }
+        },
         child: BlocBuilder<ChatBloc, ChatState>(builder: (context, state) {
           if (state is LoadingState) {
             return Loading();
@@ -71,6 +80,7 @@ class _ChatPageState extends State<ChatPage> {
                   listScrollController: listScrollController,
                   listMessages: chatBloc.chatList,
                   userId: chatBloc.user.uid,
+                  chatBloc: chatBloc,
                 )),
                 ChatInputArea(
                   chatBloc: chatBloc,

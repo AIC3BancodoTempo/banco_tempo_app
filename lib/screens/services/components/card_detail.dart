@@ -9,8 +9,8 @@ class CardDetails extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final String hour;
-  final String amount;
+  final double hour;
+  final int amount;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CardDetails extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        hour,
+                        amount.toString(),
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black54,
@@ -44,7 +44,7 @@ class CardDetails extends StatelessWidget {
                             fontWeight: FontWeight.normal),
                       ),
                       Text(
-                        ' unidades',
+                        ' und',
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black54,
@@ -56,7 +56,7 @@ class CardDetails extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        amount,
+                        hour.toString(),
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black54,

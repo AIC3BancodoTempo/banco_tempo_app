@@ -1,12 +1,12 @@
 import 'package:banco_do_tempo_app/core/models/questionary_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../core/colors.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../core/colors.dart';
+import '../core/rounded_button.dart';
 import 'components/questions.dart';
 import 'components/terms_button.dart';
-import '../core/rounded_button.dart';
 
 class QuestionaryScreen extends StatelessWidget {
   final AuthBloc authBloc;
@@ -35,7 +35,7 @@ class QuestionaryScreen extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
