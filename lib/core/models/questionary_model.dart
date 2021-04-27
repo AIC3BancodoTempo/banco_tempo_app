@@ -9,7 +9,7 @@ class QuestionaryModel {
   List<String> respostas = [
     "Garantir a qualidade dos produtos e serviços oferecidos",
     "Não esteja acompanhado durante os encontros presenciais",
-    "Indicar me postagem produto/serviço de outro membro do BT",
+    "Indicar em postagem produto/serviço de outro membro do BT",
     "São aceitos: babá/cuidador/petsitter/banho/tosa/companhia",
     "Deve ser incluído no valor da troca o tempo de deslocamento"
   ];
@@ -46,4 +46,11 @@ class QuestionaryModel {
     "O valor de um serviço é o tempo de serviço prestado",
     "Alguns serviços podem ser negociados até o limite de 10h"
   ];
+  QuestionaryModel() {
+    opcoes.shuffle();
+    opcoes1.shuffle();
+    opcoes2.shuffle();
+    opcoes3.shuffle();
+    opcoes4.shuffle();
+  }
 }

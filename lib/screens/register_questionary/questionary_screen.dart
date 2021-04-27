@@ -56,40 +56,40 @@ class QuestionaryScreen extends StatelessWidget {
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes,
-                  pergunta: questionaryModel.perguntas[0].toString(),
-                  resposta: questionaryModel.respostas[0].toString(),
+                  pergunta: questionaryModel.perguntas[0],
+                  resposta: questionaryModel.respostas[0],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes1,
-                  pergunta: questionaryModel.perguntas[1].toString(),
-                  resposta: questionaryModel.respostas[1].toString(),
+                  pergunta: questionaryModel.perguntas[1],
+                  resposta: questionaryModel.respostas[1],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes2,
-                  pergunta: questionaryModel.perguntas[2].toString(),
-                  resposta: questionaryModel.respostas[2].toString(),
+                  pergunta: questionaryModel.perguntas[2],
+                  resposta: questionaryModel.respostas[2],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes3,
-                  pergunta: questionaryModel.perguntas[3].toString(),
-                  resposta: questionaryModel.respostas[3].toString(),
+                  pergunta: questionaryModel.perguntas[3],
+                  resposta: questionaryModel.respostas[3],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes4,
-                  pergunta: questionaryModel.perguntas[4].toString(),
-                  resposta: questionaryModel.respostas[4].toString(),
+                  pergunta: questionaryModel.perguntas[4],
+                  resposta: questionaryModel.respostas[4],
                 ),
                 SizedBox(
                   height: 20,
@@ -103,8 +103,6 @@ class QuestionaryScreen extends StatelessWidget {
                 RoundedButton(
                   text: "ACESSE",
                   onpress: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Analisando respostas...')));
                     if (_formKey.currentState.validate()) {
                       authBloc.add(SignupEvent());
                     }
