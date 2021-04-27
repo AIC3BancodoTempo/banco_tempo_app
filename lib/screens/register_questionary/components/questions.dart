@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatefulWidget {
-  final List<String> pergunta;
-  final List<String> resposta;
+  final String pergunta;
+  final String resposta;
   final List<String> opcoes;
 
   const CustomDropdown({Key key, this.pergunta, this.resposta, this.opcoes})
@@ -35,7 +35,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             onChanged: (salutation) =>
                 setState(() => selectedSalutation = salutation),
             validator: (value) =>
-                value == widget.resposta ? 'Resposta Inválida' : null,
+                value == widget.resposta ? 'Resposta Incorreta' : null,
             items: widget.opcoes.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,

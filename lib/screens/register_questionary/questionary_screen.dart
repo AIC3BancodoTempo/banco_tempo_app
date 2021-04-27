@@ -56,40 +56,40 @@ class QuestionaryScreen extends StatelessWidget {
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes,
-                  pergunta: questionaryModel.perguntas[0],
-                  resposta: questionaryModel.respostas[0],
+                  pergunta: questionaryModel.perguntas[0].toString(),
+                  resposta: questionaryModel.respostas[0].toString(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomDropdown(
+                  opcoes: questionaryModel.opcoes1,
+                  pergunta: questionaryModel.perguntas[1].toString(),
+                  resposta: questionaryModel.respostas[1].toString(),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes2,
-                  pergunta: questionaryModel.perguntas[1],
-                  resposta: questionaryModel.respostas[1],
+                  pergunta: questionaryModel.perguntas[2].toString(),
+                  resposta: questionaryModel.respostas[2].toString(),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes3,
-                  pergunta: questionaryModel.perguntas[2],
-                  resposta: questionaryModel.respostas[2],
+                  pergunta: questionaryModel.perguntas[3].toString(),
+                  resposta: questionaryModel.respostas[3].toString(),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 CustomDropdown(
                   opcoes: questionaryModel.opcoes4,
-                  pergunta: questionaryModel.perguntas[3],
-                  resposta: questionaryModel.respostas[3],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                CustomDropdown(
-                  opcoes: questionaryModel.opcoes5,
-                  pergunta: questionaryModel.perguntas[4],
-                  resposta: questionaryModel.respostas[4],
+                  pergunta: questionaryModel.perguntas[4].toString(),
+                  resposta: questionaryModel.respostas[4].toString(),
                 ),
                 SizedBox(
                   height: 20,
