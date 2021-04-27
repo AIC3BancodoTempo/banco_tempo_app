@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TermsButton extends StatelessWidget {
   final VoidCallback onpress;
@@ -24,7 +26,12 @@ class TermsButton extends StatelessWidget {
               TextSpan(text: 'Clique aqui para acessar as informações dos  '),
               TextSpan(
                   text: 'Termos e Condições',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  recognizer: new TapGestureRecognizer()
+                    ..onTap = () {
+                      launch(
+                          'https://drive.google.com/file/d/1PcU8-GYK90bVK2YG6O3OeAH2FcAu4Gzo/view?usp=sharing');
+                    }),
               TextSpan(text: " do banco do tempo!")
             ]),
       ),
