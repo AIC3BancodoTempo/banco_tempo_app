@@ -76,8 +76,11 @@ class PostCard extends StatelessWidget {
           Column(
             children: [
               CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: NetworkImage(product.images[0])),
+                radius: 40.0,
+                backgroundImage: product.images.isNotEmpty
+                    ? NetworkImage(product.images[0])
+                    : AssetImage('assets/images/noimage.jpg'),
+              ),
             ],
           ),
         ],
