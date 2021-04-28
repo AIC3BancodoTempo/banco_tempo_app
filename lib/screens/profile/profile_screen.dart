@@ -8,7 +8,7 @@ import '../core/ui.dart';
 import 'components/background_image.dart';
 import 'components/perfil_image.dart';
 import 'components/profile_form.dart';
-import 'components/right_side_text.dart';
+import 'components/top_text.dart';
 
 class ProfileScreen extends StatelessWidget {
   final UserModel user;
@@ -52,6 +52,25 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
               clipBehavior: Clip.none,
               children: [
                 BackgroundImage(),
+                ClipPath(
+                  child: Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 40, left: 20),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 PerfilImage(),
               ],
             ),
