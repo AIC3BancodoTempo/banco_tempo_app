@@ -51,17 +51,6 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Positioned(
-                  left: 110,
-                  bottom: 110,
-                  child: IconButton(
-                    color: Colors.black,
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
                 BackgroundImage(),
                 PerfilImage(),
               ],

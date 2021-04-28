@@ -5,7 +5,7 @@ class PerfilImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: 110,
+      left: 120,
       bottom: -60.0,
       child: Container(
         width: 170.0,
