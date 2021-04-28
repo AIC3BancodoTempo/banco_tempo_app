@@ -47,7 +47,7 @@ class Run extends StatelessWidget {
         '/cadastroHabilidades': (context) => AddAbilityPage(),
         '/descricaoHabilidades': (context) => HabilityDescription(user: _user),
         '/profile': (context) => ProfileScreen(
-              user: _user,
+              user: _userModel,
             ),
         '/myPosts': (context) => MyPosts(),
         '/pendingPosts': (context) => PendingPost(),

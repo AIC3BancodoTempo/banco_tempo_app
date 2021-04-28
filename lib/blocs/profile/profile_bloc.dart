@@ -1,27 +1,33 @@
 import 'dart:async';
 
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
-import 'package:banco_do_tempo_app/resources/user/firebase_user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 
 import '../../core/errors/auth_error.dart';
+import '../../core/models/user_model.dart';
 import '../../resources/auth/auth_firestore.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final UsersRepository usersRepository = UsersRepository();
   final AuthRepository authRepository = AuthRepository();
-  final User user;
+  final UserModel user;
 
-  String _email, _nome;
-  UserModel userInfo;
+  String getName() {
+    return user.nome;
+  }
 
-  ProfileBloc(this.user) : super(ProfileInitial());
+  double getHoras() {
+    return user.horas;
+  }
+
+  String getMail() {
+    return user.email;
+  }
+
+  ProfileBloc({this.user}) : super(ProfileInitial());
 
   @override
   Stream<ProfileState> mapEventToState(
@@ -29,9 +35,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async* {
     if (event is ScreenStarded) {
       yield LoadingState();
-      userInfo = await usersRepository.getUserById(user.uid);
-      _email = userInfo.email;
-      _nome = userInfo.nome;
       yield ProfileLoadedState();
     } else if (event is SendPasswordRecover) {
       try {

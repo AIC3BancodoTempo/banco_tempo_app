@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/profile/profile_bloc.dart';
+import '../../core/models/user_model.dart';
 import '../core/loading.dart';
 import '../core/ui.dart';
 import 'components/background_image.dart';
@@ -11,7 +11,7 @@ import 'components/profile_form.dart';
 import 'components/right_side_text.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   ProfileScreen({
     Key key,
@@ -56,9 +56,8 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
               ],
             ),
             RightTextProfile(
-              name: profileBloc.userInfo.nome,
-              acumulatedHours:
-                  'Horas acumuladas: ${profileBloc.userInfo.horas}',
+              name: profileBloc.getName(),
+              acumulatedHours: 'Horas acumuladas: ${profileBloc.getHoras()}',
             ),
             BlocListener<ProfileBloc, ProfileState>(
               listener: (contextListener, state) {
@@ -74,8 +73,8 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                   return Loading();
                 } else {
                   return ProfileForm(
-                      hintEmail: profileBloc.userInfo.email,
-                      hintName: profileBloc.userInfo.nome,
+                      hintEmail: profileBloc.getMail(),
+                      hintName: profileBloc.getName(),
                       redefinePassword: () {
                         profileBloc.add(SendPasswordRecover());
                       });
