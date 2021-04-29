@@ -95,6 +95,7 @@ class _TrocasAndamento extends State<TrocasAndamentoPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return CardTrocas(
                       trocaModel: trocasAndamentoBloc.trocasPostList[index],
+                      tipo: 1,
                     );
                   }),
               ListView.builder(
@@ -103,6 +104,7 @@ class _TrocasAndamento extends State<TrocasAndamentoPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return CardTrocas(
                       trocaModel: trocasAndamentoBloc.trocasConsumerList[index],
+                      tipo: 0,
                     );
                   }),
             ]);
