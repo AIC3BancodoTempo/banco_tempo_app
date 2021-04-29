@@ -22,8 +22,13 @@ class _ChipsState extends State<Chips> {
   String defValue;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     defValue = widget.defaultValue > 0 ? widget.defaultValue.toString() : null;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Wrap(
       spacing: 100.0,
       children: [
