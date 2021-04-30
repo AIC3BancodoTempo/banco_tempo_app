@@ -1,6 +1,4 @@
-import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:groovin_widgets/groovin_widgets.dart';
 
 class FormDropDownUnderline extends StatefulWidget {
   final Function validator;

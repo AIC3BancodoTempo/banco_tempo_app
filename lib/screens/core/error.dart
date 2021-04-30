@@ -12,7 +12,7 @@ class ErrorScreen extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             Icon(Icons.error, color: themeSimpleColor, size: 200.0),
             Container(
               padding: EdgeInsets.only(left: 30.0, right: 20.0, top: 20.0),

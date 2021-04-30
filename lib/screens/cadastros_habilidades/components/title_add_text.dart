@@ -13,7 +13,7 @@ class TitleAddText extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'DMSans',
+                  fontFamily: 'Roboto',
                   fontStyle: FontStyle.normal,
                   fontSize: 23)),
         ),

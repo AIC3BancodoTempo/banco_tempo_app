@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/app_bars/default_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,15 +48,7 @@ class _PendingPostPageState extends State<PendingPostPage> {
   Widget build(BuildContext context) {
     pendingPostBloc = BlocProvider.of<PendingPostBloc>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Divulgações pendentes"),
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            }),
-        centerTitle: true,
-      ),
+      appBar: DefaultAppBar(text: 'Divulgações pendentes'),
       body: BlocBuilder<PendingPostBloc, PendingPostState>(
           builder: (context, state) {
         if (state is LoadingPendingPostState) {

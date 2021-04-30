@@ -25,7 +25,7 @@ class ConfirmationMessage extends StatelessWidget {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Align(
               alignment: Alignment.bottomCenter,
               child: Text(

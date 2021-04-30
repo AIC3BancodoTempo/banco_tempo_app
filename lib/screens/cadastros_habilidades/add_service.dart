@@ -1,21 +1,19 @@
 import 'dart:async';
 
-import 'package:banco_do_tempo_app/blocs/add_services/add_service_bloc.dart';
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
-import 'package:banco_do_tempo_app/core/validations.dart';
-import 'package:banco_do_tempo_app/screens/core/error.dart';
-import 'package:banco_do_tempo_app/screens/core/form/dropdown.dart';
-import 'package:banco_do_tempo_app/screens/core/form/dropdown_underline.dart';
-import 'package:banco_do_tempo_app/screens/core/loading.dart';
-import 'package:banco_do_tempo_app/screens/core/success.dart';
-import 'package:banco_do_tempo_app/screens/register_questionary/components/questions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:banco_do_tempo_app/screens/core/app_bars/default_app_bar.dart';
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/add_services/add_service_bloc.dart';
+import '../../core/models/user_model.dart';
+import '../../core/validations.dart';
 import '../core/colors.dart';
+import '../core/error.dart';
+import '../core/form/dropdown_underline.dart';
+import '../core/loading.dart';
 import '../core/rounded_button.dart';
+import '../core/success.dart';
 import 'components/insert_input_texts.dart';
 import 'components/title_add_text.dart';
 
@@ -78,19 +76,7 @@ class _AddAbilityPageState extends State<AddAbilityPage> {
   Widget build(BuildContext context) {
     addServiceBloc = BlocProvider.of<AddServiceBloc>(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        centerTitle: true,
-        backgroundColor: themeColor,
-        title: Text(
-          "Descrição",
-        ),
-      ),
+      appBar: DefaultAppBar(text: "Descrição"),
       body: BlocListener<AddServiceBloc, AddServiceState>(
         listener: (contextListener, state) {
           if (state is SuccessState) {
@@ -140,7 +126,7 @@ class _AddAbilityPageState extends State<AddAbilityPage> {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
+                        padding: EdgeInsets.fromLTRB(33.0, 25.0, 33.0, 2.0),
                         child: FormDropDownUnderline(
                           items: opcoes
                               .map<DropdownMenuItem<String>>((double value) {

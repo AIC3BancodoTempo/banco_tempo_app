@@ -1,9 +1,8 @@
-import 'package:banco_do_tempo_app/blocs/hability/hability_bloc.dart';
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/hability/hability_bloc.dart';
 import '../core/colors.dart';
 import '../core/drawer/sidebar_admin.dart';
 import '../core/drawer/sidebar_user.dart';
@@ -66,14 +65,13 @@ class _ServicesPageState extends State<ServicesPage> {
                     hintText: "Procurar",
                     hintStyle: TextStyle(color: Colors.white)),
               ),
-        actions: <Widget>[
+        actions: [
           isSearch
               ? IconButton(
                   icon: Icon(Icons.cancel),
                   onPressed: () {
                     setState(() {
                       this.isSearch = false;
-                      
                     });
                     habilityBloc.add(NewHabilityEvent());
                   },
@@ -91,21 +89,19 @@ class _ServicesPageState extends State<ServicesPage> {
       drawer: widget.authBloc.userModel.isAdmin
           ? SideBarAdm(authBloc: widget.authBloc)
           : SideBarGeral(authBloc: widget.authBloc),
-      body: 
-                 
-            BlocBuilder<HabilityBloc, HabilityState>(builder: (context, state) {
-          if (state is LoadingHabilityState) {
-            //LOADING
-            return Loading();
-          } else if(state is ShowHabilityState) {
-            return Cards(
-              scrollController: controller,
-              mockupPosts: state.habilityList,
-            );
-          } else {
-            return Container();
-          }
-        }),
+      body: BlocBuilder<HabilityBloc, HabilityState>(builder: (context, state) {
+        if (state is LoadingHabilityState) {
+          //LOADING
+          return Loading();
+        } else if (state is ShowHabilityState) {
+          return Cards(
+            scrollController: controller,
+            mockupPosts: state.habilityList,
+          );
+        } else {
+          return Container();
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: themeColor,

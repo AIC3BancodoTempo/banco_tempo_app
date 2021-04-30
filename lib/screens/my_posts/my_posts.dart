@@ -1,3 +1,4 @@
+import 'package:banco_do_tempo_app/screens/core/app_bars/default_app_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,16 +54,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
   Widget build(BuildContext context) {
     myPostsBloc = BlocProvider.of<MyPostsBloc>(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text("Meus Cadastros"),
-        centerTitle: true,
-      ),
+      appBar: DefaultAppBar(text: 'Meus Cadastros'),
       body: BlocBuilder<MyPostsBloc, MyPostsState>(builder: (context, state) {
         if (state is LoadingMyPostsState) {
           return Loading();

@@ -9,10 +9,10 @@ class SuccessScreen extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: [
                 Icon(Icons.check),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),

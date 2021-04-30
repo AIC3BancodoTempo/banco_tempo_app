@@ -1,8 +1,8 @@
-import 'package:banco_do_tempo_app/core/models/questionary_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../core/models/questionary_model.dart';
 import '../core/colors.dart';
 import '../core/rounded_button.dart';
 import 'components/questions.dart';
