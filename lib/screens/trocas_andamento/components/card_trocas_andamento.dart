@@ -5,9 +5,9 @@ import '../../core/navigation.dart';
 
 class CardTrocas extends StatelessWidget {
   final TrocaModel trocaModel;
-  final String userId;
+  final int tipo;
 
-  CardTrocas({Key key, this.trocaModel, this.userId}) : super(key: key);
+  CardTrocas({Key key, this.trocaModel, this.tipo}) : super(key: key);
   @override
   Widget build(context) {
     return Card(
@@ -21,7 +21,7 @@ class CardTrocas extends StatelessWidget {
             leading: CircleAvatar(
                 radius: 40.0,
                 backgroundImage: AssetImage("assets/images/profile.png")),
-            title: Text(userId == trocaModel.userConsumerId
+            title: Text(tipo == 0
                 ? trocaModel.userPostName
                 : trocaModel.userConsumerName),
             subtitle: Text(
