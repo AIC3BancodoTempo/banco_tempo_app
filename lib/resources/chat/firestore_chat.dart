@@ -18,13 +18,16 @@ class ChatRepository {
         .update({'visualizado': true});
   }
 
-  void updateChat(String docMasterId, String docId, double starts) async {
+  void updateChat(String docMasterId, String docId, int tipo) async {
     await firestoreInstance
         .collection('chat')
         .doc(docMasterId)
         .collection("mensagens")
         .doc(docId)
-        .update({'visualizado': true, 'starts': starts});
+        .update({
+      'type': tipo,
+      "timestamp": DateTime.now().millisecondsSinceEpoch.toString()
+    });
   }
 
   void addChat(String docId, ChatModel chat) {

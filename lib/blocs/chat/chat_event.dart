@@ -35,7 +35,11 @@ class SendImageEvent extends ChatEvent {
   List<Object> get props => [imageFile];
 }
 
-class ExchangeEvent extends ChatEvent {}
+class ExchangeEvent extends ChatEvent {
+  final String id;
+
+  ExchangeEvent({this.id});
+}
 
 class RequestExchangeEvent extends ChatEvent {}
 
