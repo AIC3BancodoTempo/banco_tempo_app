@@ -132,9 +132,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         yield ShowMessagesState();
       } else if (event is RequestExchangeEvent) {
         if (trocaModel.status == 0 && !noExchange) {
-          String image = await _storageRepository.sendChatFile(
-              imageFile.readAsBytesSync(),
-              DateTime.now().millisecondsSinceEpoch.toString());
+          String image = '';
+          if (imageFile != null) {
+            image = await _storageRepository.sendChatFile(
+                imageFile.readAsBytesSync(),
+                DateTime.now().millisecondsSinceEpoch.toString());
+          }
           ChatModel chat = ChatModel(
               content: "Confirmação de troca",
               url: image,
@@ -167,6 +170,17 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 await _habilityRepository.decrementaQuantidade(
                     trocaModel.productId, trocaModel.amount);
               }
+              int index =
+                  chatList.indexWhere((element) => event.id == element.key);
+              if (index >= 0) {
+                chatList[index].type = 2;
+                ChatModel tmp = chatList[index];
+                chatList.removeAt(index);
+                chatList.insert(index, tmp);
+                _chatRepository.updateChat(trocaModel.salaId, event.id, 2);
+              }
+              yield WarningState(message: "Troca realizada com sucesso!");
+              yield ShowMessagesState();
             } else {
               yield WarningState(
                   message: "O produto não tem mais a quantidade desejada!");

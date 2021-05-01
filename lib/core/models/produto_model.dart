@@ -12,7 +12,7 @@ class ProdutoModel {
   int status;
   String data;
   List<String> images;
-  QueryDocumentSnapshot documentSnapshot;
+  DocumentSnapshot documentSnapshot;
   ProdutoModel(
       {this.userPostId,
       this.userPostName,
@@ -51,8 +51,7 @@ class ProdutoModel {
         images: images ?? this.images);
   }
 
-  ProdutoModel.fromSnapshot(
-      Map<String, dynamic> info, QueryDocumentSnapshot doc) {
+  ProdutoModel.fromSnapshot(Map<String, dynamic> info, DocumentSnapshot doc) {
     productId = doc.id;
     documentSnapshot = doc;
     userPostId = info['userPostId'] != null ? info['userPostId'] : '';

@@ -29,7 +29,7 @@ class ConfirmationMessage extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Text(
-                chatBloc.user.uid == chatModel.fromId
+                chatBloc.user.uid == chatModel.fromId || chatModel.type == 2
                     ? "Confirmação de troca"
                     : "Confirmar a troca?",
                 style: TextStyle(
@@ -59,32 +59,34 @@ class ConfirmationMessage extends StatelessWidget {
                 fontSize: 16.0,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(13.0),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => ImageView(
-                        imageProvider: NetworkImage(chatModel.url),
+            chatModel.url.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(13.0),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ImageView(
+                              imageProvider: NetworkImage(chatModel.url),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Image.network(
+                        chatModel.url,
+                        width: 120,
+                        height: 120,
                       ),
                     ),
-                  );
-                },
-                child: Image.network(
-                  chatModel.url,
-                  width: 120,
-                  height: 120,
-                ),
-              ),
-            ),
-            chatBloc.user.uid != chatModel.fromId
+                  )
+                : Container(),
+            chatBloc.user.uid != chatModel.fromId && chatModel.type != 2
                 ? Align(
                     alignment: Alignment.bottomCenter,
                     child: TextButton(
                       onPressed: () {
-                        chatBloc.add(ExchangeEvent());
+                        chatBloc.add(ExchangeEvent(id: chatModel.key));
                       },
                       child: Text(
                         "Trocar",

@@ -30,7 +30,8 @@ class ChatMessageList extends StatelessWidget {
               chatModel: listMessages[index],
               userId: userId,
             );
-          } else if (listMessages[index].type == 1) {
+          } else if (listMessages[index].type == 1 ||
+              listMessages[index].type == 2) {
             chatBloc.setNoExchange();
             return ConfirmationMessage(
                 chatBloc: chatBloc, chatModel: listMessages[index]);
