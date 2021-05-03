@@ -134,12 +134,12 @@ class _DescriptionPageState extends State<HabilityDescriptionPage> {
                         text: habilityDescriptionBloc.produtoModel.userPostName,
                       ),
                       spaceVertical(20),
-                      RoundedButton(
+                      if (habilityDescriptionBloc.user.uid != habilityDescriptionBloc.produtoModel.userPostId) RoundedButton(
                         text: "TENHO INTERESSE",
                         onpress: () {
                           habilityDescriptionBloc.add(ChatPressedEvent());
                         },
-                      )
+                      ) else Container()
                     ],
                   ),
                 ),
