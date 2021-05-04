@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../core/models/produto_model.dart';
-import '../../core/models/troca_model.dart';
+import '../../core/models/service_model.dart';
+import '../../core/models/exchange_model.dart';
 
-void navigateToChatScreen(BuildContext context, TrocaModel trocaModel) {
-  Navigator.of(context).pushNamed('/chat', arguments: trocaModel);
+void navigateToChatScreen(BuildContext context, ExchangeModel exchangeModel) {
+  Navigator.of(context).pushNamed('/chat', arguments: exchangeModel);
 }
 
-void navigateToExchangeDetailsScreen(
-    BuildContext context, ProdutoModel produtoModel) {
+void navigateToServiceDescriptionScreen(
+    BuildContext context, ServiceModel serviceModel) {
   Navigator.of(context)
-      .pushNamed('/descricaoHabilidades', arguments: produtoModel);
+      .pushNamed('/serviceDescription', arguments: serviceModel);
 }
 
 void navigateToProfileScreen(BuildContext context) {
@@ -18,11 +18,11 @@ void navigateToProfileScreen(BuildContext context) {
 }
 
 void navigateToSkillHabilit(BuildContext context) {
-  Navigator.of(context).pushNamed('/cadastroHabilidades');
+  Navigator.of(context).pushNamed('/addService');
 }
 
 void navigateToCurrentExchanges(BuildContext context) {
-  Navigator.of(context).pushNamed('/trocasAndamento');
+  Navigator.of(context).pushNamed('/exchangeInProgress');
 }
 
 void navigateToMyPosts(BuildContext context) {

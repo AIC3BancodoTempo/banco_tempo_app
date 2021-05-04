@@ -40,21 +40,21 @@ class ConfirmationMessage extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             Text(
-              "Nome: " + chatBloc.trocaModel.userPostName,
+              "Nome: " + chatBloc.exchangeModel.userPostName,
               style: TextStyle(
                 fontSize: 16.0,
               ),
             ),
             SizedBox(height: 16.0),
             Text(
-              "Unidade: " + chatBloc.trocaModel.amount.toString(),
+              "Unidade: " + chatBloc.exchangeModel.amount.toString(),
               style: TextStyle(
                 fontSize: 16.0,
               ),
             ),
             SizedBox(height: 16.0),
             Text(
-              "Consumo de horas: " + chatBloc.trocaModel.cost.toString(),
+              "Consumo de horas: " + chatBloc.exchangeModel.cost.toString(),
               style: TextStyle(
                 fontSize: 16.0,
               ),

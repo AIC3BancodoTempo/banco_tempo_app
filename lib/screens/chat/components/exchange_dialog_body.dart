@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../blocs/chat/chat_bloc.dart';
-import '../../core/circle_button.dart';
+import '../../core/buttons/circle_button.dart';
 import '../../core/colors.dart';
 import '../../core/image_picker.dart';
 

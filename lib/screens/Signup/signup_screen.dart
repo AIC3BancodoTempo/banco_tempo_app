@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../../core/validations.dart';
-import '../core/already_have_an_account_acheck.dart';
-import '../core/rounded_button.dart';
+import '../core/buttons/already_have_an_account_button.dart';
+import '../core/buttons/rounded_button.dart';
 import '../core/rounded_input.dart';
 import '../core/rounded_password_field.dart';
 

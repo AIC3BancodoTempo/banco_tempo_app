@@ -1,10 +1,10 @@
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
+import 'package:banco_do_tempo_app/core/models/service_model.dart';
 import 'package:flutter/material.dart';
 
 import 'item_card.dart';
 
 class Cards extends StatelessWidget {
-  final List<ProdutoModel> mockupPosts;
+  final List<ServiceModel> mockupPosts;
   final ScrollController scrollController;
 
   const Cards({Key key, this.mockupPosts, this.scrollController})

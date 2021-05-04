@@ -4,19 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../core/models/produto_model.dart';
-import '../../resources/hability/firestore_hability.dart';
+import '../../core/models/service_model.dart';
+import '../../resources/service/firestore_service.dart';
 import '../../resources/storage/firebase_storage.dart';
 
 part 'pending_post_event.dart';
 part 'pending_post_state.dart';
 
 class PendingPostBloc extends Bloc<PendingPostEvent, PendingPostState> {
-  final HabilityRepository _habilityRepository = HabilityRepository();
+  final ServiceRepository _serviceRepository = ServiceRepository();
   final StorageRepository _storageRepository = StorageRepository();
-  final ProdutoModel productModel;
+  final ServiceModel productModel;
 
-  List<ProdutoModel> habilityList = [];
+  List<ServiceModel> serviceList = [];
   bool noMore;
   StreamSubscription _subscription;
   PendingPostBloc({this.productModel}) : super(PendingPostInitial());
@@ -33,29 +33,29 @@ class PendingPostBloc extends Bloc<PendingPostEvent, PendingPostState> {
     try {
       if (event is PendingPostStartedEvent) {
         yield LoadingPendingPostState();
-        habilityList = await _habilityRepository.getLastHability(0);
+        serviceList = await _serviceRepository.getLastService(0);
         Stream<QuerySnapshot> stream =
-            _habilityRepository.getStreamLastHability(0);
+            _serviceRepository.getStreamLastService(0);
         _subscription = stream.listen((event) {
           if (event.docs.length > 0) {
             Map<String, dynamic> data = event.docs.first.data();
-            ProdutoModel prod =
-                ProdutoModel.fromSnapshot(data, event.docs.first);
-            int index = habilityList
+            ServiceModel prod =
+                ServiceModel.fromSnapshot(data, event.docs.first);
+            int index = serviceList
                 .indexWhere((element) => prod.productId == element.productId);
             if (index >= 0)
-              habilityList[index] = prod;
+              serviceList[index] = prod;
             else
-              habilityList.insert(0, prod);
+              serviceList.insert(0, prod);
             add(NewPendingPostEvent());
           }
         });
         yield ShowPendingPostState();
       } else if (event is GetMorePendingPostsEvent) {
         if (!noMore) {
-          List<ProdutoModel> modelList = await _habilityRepository
-              .getMoreHability(0, habilityList.last.documentSnapshot);
-          habilityList += modelList;
+          List<ServiceModel> modelList = await _serviceRepository
+              .getMoreService(0, serviceList.last.documentSnapshot);
+          serviceList += modelList;
           if (modelList.length <= 0) noMore = true;
           add(NewPendingPostEvent());
         }
@@ -63,23 +63,23 @@ class PendingPostBloc extends Bloc<PendingPostEvent, PendingPostState> {
         yield UpdatePendingPostState();
         yield ShowPendingPostState();
       } else if (event is AcceptPendingPostEvent) {
-        bool success = await _habilityRepository.updateStatus(event.docId, 1);
+        bool success = await _serviceRepository.updateStatus(event.docId, 1);
         if (success) {
-          int index = habilityList
+          int index = serviceList
               .indexWhere((element) => event.docId == element.productId);
-          if (index >= 0) habilityList.removeAt(index);
+          if (index >= 0) serviceList.removeAt(index);
         }
         add(NewPendingPostEvent());
       } else if (event is RejectPendingPostEvent) {
-        bool success = await _habilityRepository.delete(event.docId);
+        bool success = await _serviceRepository.delete(event.docId);
         if (success) {
-          int index = habilityList
+          int index = serviceList
               .indexWhere((element) => event.docId == element.productId);
           if (index >= 0) {
-            for (var item in habilityList[index].images) {
+            for (var item in serviceList[index].images) {
               await _storageRepository.removeFile(item);
             }
-            habilityList.removeAt(index);
+            serviceList.removeAt(index);
           }
         }
         add(NewPendingPostEvent());
