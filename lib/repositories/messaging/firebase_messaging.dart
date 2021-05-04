@@ -48,7 +48,7 @@ class MessagingRepository {
 
   void sendMessage(String token, String from, String content) async {
     final String serverToken =
-        'AAAA4r-Cshg:APA91bF9koGxBr7LRiNnJEm0QIQ-CLxbOM6gY2Ciexe3B7DTT0_-Ba7KkG1s2__VrzzA6qdGtB1oCqhNLvC8RU-l1jjWfszZhMdel74ytmKBhbSidPR17HkHG2SA3SDFgxvs11XsTd6_';
+        'AAAABcTPY-8:APA91bFLJygVNqeHnCEDnK-Xs0KM1z_44mWKMw8zi3yhTWnWEMKHsu0XPSgoHmHwKwS5gjDqYyV3xyr2OddEYv5YWhIiI8oCTkuJBDc6NRnH5c6vfLkOF7ZMNIJANbBCAJtBz_4b1F-0';
     http.Response response = await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
       headers: <String, String>{
