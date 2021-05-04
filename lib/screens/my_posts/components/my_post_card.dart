@@ -1,8 +1,8 @@
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
+import 'package:banco_do_tempo_app/core/models/service_model.dart';
 import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
-  final ProdutoModel product;
+  final ServiceModel product;
 
   PostCard({
     Key key,

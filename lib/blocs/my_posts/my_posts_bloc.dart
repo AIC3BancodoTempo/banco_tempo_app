@@ -4,17 +4,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../core/models/produto_model.dart';
-import '../../resources/hability/firestore_hability.dart';
+import '../../core/models/service_model.dart';
+import '../../resources/service/firestore_service.dart';
 
 part 'my_posts_event.dart';
 part 'my_posts_state.dart';
 
 class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
-  final HabilityRepository _habilityRepository = HabilityRepository();
+  final ServiceRepository _serviceRepository = ServiceRepository();
   final User user;
-  final ProdutoModel productModel;
-  List<ProdutoModel> postsList = [];
+  final ServiceModel productModel;
+  List<ServiceModel> postsList = [];
   bool noMore;
   StreamSubscription _subscription;
   MyPostsBloc({this.user, this.productModel}) : super(MyPostsInitial());
@@ -24,7 +24,7 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
     return super.close();
   }
 
-  List<ProdutoModel> getProductList() {
+  List<ServiceModel> getProductList() {
     return postsList;
   }
 
@@ -39,16 +39,16 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
     try {
       if (event is MyPostsStartedEvent) {
         yield LoadingMyPostsState();
-        postsList = await _habilityRepository.getAbilityByUser(user.uid);
+        postsList = await _serviceRepository.getAbilityByUser(user.uid);
         yield ShowMyPostsState();
       } else if (event is RemoveMyPostsEvent) {
         yield MyPostsYetState();
         postsList.removeAt(event.index);
-        await _habilityRepository.removeAbility(event.key);
+        await _serviceRepository.removeAbility(event.key);
         yield ChangeProductState();
       } else if (event is GetMorePostsEvent) {
         if (!noMore) {
-          List<ProdutoModel> modelList = await _habilityRepository
+          List<ServiceModel> modelList = await _serviceRepository
               .getMoreMyPosts(user.uid, postsList.last.documentSnapshot);
           postsList += modelList;
           if (modelList.length <= 0) noMore = true;

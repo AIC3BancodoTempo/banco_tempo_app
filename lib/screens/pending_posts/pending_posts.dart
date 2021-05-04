@@ -63,10 +63,10 @@ class _PendingPostPageState extends State<PendingPostPage> {
         } else {
           return ListView.builder(
               controller: controller,
-              itemCount: pendingPostBloc.habilityList.length,
+              itemCount: pendingPostBloc.serviceList.length,
               itemBuilder: (BuildContext context, int index) {
                 return PendingItemCard(
-                  product: pendingPostBloc.habilityList[index],
+                  product: pendingPostBloc.serviceList[index],
                   acceptPressed: (value) {
                     pendingPostBloc.add(AcceptPendingPostEvent(docId: value));
                   },

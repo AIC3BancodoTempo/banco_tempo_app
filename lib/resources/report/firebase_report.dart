@@ -7,15 +7,15 @@ class ReportRepository {
     this.firestoreInstance = FirebaseFirestore.instance;
   }
 
-  Future<bool> insertTroca(String reportedId, String reportedName,
-      String report, String trocaId, String fromId, String fromName) async {
+  Future<bool> insertExchange(String reportedId, String reportedName,
+      String report, String exchangeId, String fromId, String fromName) async {
     return await firestoreInstance.collection('report').add({
       'userReportedId': reportedId,
       'userReportedName': reportedName,
       'fromReportId': fromId,
       'fromReportName': fromName,
       'report': report,
-      'trocaId': trocaId,
+      'trocaId': exchangeId,
       'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
     }).then((value) {
       return true;

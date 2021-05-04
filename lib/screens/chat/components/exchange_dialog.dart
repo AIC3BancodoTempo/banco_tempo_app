@@ -51,9 +51,9 @@ class CustomDialog extends StatelessWidget {
             ]),
         child: ExchangeDialogBody(
           chatBloc: chatBloc,
-          horasUtilizadas: chatBloc.trocaModel.cost,
-          nome: chatBloc.trocaModel.productName,
-          unidade: chatBloc.trocaModel.amount,
+          horasUtilizadas: chatBloc.exchangeModel.cost,
+          nome: chatBloc.exchangeModel.productName,
+          unidade: chatBloc.exchangeModel.amount,
         ),
       ),
       ChatDialogIcon(icon: Icons.multiple_stop_sharp),

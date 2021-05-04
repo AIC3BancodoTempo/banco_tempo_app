@@ -4,7 +4,7 @@ import '../../../blocs/chat/chat_bloc.dart';
 import '../../core/app_bars/app_bar_action.dart';
 import '../../core/colors.dart';
 import '../../core/profile_image.dart';
-import '../../core/return_button.dart';
+import '../../core/buttons/return_button.dart';
 import 'exchange_dialog.dart';
 import 'profile_description.dart';
 import 'report_dialog.dart';
@@ -26,54 +26,48 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: SafeArea(
         child: Container(
           padding: EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              ReturnButton(),
+              SizedBox(
+                width: 2,
+              ),
+              ProfileImage(radius: 20, image: "assets/images/profile.png"),
+              SizedBox(
+                width: 12,
+              ),
+              ChatProfileDescription(
+                  nome:
+                      chatBloc.exchangeModel.userConsumerId == chatBloc.user.uid
+                          ? chatBloc.exchangeModel.userPostName
+                          : chatBloc.exchangeModel.userConsumerName,
+                  descricao: chatBloc.exchangeModel.productName),
+              SizedBox(
+                width: 12,
+              ),
+            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children:[
-                      ReturnButton(),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      ProfileImage(
-                          radius: 20,
-                          image:
-                              "assets/images/profile.png"),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      ChatProfileDescription(
-                          nome: chatBloc.trocaModel.userConsumerId ==
-                                  chatBloc.user.uid
-                              ? chatBloc.trocaModel.userPostName
-                              : chatBloc.trocaModel.userConsumerName,
-                          descricao: chatBloc.trocaModel.productName),
-                      SizedBox(
-                        width: 12,
-                      ),
-                    ]),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    AppBarAction(
+                AppBarAction(
+                    onPressEvent: () {
+                      buildReportDialog(context, chatBloc);
+                    },
+                    icon: Icons.warning),
+                SizedBox(
+                  width: 5,
+                ),
+                chatBloc.exchangeModel.userPostId == chatBloc.user.uid
+                    ? AppBarAction(
                         onPressEvent: () {
-                          buildReportDialog(context, chatBloc);
+                          buildExchangeDialog(context, chatBloc);
                         },
-                        icon: Icons.warning),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    chatBloc.trocaModel.userPostId == chatBloc.user.uid
-                        ? AppBarAction(
-                            onPressEvent: () {
-                              buildExchangeDialog(context, chatBloc);
-                            },
-                            icon: Icons.multiple_stop_sharp)
-                        : Container()
-                  ],
-                )
-              ]),
+                        icon: Icons.multiple_stop_sharp)
+                    : Container()
+              ],
+            )
+          ]),
         ),
       ),
     );
