@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:banco_do_tempo_app/core/models/produto_model.dart';
+import 'package:banco_do_tempo_app/repositories/messaging/firebase_messaging.dart';
+import 'package:banco_do_tempo_app/repositories/tokens/firestore_tokens.dart';
 import 'package:banco_do_tempo_app/resources/hability/firestore_hability.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,6 +28,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final StorageRepository _storageRepository = StorageRepository();
   final ReportRepository _reportRepository = ReportRepository();
   final TrocaRepository _trocaRepository = TrocaRepository();
+  final MessagingRepository _messagingRepository = MessagingRepository();
+  final TokenRepository _tokenRepository = TokenRepository();
 
   final HabilityRepository _habilityRepository = HabilityRepository();
   final UserModel userModel;
