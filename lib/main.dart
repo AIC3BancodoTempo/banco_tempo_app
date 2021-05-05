@@ -1,18 +1,18 @@
+import 'package:banco_do_tempo_app/screens/exchange_in_progress/exchange_in_progress_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'core/models/user_model.dart';
+import 'screens/add_service/add_service_screen.dart';
 import 'screens/app.dart';
-import 'screens/cadastros_habilidades/add_service.dart';
 import 'screens/chat/chat_screen.dart';
 import 'screens/core/colors.dart';
-import 'screens/descricao_habilidade/descricao_habilidade.dart';
 import 'screens/my_posts/my_posts.dart';
 import 'screens/pending_posts/pending_posts.dart';
 import 'screens/profile/profile_screen.dart';
-import 'screens/trocas_andamento/trocas_andamento.dart';
+import 'screens/service_description/service_description_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,13 +60,13 @@ class Run extends StatelessWidget {
       ),
       home: App(setUser: setUser),
       routes: {
-        '/trocasAndamento': (context) => TrocasAndamento(user: _user),
+        '/exchangeInProgress': (context) => ExchangeInProgress(user: _user),
         '/chat': (context) => Chat(
               user: _user,
               userModel: _userModel,
             ),
-        '/cadastroHabilidades': (context) => AddAbility(user: _userModel),
-        '/descricaoHabilidades': (context) => HabilityDescription(user: _user),
+        '/addService': (context) => AddServiceScreen(user: _userModel),
+        '/serviceDescription': (context) => ServiceDescription(user: _user),
         '/profile': (context) => ProfileScreen(
               user: _userModel,
             ),

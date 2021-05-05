@@ -1,9 +1,8 @@
-import 'package:banco_do_tempo_app/blocs/hability/hability_bloc.dart';
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/service/service_bloc.dart';
 import '../core/colors.dart';
 import '../core/drawer/sidebar_admin.dart';
 import '../core/drawer/sidebar_user.dart';
@@ -18,7 +17,7 @@ class Services extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HabilityBloc()..add(HabilityStartedEvent()),
+      create: (context) => ServiceBloc()..add(ServiceStartedEvent()),
       child: ServicesPage(authBloc: authBloc),
     );
   }
@@ -33,20 +32,20 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
-  HabilityBloc habilityBloc;
+  ServiceBloc serviceBloc;
   bool isSearch = false;
   final ScrollController controller = ScrollController();
 
   @override
   void dispose() {
     controller.dispose();
-    habilityBloc.close();
+    serviceBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    habilityBloc = BlocProvider.of<HabilityBloc>(context);
+    serviceBloc = BlocProvider.of<ServiceBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: themeColor,
@@ -55,7 +54,7 @@ class _ServicesPageState extends State<ServicesPage> {
             ? Text('Serviços/Habilidades')
             : TextField(
                 onChanged: (value) {
-                  habilityBloc.add(SearchHabilityEvent(search: value));
+                  serviceBloc.add(SearchServiceEvent(search: value));
                 },
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
@@ -73,9 +72,8 @@ class _ServicesPageState extends State<ServicesPage> {
                   onPressed: () {
                     setState(() {
                       this.isSearch = false;
-                      
                     });
-                    habilityBloc.add(NewHabilityEvent());
+                    serviceBloc.add(NewServiceEvent());
                   },
                 )
               : IconButton(
@@ -91,21 +89,19 @@ class _ServicesPageState extends State<ServicesPage> {
       drawer: widget.authBloc.userModel.isAdmin
           ? SideBarAdm(authBloc: widget.authBloc)
           : SideBarGeral(authBloc: widget.authBloc),
-      body: 
-                 
-            BlocBuilder<HabilityBloc, HabilityState>(builder: (context, state) {
-          if (state is LoadingHabilityState) {
-            //LOADING
-            return Loading();
-          } else if(state is ShowHabilityState) {
-            return Cards(
-              scrollController: controller,
-              mockupPosts: state.habilityList,
-            );
-          } else {
-            return Container();
-          }
-        }),
+      body: BlocBuilder<ServiceBloc, ServiceState>(builder: (context, state) {
+        if (state is LoadingServiceState) {
+          //LOADING
+          return Loading();
+        } else if (state is ShowServiceState) {
+          return Cards(
+            scrollController: controller,
+            mockupPosts: state.serviceList,
+          );
+        } else {
+          return Container();
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: themeColor,

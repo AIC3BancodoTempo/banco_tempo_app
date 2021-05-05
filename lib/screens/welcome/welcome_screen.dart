@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../core/colors.dart';
-import '../core/rounded_button.dart';
+import '../core/buttons/rounded_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final AuthBloc authBloc;

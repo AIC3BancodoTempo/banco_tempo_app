@@ -1,6 +1,7 @@
-import 'package:banco_do_tempo_app/screens/core/custom_text_form_field.dart';
-import 'package:banco_do_tempo_app/screens/core/rounded_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/buttons/rounded_button.dart';
+import '../../core/custom_text_form_field.dart';
 
 class ProfileForm extends StatelessWidget {
   final Function redefinePassword;

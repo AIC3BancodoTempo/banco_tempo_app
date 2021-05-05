@@ -1,22 +1,22 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:banco_do_tempo_app/core/models/produto_model.dart';
-import 'package:banco_do_tempo_app/resources/messaging/firebase_messaging.dart';
-import 'package:banco_do_tempo_app/resources/tokens/firestore_tokens.dart';
-import 'package:banco_do_tempo_app/resources/hability/firestore_hability.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/models/chat_model.dart';
-import '../../core/models/troca_model.dart';
+import '../../core/models/exchange_model.dart';
+import '../../core/models/service_model.dart';
 import '../../core/models/user_model.dart';
 import '../../resources/chat/firestore_chat.dart';
+import '../../resources/exchange/firestore_exchange.dart';
+import '../../resources/messaging/firebase_messaging.dart';
 import '../../resources/report/firebase_report.dart';
+import '../../resources/service/firestore_service.dart';
 import '../../resources/storage/firebase_storage.dart';
-import '../../resources/troca/firestore_troca.dart';
+import '../../resources/tokens/firestore_tokens.dart';
 import '../../resources/user/firebase_user.dart';
 
 part 'chat_event.dart';
@@ -27,14 +27,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final UsersRepository _usersRepository = UsersRepository();
   final StorageRepository _storageRepository = StorageRepository();
   final ReportRepository _reportRepository = ReportRepository();
-  final TrocaRepository _trocaRepository = TrocaRepository();
+
   final MessagingRepository _messagingRepository = MessagingRepository();
   final TokenRepository _tokenRepository = TokenRepository();
+  final ExchangeRepository _exchangeRepository = ExchangeRepository();
 
-  final HabilityRepository _habilityRepository = HabilityRepository();
+  final ServiceRepository _serviceRepository = ServiceRepository();
   final UserModel userModel;
   final User user;
-  final TrocaModel trocaModel;
+  final ExchangeModel exchangeModel;
   String token;
   File imageFile;
   String tokenuser;
@@ -46,7 +47,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc({
     this.userModel,
     this.user,
-    this.trocaModel,
+    this.exchangeModel,
   }) : super(ChatInitial());
 
   setNoExchange() {
@@ -66,12 +67,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     try {
       if (event is ChatStartedEvent) {
         yield LoadingState();
-        if (trocaModel.salaId.isNotEmpty) {
-          chatList = await _chatRepository.getLastMessages(trocaModel.salaId);
+        if (exchangeModel.salaId.isNotEmpty) {
+          chatList =
+              await _chatRepository.getLastMessages(exchangeModel.salaId);
           noReport =
-              await _reportRepository.existeReport(user.uid, trocaModel.key);
+              await _reportRepository.existeReport(user.uid, exchangeModel.key);
           Stream<QuerySnapshot> messages =
-              await _chatRepository.receiveOneMessage(trocaModel.salaId);
+              await _chatRepository.receiveOneMessage(exchangeModel.salaId);
           tokenuser = await _tokenRepository.getToken(user.uid);
           _subscription = messages.listen((event) {
             event.docs.forEach((element) {
@@ -94,7 +96,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         yield ShowMessagesState();
       } else if (event is ReceivedEvent) {
         if (event.userId != event.fromId && event.visualizado == false) {
-          _chatRepository.receivedCheck(trocaModel.salaId, event.messageId);
+          _chatRepository.receivedCheck(exchangeModel.salaId, event.messageId);
         }
         yield UpdateMessagesState();
         yield ShowMessagesState();
@@ -104,7 +106,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             fromId: user.uid,
             type: 0,
             timestamp: DateTime.now().millisecondsSinceEpoch.toString());
-        _chatRepository.addChat(trocaModel.salaId, chat);
+        _chatRepository.addChat(exchangeModel.salaId, chat);
         _messagingRepository.sendMessage(
             token, user.displayName, event.message);
       } else if (event is SendImageEvent) {
@@ -113,7 +115,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         int lenght = chatList.length;
         if (!noMore) {
           chatList += await _chatRepository.getMoreMessages(
-              trocaModel.salaId, chatList.last.documentSnapshot);
+              exchangeModel.salaId, chatList.last.documentSnapshot);
           yield UpdateMessagesState();
         }
         if (lenght == chatList.length) noMore = true;
@@ -121,25 +123,25 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       } else if (event is ReportEvent) {
         if (!noReport) {
           String reportedId, reportedName = '';
-          if (user.uid == trocaModel.userConsumerId) {
-            reportedId = trocaModel.userPostId;
-            reportedName = trocaModel.userPostName;
+          if (user.uid == exchangeModel.userConsumerId) {
+            reportedId = exchangeModel.userPostId;
+            reportedName = exchangeModel.userPostName;
           } else {
-            reportedId = trocaModel.userConsumerId;
-            reportedName = trocaModel.userConsumerName;
+            reportedId = exchangeModel.userConsumerId;
+            reportedName = exchangeModel.userConsumerName;
           }
-          noReport = await _reportRepository.insertTroca(
+          noReport = await _reportRepository.insertExchange(
               reportedId,
               reportedName,
               event.report,
-              trocaModel.key,
+              exchangeModel.key,
               user.uid,
               user.displayName);
         }
         yield WarningState(message: "Report enviado com sucesso!");
         yield ShowMessagesState();
       } else if (event is RequestExchangeEvent) {
-        if (trocaModel.status == 0 && !noExchange) {
+        if (exchangeModel.status == 0 && !noExchange) {
           String image = '';
           if (imageFile != null) {
             image = await _storageRepository.sendChatFile(
@@ -152,31 +154,32 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               fromId: user.uid,
               type: 1,
               timestamp: DateTime.now().millisecondsSinceEpoch.toString());
-          _chatRepository.addChat(trocaModel.salaId, chat);
+          _chatRepository.addChat(exchangeModel.salaId, chat);
           noExchange = true;
         } else {
           yield WarningState(
               message: "Requisição de troca só pode ser feito uma vez!");
         }
       } else if (event is ExchangeEvent) {
-        double horasTroca = trocaModel.cost * trocaModel.amount;
+        double horasTroca = exchangeModel.cost * exchangeModel.amount;
         if (userModel.horas >= horasTroca) {
-          ProdutoModel produto =
-              await _habilityRepository.getHabilityById(trocaModel.productId);
-          if (produto != null) {
-            int restante = produto.productQuantity - trocaModel.amount;
+          ServiceModel service =
+              await _serviceRepository.getServiceById(exchangeModel.productId);
+          if (service != null) {
+            int restante = service.productQuantity - exchangeModel.amount;
             if (restante >= 0) {
               await _usersRepository.addHoras(
-                  trocaModel.userPostId, horasTroca);
+                  exchangeModel.userPostId, horasTroca);
               await _usersRepository.removeHoras(
-                  trocaModel.userConsumerId, horasTroca);
+                  exchangeModel.userConsumerId, horasTroca);
               userModel.horas -= horasTroca;
-              await _trocaRepository.concluiTroca(trocaModel.key);
+              await _exchangeRepository.concluiExchange(exchangeModel.key);
               if (restante == 0) {
-                await _habilityRepository.updateStatus(trocaModel.productId, 2);
+                await _serviceRepository.updateStatus(
+                    exchangeModel.productId, 2);
               } else {
-                await _habilityRepository.decrementaQuantidade(
-                    trocaModel.productId, trocaModel.amount);
+                await _serviceRepository.decrementaQuantidade(
+                    exchangeModel.productId, exchangeModel.amount);
               }
               int index =
                   chatList.indexWhere((element) => event.id == element.key);
@@ -185,7 +188,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 ChatModel tmp = chatList[index];
                 chatList.removeAt(index);
                 chatList.insert(index, tmp);
-                _chatRepository.updateChat(trocaModel.salaId, event.id, 2);
+                _chatRepository.updateChat(exchangeModel.salaId, event.id, 2);
               }
               yield WarningState(message: "Troca realizada com sucesso!");
               yield ShowMessagesState();

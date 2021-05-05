@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../core/colors.dart';
-import '../core/rounded_button.dart';
+import '../core/buttons/rounded_button.dart';
 import 'components/questions.dart';
 import 'components/terms_button.dart';
 

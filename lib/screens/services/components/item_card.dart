@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/models/produto_model.dart';
+import '../../../core/models/service_model.dart';
 import '../../core/navigation.dart';
 import 'card_detail.dart';
 import 'image_card.dart';
 
 class ItemCard extends StatelessWidget {
-  final ProdutoModel product;
+  final ServiceModel product;
 
   const ItemCard({
     @required this.product,
@@ -26,7 +26,7 @@ class ItemCard extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: InkWell(
           onTap: () {
-            navigateToExchangeDetailsScreen(context, product);
+            navigateToServiceDescriptionScreen(context, product);
           },
           child: Column(
             children: [

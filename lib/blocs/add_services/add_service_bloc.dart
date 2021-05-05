@@ -1,26 +1,25 @@
 import 'dart:async';
 
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../core/models/produto_model.dart';
-import '../../resources/hability/firestore_hability.dart';
+import '../../core/models/service_model.dart';
+import '../../core/models/user_model.dart';
+import '../../resources/service/firestore_service.dart';
 import '../../resources/storage/firebase_storage.dart';
 
 part 'add_service_event.dart';
 part 'add_service_state.dart';
 
 class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
-  final HabilityRepository _abilityRepository = HabilityRepository();
+  final ServiceRepository _abilityRepository = ServiceRepository();
   final StorageRepository _storageRepository = StorageRepository();
   final UserModel user;
-  ProdutoModel product;
+  ServiceModel product;
   AddServiceBloc({
     @required this.user,
   }) : super(AddServiceInitial());
@@ -85,7 +84,7 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
   ) async* {
     try {
       if (event is AddServiceStartedEvent) {
-        product = ProdutoModel(
+        product = ServiceModel(
             userPostId: user.key, userPostName: user.nome, status: 0);
 
         yield LoadedState();

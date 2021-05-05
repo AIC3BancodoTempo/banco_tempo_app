@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/models/produto_model.dart';
+import '../../../core/models/service_model.dart';
 
 class PendingItemCard extends StatelessWidget {
-  final ProdutoModel product;
+  final ServiceModel product;
   final Function acceptPressed;
   final Function rejectPressed;
 
