@@ -1,0 +1,37 @@
+name: build_app
+on: [pull_request, push]
+
+jobs:
+  build:
+    name: build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.0.3'
+    - run: flutter pub get
+    - name: decrip
+      run: |
+        mkdir $HOME/private
+        gpg --quiet --batch --yes --decrypt --passphrase="$FIREBASE_SECRET" \
+        --output $HOME/private/google-services.7z google-services.7z.gpg
+        7z x $HOME/private/google-services.7z 
+      env:
+        FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+    - name: format-check
+      # Check for any formatting issues in the code.
+      run: flutter format --set-exit-if-changed .
+    - name: analyze
+      # Statically analyze the Dart code for any errors.
+      run: flutter analyze .
+    #- name: test
+      # Run widget tests for our flutter project.
+    #  run: flutter test
+    
+    - name: build
+      run: flutter build apk
