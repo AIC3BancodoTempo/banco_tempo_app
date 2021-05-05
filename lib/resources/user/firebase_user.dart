@@ -37,7 +37,7 @@ class UsersRepository {
   }
 
   Future<bool> addHoras(String userId, double horas) async {
-    return await firestoreInstance.collection('users').doc(userId).set({
+    return await firestoreInstance.collection('users').doc(userId).update({
       'horas': FieldValue.increment(horas),
     }).then((value) {
       return true;
@@ -45,7 +45,7 @@ class UsersRepository {
   }
 
   Future<bool> removeHoras(String userId, double horas) async {
-    return await firestoreInstance.collection('users').doc(userId).set({
+    return await firestoreInstance.collection('users').doc(userId).update({
       'horas': FieldValue.increment(-horas),
     }).then((value) {
       return true;
