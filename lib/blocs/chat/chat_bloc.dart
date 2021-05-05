@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:banco_do_tempo_app/core/models/produto_model.dart';
-import 'package:banco_do_tempo_app/repositories/messaging/firebase_messaging.dart';
-import 'package:banco_do_tempo_app/repositories/tokens/firestore_tokens.dart';
+import 'package:banco_do_tempo_app/resources/messaging/firebase_messaging.dart';
+import 'package:banco_do_tempo_app/resources/tokens/firestore_tokens.dart';
 import 'package:banco_do_tempo_app/resources/hability/firestore_hability.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,6 +35,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final UserModel userModel;
   final User user;
   final TrocaModel trocaModel;
+  String token;
   File imageFile;
   String tokenuser;
   bool noMore = false;
@@ -71,6 +72,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               await _reportRepository.existeReport(user.uid, trocaModel.key);
           Stream<QuerySnapshot> messages =
               await _chatRepository.receiveOneMessage(trocaModel.salaId);
+          tokenuser = await _tokenRepository.getToken(user.uid);
           _subscription = messages.listen((event) {
             event.docs.forEach((element) {
               Map<String, dynamic> data = element.data();
@@ -103,6 +105,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             type: 0,
             timestamp: DateTime.now().millisecondsSinceEpoch.toString());
         _chatRepository.addChat(trocaModel.salaId, chat);
+        _messagingRepository.sendMessage(
+            token, user.displayName, event.message);
       } else if (event is SendImageEvent) {
         imageFile = event.imageFile;
       } else if (event is GetMoreMessagesEvent) {

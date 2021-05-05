@@ -9,6 +9,7 @@ import 'login/login_screen.dart';
 import 'register_questionary/questionary_screen.dart';
 import 'services/services.dart';
 import 'welcome/welcome_screen.dart';
+import '../resources/messaging/fcm_messaging.dart';
 
 class App extends StatelessWidget {
   final Function setUser;
@@ -44,6 +45,11 @@ class _AppPageState extends State<AppPage> {
     super.dispose();
   }
 
+  setMessaging(BuildContext context) async {
+    await init(context);
+    authBloc.checkToken();
+  }
+
   @override
   Widget build(BuildContext context) {
     authBloc = BlocProvider.of<AuthBloc>(context);
@@ -53,6 +59,7 @@ class _AppPageState extends State<AppPage> {
           if (state is AuthenticatedState) {
             if (state.user != null) {
               widget.setUser(state.user, state.userModel);
+              setMessaging(context);
             }
           } else if (state is ExceptionState) {
             buildSnackBarUi(context, state.message);

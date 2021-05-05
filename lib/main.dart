@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 import 'core/models/user_model.dart';
 import 'screens/app.dart';
 import 'screens/cadastros_habilidades/add_service.dart';
@@ -26,6 +25,7 @@ void main() async {
 }
 
 class Run extends StatelessWidget {
+  Run({Key key}) : super(key: key);
   User _user;
   UserModel _userModel;
 

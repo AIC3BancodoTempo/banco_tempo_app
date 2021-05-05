@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:banco_do_tempo_app/core/errors/auth_error.dart';
+import 'package:banco_do_tempo_app/resources/messaging/firebase_messaging.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -9,6 +10,7 @@ import '../../core/models/user_model.dart';
 import '../../resources/caixa/firestore_caixa.dart';
 import '../../resources/auth/auth_firestore.dart';
 import '../../resources/user/firebase_user.dart';
+import '../../resources/tokens/firestore_tokens.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -16,11 +18,20 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository = AuthRepository();
   final UsersRepository _usersRepository = UsersRepository();
+  final MessagingRepository _messagingRepository = MessagingRepository();
+  TokenRepository tokenRepository = TokenRepository();
   final CaixaRepository _caixaRepository = CaixaRepository();
   AuthBloc() : super(AuthInitial());
   User user;
   UserModel userModel;
   StreamSubscription _subscription;
+  checkToken() {
+    _messagingRepository.tokenState(user.uid).then((value) {
+      if (!value) {
+        _messagingRepository.setToken(user.uid, true);
+      }
+    });
+  }
 
   @override
   Future<void> close() {
@@ -83,12 +94,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is CreateLoginEmailEvent) {
         user = await _authRepository.createUserWithEmailPass(
             event.email, event.senha);
+
         user.updateProfile(displayName: event.nome);
         userModel = await _usersRepository.insertUser(
           user.uid,
           event.email,
           event.nome,
         );
+        String token = await _messagingRepository.getToken();
+        bool insertedToken = await tokenRepository.setToken(user.uid, token);
+
         if (userModel == null) {
           yield UnauthenticatedState();
         } else {

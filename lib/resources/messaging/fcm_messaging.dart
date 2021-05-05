@@ -86,10 +86,10 @@ Future selectNotification(String payload) async {
   if (payload != null) {
     debugPrint('notification payload: $payload');
   }
-  await Navigator.pushNamed(
+  /*await Navigator.pushNamed(
     _context,
     '/chatCliente',
-  );
+  );*/
   await flutterLocalNotificationsPlugin.cancelAll();
 }
 
@@ -105,7 +105,7 @@ Future selectNotificationMap(Map<String, dynamic> message) async {
 
 Future showNotification(RemoteMessage message) async {
   int index = 0;
-  String groupKey = 'com.u1b0x.u1b0xapp.onebox';
+  String groupKey = 'com.example.banco_do_tempo_app';
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'grouped channel id', 'grouped channel name', 'grouped channel desc',
       importance: Importance.max,
