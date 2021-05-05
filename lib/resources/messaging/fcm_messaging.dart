@@ -94,10 +94,10 @@ Future selectNotification(String payload) async {
 }
 
 Future selectNotificationMap(Map<String, dynamic> message) async {
-  Navigator.pushNamed(
+  /*Navigator.pushNamed(
     _context,
     '/chatCliente',
-  );
+  );*/
   //  Navigator.pushNamed(context, '/message',
   //      arguments: MessageArguments(message, true));
   await flutterLocalNotificationsPlugin.cancelAll();
