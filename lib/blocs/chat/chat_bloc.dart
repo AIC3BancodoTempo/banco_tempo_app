@@ -36,7 +36,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final UserModel userModel;
   final User user;
   final ExchangeModel exchangeModel;
-  String token;
   File imageFile;
   String tokenuser;
   bool noMore = false;
@@ -74,7 +73,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               await _reportRepository.existeReport(user.uid, exchangeModel.key);
           Stream<QuerySnapshot> messages =
               await _chatRepository.receiveOneMessage(exchangeModel.salaId);
-          tokenuser = await _tokenRepository.getToken(user.uid);
+          tokenuser = await _tokenRepository.getToken(
+              user.uid != exchangeModel.userConsumerId
+                  ? exchangeModel.userConsumerId
+                  : exchangeModel.userPostId);
           _subscription = messages.listen((event) {
             event.docs.forEach((element) {
               Map<String, dynamic> data = element.data();
@@ -108,7 +110,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             timestamp: DateTime.now().millisecondsSinceEpoch.toString());
         _chatRepository.addChat(exchangeModel.salaId, chat);
         _messagingRepository.sendMessage(
-            token, user.displayName, event.message);
+            tokenuser, user.displayName, event.message);
       } else if (event is SendImageEvent) {
         imageFile = event.imageFile;
       } else if (event is GetMoreMessagesEvent) {
@@ -155,6 +157,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               type: 1,
               timestamp: DateTime.now().millisecondsSinceEpoch.toString());
           _chatRepository.addChat(exchangeModel.salaId, chat);
+          _messagingRepository.sendMessage(
+              tokenuser, user.displayName, "Enviou a requisição da troca");
           noExchange = true;
         } else {
           yield WarningState(
