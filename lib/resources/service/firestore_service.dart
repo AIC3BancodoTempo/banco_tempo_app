@@ -129,7 +129,7 @@ class ServiceRepository {
   }
 
   Future<bool> decrementaQuantidade(String docId, int qtd) async {
-    return await firestoreInstance.collection('produto').doc(docId).set({
+    return await firestoreInstance.collection('produto').doc(docId).update({
       'productQuantity': FieldValue.increment(-qtd),
     }).then((value) {
       return true;
