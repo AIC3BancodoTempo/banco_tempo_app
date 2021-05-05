@@ -52,9 +52,9 @@ class AuthRepository {
 
   Stream<User> getCurrentUser() => _firebaseAuth.authStateChanges();
 
-  Future<Stream> getUser() async {
-    Stream stream = _firebaseAuth.userChanges();
-    //User user = _firebaseAuth.currentUser;
-    return stream;
+  Future<User> getUser() async {
+    //Stream stream = _firebaseAuth.userChanges();
+    User user = _firebaseAuth.currentUser;
+    return user;
   }
 }

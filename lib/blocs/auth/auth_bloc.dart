@@ -36,15 +36,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event is AppStartedEvent) {
         yield LoadingState();
 
-        Stream<User> stream = await _authRepository.getUser();
-        _subscription = stream.listen((event) {
-          user = event;
-          if (user != null) {
-            add(LoginSuccessEvent(user: user));
-          } else {
-            add(ToWelcomeEvent());
-          }
-        });
+        user = await _authRepository.getUser();
+        if (user != null) {
+          add(LoginSuccessEvent(user: user));
+        } else {
+          add(ToWelcomeEvent());
+        }
       } else if (event is LoginEmailEvent) {
         user = await _authRepository.signInEmailAndPassword(
             event.email, event.senha);
@@ -105,7 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield ExceptionState(message: authErrorHandler(e));
         yield UnauthenticatedState();
       } else {
-        //yield ExceptionState(message: e.toString());
+        yield ExceptionState(message: e.toString());
         yield UnauthenticatedState();
       }
     }
