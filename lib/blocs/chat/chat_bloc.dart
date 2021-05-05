@@ -7,14 +7,16 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/models/chat_model.dart';
-import '../../core/models/service_model.dart';
 import '../../core/models/exchange_model.dart';
+import '../../core/models/service_model.dart';
 import '../../core/models/user_model.dart';
 import '../../resources/chat/firestore_chat.dart';
+import '../../resources/exchange/firestore_exchange.dart';
+import '../../resources/messaging/firebase_messaging.dart';
 import '../../resources/report/firebase_report.dart';
 import '../../resources/service/firestore_service.dart';
 import '../../resources/storage/firebase_storage.dart';
-import '../../resources/exchange/firestore_exchange.dart';
+import '../../resources/tokens/firestore_tokens.dart';
 import '../../resources/user/firebase_user.dart';
 
 part 'chat_event.dart';
@@ -25,6 +27,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final UsersRepository _usersRepository = UsersRepository();
   final StorageRepository _storageRepository = StorageRepository();
   final ReportRepository _reportRepository = ReportRepository();
+
+  final MessagingRepository _messagingRepository = MessagingRepository();
+  final TokenRepository _tokenRepository = TokenRepository();
   final ExchangeRepository _exchangeRepository = ExchangeRepository();
 
   final ServiceRepository _serviceRepository = ServiceRepository();
@@ -68,6 +73,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               await _reportRepository.existeReport(user.uid, exchangeModel.key);
           Stream<QuerySnapshot> messages =
               await _chatRepository.receiveOneMessage(exchangeModel.salaId);
+          tokenuser = await _tokenRepository.getToken(
+              user.uid != exchangeModel.userConsumerId
+                  ? exchangeModel.userConsumerId
+                  : exchangeModel.userPostId);
           _subscription = messages.listen((event) {
             event.docs.forEach((element) {
               Map<String, dynamic> data = element.data();
@@ -100,6 +109,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             type: 0,
             timestamp: DateTime.now().millisecondsSinceEpoch.toString());
         _chatRepository.addChat(exchangeModel.salaId, chat);
+        _messagingRepository.sendMessage(
+            tokenuser, user.displayName, event.message);
       } else if (event is SendImageEvent) {
         imageFile = event.imageFile;
       } else if (event is GetMoreMessagesEvent) {
@@ -146,6 +157,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               type: 1,
               timestamp: DateTime.now().millisecondsSinceEpoch.toString());
           _chatRepository.addChat(exchangeModel.salaId, chat);
+          _messagingRepository.sendMessage(
+              tokenuser, user.displayName, "Enviou a requisição da troca");
           noExchange = true;
         } else {
           yield WarningState(
