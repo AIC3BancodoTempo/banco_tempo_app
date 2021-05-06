@@ -17,10 +17,10 @@ jobs:
     - run: flutter pub get
     - name: decrip
       run: |
-        mkdir $HOME/private
+        ls
         gpg --quiet --batch --yes --decrypt --passphrase="$FIREBASE_SECRET" \
-        --output $HOME/private/google-services.7z google-services.7z.gpg
-        7z x $HOME/private/google-services.7z 
+        --output google-services.7z /google-services.7z.gpg
+        7z x google-services.7z 
       env:
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
     - name: format-check
