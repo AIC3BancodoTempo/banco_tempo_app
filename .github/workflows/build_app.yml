@@ -19,8 +19,8 @@ jobs:
       run: |
         ls
         gpg --quiet --batch --yes --decrypt --passphrase="$FIREBASE_SECRET" \
-        --output google-services.7z /google-services.7z.gpg
-        7z x google-services.7z 
+        --output /android/app/google-services.7z /android/app/google-services.7z.gpg
+        7z x /android/app/google-services.7z 
       env:
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
     - name: format-check
