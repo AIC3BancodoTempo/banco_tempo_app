@@ -41,7 +41,6 @@ class InsertInputs extends StatelessWidget {
                 labelStyle: TextStyle(
                     color:
                         myFocusNode.hasFocus ? Colors.black38 : Colors.black45),
-                hintText: 'Resposta',
                 suffix: Icon(
                   Icons.check,
                   color: Colors.deepPurpleAccent,

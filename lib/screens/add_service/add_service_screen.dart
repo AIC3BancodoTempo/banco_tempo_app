@@ -38,6 +38,7 @@ class AddServicePage extends StatefulWidget {
 }
 
 class _AddServicePageState extends State<AddServicePage> {
+  bool checkBoxValue = false;
   AddServiceBloc addServiceBloc;
   final myFocusNode = new FocusNode();
   final GlobalKey<FormState> formInfo = GlobalKey<FormState>();
@@ -74,6 +75,7 @@ class _AddServicePageState extends State<AddServicePage> {
   @override
   Widget build(BuildContext context) {
     addServiceBloc = BlocProvider.of<AddServiceBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -131,7 +133,7 @@ class _AddServicePageState extends State<AddServicePage> {
                       ),
                       InsertInputs(
                         keyboardType: TextInputType.number,
-                        insertLabel: 'Quantidade Disponível',
+                        insertLabel: 'Quantidade disponível ou desejava',
                         onChanged: (value) {
                           addServiceBloc.setQuantity(value);
                         },
@@ -149,13 +151,28 @@ class _AddServicePageState extends State<AddServicePage> {
                             );
                           }).toList(),
                           validator: validateEmptyField,
-                          hint: "Quantia em Horas",
+                          hint: "Quantia em horas que deseja receber ou pagar",
                           onChanged: (value) {
                             addServiceBloc.setCustoHoras(value);
                           },
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              value: checkBoxValue,
+                              activeColor: themeColor,
+                              onChanged: (newValue) => setState(() {
+                                checkBoxValue = newValue;
+                              }),
+                            ),
+                            Text("Marque caso seja algo que esteja procurando")
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
                         child: Text(
