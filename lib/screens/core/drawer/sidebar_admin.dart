@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../blocs/auth/auth_bloc.dart';
+import '../about_dialog.dart';
 import '../navigation.dart';
 import 'drawer_header_geral.dart';
 
@@ -43,6 +44,13 @@ class SideBarAdm extends StatelessWidget {
             title: Text("Meu perfil"),
             onTap: () {
               navigateToProfileScreen(context);
+            },
+          ),
+          ListTile(
+            trailing: Icon(Icons.account_circle_outlined),
+            title: Text("Sobre"),
+            onTap: () {
+              showCustomAboutDialog(context);
             },
           ),
           ListTile(
