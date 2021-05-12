@@ -22,7 +22,9 @@ class CardDetails extends StatelessWidget {
           children: [
             Text(
               title,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.justify,
+              maxLines: 2,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16.0,
