@@ -13,7 +13,7 @@ class ExchangeModel {
   String userConsumerName;
   String productId;
   String productName;
-  String timestamp;
+  int timestamp;
   int status;
   int amount;
   double cost;
@@ -50,7 +50,7 @@ class ExchangeModel {
     amount = data['amount'] != null ? data['amount'] : 0;
     cost = data['cost'] != null ? data['cost'].toDouble() : 0;
     salaId = data['salaId'] != null ? data['salaId'] : '';
-    timestamp = data['timestamp'] != null ? data['timestamp'] : '';
+    timestamp = data['timestamp'] != null ? data['timestamp'] : 0;
   }
 
   Map<String, dynamic> toMap() {
@@ -65,7 +65,7 @@ class ExchangeModel {
       'amount': amount,
       'cost': cost,
       'salaId': salaId,
-      'timestamp': DateTime.now().millisecondsSinceEpoch.toString()
+      'timestamp': DateTime.now().millisecondsSinceEpoch
     };
   }
 

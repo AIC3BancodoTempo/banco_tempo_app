@@ -47,7 +47,6 @@ class _AppPageState extends State<AppPage> {
 
   setMessaging(BuildContext context) async {
     await init(context);
-    authBloc.checkToken();
   }
 
   @override

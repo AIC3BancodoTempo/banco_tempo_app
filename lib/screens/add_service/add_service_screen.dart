@@ -14,6 +14,7 @@ import '../core/form/dropdown_underline.dart';
 import '../core/loading.dart';
 import '../core/success.dart';
 import 'components/insert_input_texts.dart';
+import 'components/offer_type.dart';
 import 'components/title_add_text.dart';
 
 class AddServiceScreen extends StatelessWidget {
@@ -38,7 +39,6 @@ class AddServicePage extends StatefulWidget {
 }
 
 class _AddServicePageState extends State<AddServicePage> {
-  bool checkBoxValue = false;
   AddServiceBloc addServiceBloc;
   final myFocusNode = new FocusNode();
   final GlobalKey<FormState> formInfo = GlobalKey<FormState>();
@@ -157,21 +157,8 @@ class _AddServicePageState extends State<AddServicePage> {
                           },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Checkbox(
-                              value: checkBoxValue,
-                              activeColor: themeColor,
-                              onChanged: (newValue) => setState(() {
-                                checkBoxValue = newValue;
-                              }),
-                            ),
-                            Text("Marque caso seja algo que esteja procurando")
-                          ],
-                        ),
+                      OfferType(
+                        onChange: (value) => addServiceBloc.setTipe(value),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),

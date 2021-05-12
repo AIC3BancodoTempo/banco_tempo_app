@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class AnuncianteText extends StatelessWidget {
   final String text;
+  final bool isSolicitante;
 
-  const AnuncianteText({Key key, @required this.text}) : super(key: key);
+  const AnuncianteText(
+      {Key key, @required this.text, this.isSolicitante = false})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,7 +16,7 @@ class AnuncianteText extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Anunciante: ' + text,
+              isSolicitante ? 'Solicitante: ' + text : 'Anunciante: ' + text,
               textAlign: TextAlign.left,
               style: TextStyle(
                   fontSize: 18,

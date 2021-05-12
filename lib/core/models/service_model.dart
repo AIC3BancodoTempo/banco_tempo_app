@@ -10,6 +10,7 @@ class ServiceModel {
   int productQuantity;
   double custoHoras;
   int status;
+  bool isSearch;
   String data;
   List<String> images;
   DocumentSnapshot documentSnapshot;
@@ -23,6 +24,7 @@ class ServiceModel {
       this.productDescription,
       this.status,
       this.images,
+      this.isSearch = false,
       this.custoHoras,
       this.documentSnapshot});
 
@@ -48,6 +50,7 @@ class ServiceModel {
         custoHoras: custoHoras ?? this.custoHoras,
         status: status ?? this.status,
         data: data ?? this.data,
+        isSearch: isSearch ?? this.isSearch,
         images: images ?? this.images);
   }
 
@@ -66,6 +69,7 @@ class ServiceModel {
         : '';
     productName = info['productName'] != null ? info['productName'] : '';
     status = info['status'] != null ? info['status'] : 0;
+    isSearch = info['isSearch'] != null ? info['isSearch'] : false;
     custoHoras = info['custoHoras'] != null ? info['custoHoras'].toDouble() : 0;
     images = info['imagens'] != null ? List<String>.from(info['imagens']) : [];
   }
@@ -83,6 +87,7 @@ class ServiceModel {
         custoHoras: map['custoHoras'],
         status: map['status'],
         data: map['data'],
+        isSearch: map['isSearch'],
         images: map['imagens']);
   }
   Map<String, dynamic> toMap() {
@@ -96,6 +101,7 @@ class ServiceModel {
       'status': status,
       'userPostId': userPostId,
       'userPostName': userPostName,
+      'isSearch': isSearch,
     };
   }
 }

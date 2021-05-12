@@ -156,4 +156,13 @@ class ExchangeRepository {
     }
     return modelList;
   }
+
+  Future<bool> updateAmount(String docId, int amount) async {
+    return await firestoreInstance.collection('troca').doc(docId).update({
+      'amount': amount,
+      'timestamp': DateTime.now().millisecondsSinceEpoch
+    }).then((value) {
+      return true;
+    }).catchError((error) => throw error);
+  }
 }

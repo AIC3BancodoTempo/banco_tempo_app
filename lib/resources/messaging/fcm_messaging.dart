@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,7 +12,7 @@ import '../../screens/core/messaging.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  showNotification(message);
+  await Firebase.initializeApp();
 }
 
 /// Create a [AndroidNotificationChannel] for heads up notifications
@@ -52,7 +53,7 @@ init(BuildContext context) async {
 
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/launcher_icon');
+      AndroidInitializationSettings('@drawable/logo');
   final IOSInitializationSettings initializationSettingsIOS =
       IOSInitializationSettings(
           onDidReceiveLocalNotification:
@@ -77,9 +78,16 @@ init(BuildContext context) async {
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     print('A new onMessageOpenedApp event was published!');
     //quando clica
-    Map<String, String> data = message.data;
-    selectNotificationMap(data);
+    RemoteNotification notification = message.notification;
+
+    if (notification != null) {
+      selectNotification(message.data.toString());
+    }
   });
+  RemoteMessage message = await FirebaseMessaging.instance.getInitialMessage();
+  if (message != null) {
+    selectNotification(message.data.toString());
+  }
 }
 
 Future selectNotification(String payload) async {
@@ -90,16 +98,6 @@ Future selectNotification(String payload) async {
     _context,
     '/chatCliente',
   );*/
-  await flutterLocalNotificationsPlugin.cancelAll();
-}
-
-Future selectNotificationMap(Map<String, dynamic> message) async {
-  /*Navigator.pushNamed(
-    _context,
-    '/chatCliente',
-  );*/
-  //  Navigator.pushNamed(context, '/message',
-  //      arguments: MessageArguments(message, true));
   await flutterLocalNotificationsPlugin.cancelAll();
 }
 
