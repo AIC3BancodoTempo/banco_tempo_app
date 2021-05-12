@@ -79,7 +79,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
                   ),
                   actions: [
                     IconSlideAction(
-                        caption: 'Delete',
+                        caption: 'Apagar',
                         color: themeColor,
                         icon: Icons.delete,
                         onTap: () {

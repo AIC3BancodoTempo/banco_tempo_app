@@ -28,7 +28,7 @@ showCustomAboutDialog(BuildContext context) {
       ],
     ),
     content: Text(
-        "Aplicativo desenvolvido por alunos do bacharel em Sistemas de informação da Universidade Federal Do Rio Grande em parceria com o Banco do Tempo de Rio Grande."),
+        "Aplicativo desenvolvido por alunos do curso de bacharel em Sistemas de Informação da Universidade Federal Do Rio Grande em parceria com o Banco do Tempo de Rio Grande."),
     actions: [
       okButton,
     ],
