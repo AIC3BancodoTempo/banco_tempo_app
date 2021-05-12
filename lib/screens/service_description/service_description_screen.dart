@@ -130,13 +130,17 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
                       ),
                       spaceVertical(30),
                       AnuncianteText(
+                        isSolicitante:
+                            serviceDescriptionBloc.serviceModel.isSearch,
                         text: serviceDescriptionBloc.serviceModel.userPostName,
                       ),
                       spaceVertical(20),
                       if (serviceDescriptionBloc.user.uid !=
                           serviceDescriptionBloc.serviceModel.userPostId)
                         RoundedButton(
-                          text: "TENHO INTERESSE",
+                          text: serviceDescriptionBloc.serviceModel.isSearch
+                              ? "OFERECER"
+                              : "TENHO INTERESSE",
                           onpress: () {
                             serviceDescriptionBloc.add(ChatPressedEvent());
                           },

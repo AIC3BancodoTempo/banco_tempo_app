@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   User user;
   UserModel userModel;
   StreamSubscription _subscription;
-  checkToken() {
+  _checkToken() {
     _messagingRepository.tokenState(user.uid).then((value) {
       if (!value) {
         _messagingRepository.setToken(user.uid, true);
@@ -77,6 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (userModel == null) {
           yield UnauthenticatedState();
         } else {
+          _checkToken();
           yield AuthenticatedState(user: user, userModel: userModel);
         }
       } else if (event is ForgotEvent) {
@@ -92,7 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         user = await _authRepository.createUserWithEmailPass(
             event.email, event.senha);
 
-        user.updateProfile(displayName: event.nome);
+        await user.updateProfile(displayName: event.nome);
         userModel = await _usersRepository.insertUser(
           user.uid,
           event.email,

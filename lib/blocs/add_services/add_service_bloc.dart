@@ -74,6 +74,10 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
     product.productQuantity = int.parse(productQuantity);
   }
 
+  setTipe(bool isSearch) {
+    product.isSearch = isSearch;
+  }
+
   bool getLimitQuantityHours() {
     return (product.productQuantity * product.custoHoras + user.horas) <= 20;
   }
@@ -95,7 +99,9 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
           product.images = pics;
         }
         bool result = false;
-
+        if (product.isSearch) {
+          product.productName = "Busca:" + product.productName;
+        }
         result = await _abilityRepository.insertProduct(product);
 
         if (result) {

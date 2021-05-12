@@ -47,7 +47,7 @@ class SideBarAdm extends StatelessWidget {
             },
           ),
           ListTile(
-            trailing: Icon(Icons.account_circle_outlined),
+            trailing: Icon(Icons.info_outlined),
             title: Text("Sobre"),
             onTap: () {
               showCustomAboutDialog(context);

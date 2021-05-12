@@ -14,6 +14,7 @@ import '../core/form/dropdown_underline.dart';
 import '../core/loading.dart';
 import '../core/success.dart';
 import 'components/insert_input_texts.dart';
+import 'components/offer_type.dart';
 import 'components/title_add_text.dart';
 
 class AddServiceScreen extends StatelessWidget {
@@ -74,6 +75,7 @@ class _AddServicePageState extends State<AddServicePage> {
   @override
   Widget build(BuildContext context) {
     addServiceBloc = BlocProvider.of<AddServiceBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -131,7 +133,7 @@ class _AddServicePageState extends State<AddServicePage> {
                       ),
                       InsertInputs(
                         keyboardType: TextInputType.number,
-                        insertLabel: 'Quantidade Disponível',
+                        insertLabel: 'Quantidade disponível ou desejava',
                         onChanged: (value) {
                           addServiceBloc.setQuantity(value);
                         },
@@ -149,13 +151,15 @@ class _AddServicePageState extends State<AddServicePage> {
                             );
                           }).toList(),
                           validator: validateEmptyField,
-                          hint: "Quantia em Horas",
+                          hint: "Quantia em horas que deseja receber ou pagar",
                           onChanged: (value) {
                             addServiceBloc.setCustoHoras(value);
                           },
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      OfferType(
+                        onChange: (value) => addServiceBloc.setTipe(value),
+                      ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
                         child: Text(

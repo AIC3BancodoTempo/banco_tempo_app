@@ -53,7 +53,7 @@ class ServiceDescriptionBloc
     try {
       if (event is StartedEvent) {
         yield LoadingScreenState();
-        if (serviceModel.userPostId == user.uid) {
+        if (serviceModel.userPostId == user.uid || serviceModel.isSearch) {
           exchange = await _exchangeRepository.getFirstExchange(
               serviceModel.productId, user.uid);
         } else {
@@ -68,22 +68,32 @@ class ServiceDescriptionBloc
       } else if (event is ChatPressedEvent) {
         yield LoadingScreenState();
         if (exchange != null) {
+          if (amount != exchange.amount) {
+            await _exchangeRepository.updateAmount(exchange.key, amount);
+            exchange.amount = amount;
+          }
           yield ChatPressedState(exchangeModel: exchange);
           yield ShowScreenState();
         } else if (amount > 0) {
           var uid = Uuid();
           exchange = ExchangeModel(
               key: uid.v1(),
-              userConsumerId: user.uid,
-              userConsumerName: user.displayName,
+              userConsumerId:
+                  serviceModel.isSearch ? serviceModel.userPostId : user.uid,
+              userConsumerName: serviceModel.isSearch
+                  ? serviceModel.userPostName
+                  : user.displayName,
               productId: serviceModel.productId,
               productName: serviceModel.productName,
               salaId: uid.v1(),
               status: 0,
               amount: amount,
               cost: serviceModel.custoHoras,
-              userPostId: serviceModel.userPostId,
-              userPostName: serviceModel.userPostName);
+              userPostId:
+                  serviceModel.isSearch ? user.uid : serviceModel.userPostId,
+              userPostName: serviceModel.isSearch
+                  ? user.displayName
+                  : serviceModel.userPostName);
           exchange.key = await _exchangeRepository.insertExchange(exchange);
           yield ChatPressedState(exchangeModel: exchange);
           yield ShowScreenState();
@@ -94,7 +104,7 @@ class ServiceDescriptionBloc
       }
     } catch (e) {
       print(e.toString());
-      yield WarningState(message: "Algo saiu!");
+      yield WarningState(message: "Algo saiu errado!");
     }
   }
 }
