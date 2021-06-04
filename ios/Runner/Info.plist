@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>banco_do_tempo_app</string>
+	<string>Banco do Tempo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -28,11 +28,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to camera to capture photos</string>
+	<string>Precisamos acessar sua câmera para que você insira fotos incríveis do item que deseja trocar.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow access to microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to photo library</string>
+	<string>Precisamos acessar suas imagens para que você insira imagens incríveis do item que deseja trocar.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
