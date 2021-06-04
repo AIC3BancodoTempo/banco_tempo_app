@@ -56,7 +56,7 @@ class MessagingRepository {
       },
       body: jsonEncode(
         <String, dynamic>{
-          'notification': <String, dynamic>{'body': from, 'title': content},
+          'notification': <String, dynamic>{'title': content, 'body': from},
           'priority': 'high',
           'data': <String, dynamic>{
             'click_action': 'FLUTTER_NOTIFICATION_CLICK',
