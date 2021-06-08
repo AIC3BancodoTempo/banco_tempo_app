@@ -100,7 +100,7 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
         }
         bool result = false;
         if (product.isSearch) {
-          product.productName = "Busca: " + product.productName;
+          product.productName = "Procuro: " + product.productName;
         }
         result = await _abilityRepository.insertProduct(product);
 
