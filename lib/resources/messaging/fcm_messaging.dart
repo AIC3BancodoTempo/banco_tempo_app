@@ -104,8 +104,8 @@ Future selectNotification(String payload) async {
 Future showNotification(RemoteMessage message) async {
   int index = 0;
   //CHANGE WHEN DEPLOYING TO PLAYSTORE/APP STORE
-  //String groupKey = 'com.example.banco_do_tempo_app';
-  String groupKey = 'com.furg.bancoDoTempoApp';
+  String groupKey = 'com.example.banco_do_tempo_app';
+  //String groupKey = 'com.furg.bancoDoTempoApp';
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'grouped channel id', 'grouped channel name', 'grouped channel desc',
       importance: Importance.max,

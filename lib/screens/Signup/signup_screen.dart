@@ -61,11 +61,13 @@ class SignUpScreen extends StatelessWidget {
                         hintText: "Seu nome",
                         controller: nomeCntrlr,
                         validator: validateEmptyField,
+                        onChanged: () {},
                         icon: Icons.person),
                     RoundedInput(
                       hintText: "Seu e-mail",
                       controller: emailCntrlr,
                       validator: validateEmail,
+                      onChanged: () {},
                       icon: Icons.mail,
                     ),
                     RoundedPasswordField(
@@ -75,20 +77,13 @@ class SignUpScreen extends StatelessWidget {
                     RoundedButton(
                       text: "CADASTRAR",
                       onpress: () {
-                        if (validateAndSave(formKey)) {
-                          authBloc.add(CreateLoginEmailEvent(
-                              email: emailCntrlr.text,
-                              senha: passCntrlr.text,
-                              nome: nomeCntrlr.text));
-                        }
+                        if (validateAndSave(formKey)) {}
                       },
                     ),
                     SizedBox(height: size.height * 0.03),
                     AlreadyHaveAnAccountCheck(
                       login: false,
-                      press: () {
-                        authBloc.add(LoginEvent());
-                      },
+                      press: () {},
                     ),
                   ],
                 ),
