@@ -19,7 +19,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel', // id
   'High Importance Notifications', // title
-  'This channel is used for important notifications.', // description
+  // description
   importance: Importance.high,
 );
 
@@ -107,7 +107,7 @@ Future showNotification(RemoteMessage message) async {
   String groupKey = 'com.example.banco_do_tempo_app';
   //String groupKey = 'com.furg.bancoDoTempoApp';
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      'grouped channel id', 'grouped channel name', 'grouped channel desc',
+      'grouped channel id', 'grouped channel name',
       importance: Importance.max,
       priority: Priority.high,
       setAsGroupSummary: true,
