@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../core/models/user_model.dart';
 
 class UsersRepository {
+
+
   FirebaseFirestore firestoreInstance;
 
   UsersRepository() {
@@ -15,7 +19,7 @@ class UsersRepository {
       'email': email,
       'is_admin': false,
       'nome': nome,
-      'reports': 0
+      'reports': 0,
     }).then((value) {
       return UserModel(
           email: email, horas: 22, isAdmin: false, nome: nome, reports: 0);
@@ -51,4 +55,21 @@ class UsersRepository {
       return true;
     }).catchError((error) => throw error);
   }
+
+
+
+    List<UserModel> _listaUsuarios(QuerySnapshot snapshot){
+    return snapshot.docs.map((e){
+      return UserModel(
+        nome: e.get("nome") ?? "",
+        horas: e.get("horas") ?? ""
+        );
+      }
+    ).toList();
+  }
+
+  Stream<List<UserModel>> get usuarios{
+    return firestoreInstance.collection('users').snapshots().map(_listaUsuarios);
+  }
+
 }

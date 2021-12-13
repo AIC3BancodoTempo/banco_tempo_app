@@ -32,3 +32,11 @@ void navigateToMyPosts(BuildContext context) {
 void navigateToPendingPosts(BuildContext context) {
   Navigator.of(context).pushNamed('/pendingPosts');
 }
+
+void navigateToUsersPage(BuildContext context) {
+  Navigator.of(context).pushNamed('/tela_usuarios');
+}
+
+void navigateToUsersProfile(BuildContext context, nome, horas) {
+  Navigator.of(context).pushNamed('/users_profile', arguments: nome);
+}

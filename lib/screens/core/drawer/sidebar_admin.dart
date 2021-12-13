@@ -60,6 +60,17 @@ class SideBarAdm extends StatelessWidget {
               authBloc.add(LogoutEvent());
             },
           ),
+          Container(height: 50,),
+          ListTile(
+            title: Text("Administrador:"),
+          ),
+          ListTile(
+            trailing: Icon(Icons.person_outline_rounded),
+            title: Text("Usuarios"),
+            onTap: () {
+              navigateToUsersPage(context);
+            },
+          ),
         ],
       ),
     );

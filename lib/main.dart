@@ -1,4 +1,6 @@
 import 'package:banco_do_tempo_app/screens/exchange_in_progress/exchange_in_progress_screen.dart';
+import 'package:banco_do_tempo_app/screens/users_page/users_page.dart';
+import 'package:banco_do_tempo_app/screens/users_profile/users_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +76,8 @@ class Run extends StatelessWidget {
               user: _user,
             ),
         '/pendingPosts': (context) => PendingPost(),
+        '/tela_usuarios': (context) => TelaUsuarios(),
+        '/users_profile': (context) => UserProfile(),
       },
       initialRoute: '/',
     );
