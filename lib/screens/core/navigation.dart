@@ -38,5 +38,5 @@ void navigateToUsersPage(BuildContext context) {
 }
 
 void navigateToUsersProfile(BuildContext context, nome, horas) {
-  Navigator.of(context).pushNamed('/users_profile', arguments: nome);
+  Navigator.of(context).pushNamed('/users_profile', arguments: horas);
 }

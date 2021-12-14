@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CardProfile extends StatefulWidget {
-  const CardProfile({ Key key}) : super(key: key);
+  final String nome;
+  const CardProfile({ Key key, this.nome}) : super(key: key);
 
   @override
   _CardProfileState createState() => _CardProfileState();
@@ -27,9 +28,9 @@ class _CardProfileState extends State<CardProfile> {
                       child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Nome completo",style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis),
+                          Text(widget.nome,style: TextStyle(fontSize: 19,color: Colors.white,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,),
                           Container(height: 5,),
-                          Text("Cidade - RS",style: TextStyle(fontSize: 15,color: Colors.white),)
+                          Text("Rio Grande - RS",style: TextStyle(fontSize: 15,color: Colors.white),)
                         ],
                       ),
                     )

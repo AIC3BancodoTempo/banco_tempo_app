@@ -2,7 +2,8 @@ import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
 
 class CardHours extends StatefulWidget {
-  const CardHours({ Key key }) : super(key: key);
+  final num horas;
+  const CardHours({ Key key, this.horas }) : super(key: key);
 
   @override
   _CardHoursState createState() => _CardHoursState();
@@ -23,7 +24,7 @@ class _CardHoursState extends State<CardHours> {
           children: [
             Icon(Icons.access_time_sharp,size: 40,color: themeColor,),
             Container(width: 7,),
-            Text("6 horas", style: TextStyle(fontSize: 30,color: themeColor,fontWeight: FontWeight.bold),
+            Text(widget.horas.toString()+" horas", style: TextStyle(fontSize: 30,color: themeColor,fontWeight: FontWeight.bold),
             )
           ],
         )

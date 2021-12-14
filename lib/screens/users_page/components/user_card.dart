@@ -1,15 +1,14 @@
-import 'dart:ffi';
-
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
-import 'package:banco_do_tempo_app/screens/core/navigation.dart';
+import 'package:banco_do_tempo_app/screens/users_profile/users_profile.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatefulWidget {
 
   final String nome;
   final num horas;
+  final String id;
 
-  const UserCard({ Key key, this.nome, this.horas }) : super(key: key);
+  const UserCard({ Key key, this.nome, this.horas, this.id }) : super(key: key);
 
   @override
   _UserCardState createState() => _UserCardState();
@@ -20,7 +19,7 @@ class _UserCardState extends State<UserCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        navigateToUsersProfile(context, widget.nome,widget.horas);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile(nome: widget.nome,horas: widget.horas, id: widget.id)));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -41,7 +40,7 @@ class _UserCardState extends State<UserCard> {
                     children: [
                       Text(widget.nome,style: TextStyle(fontSize: 19,color: themeColor,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis),
                       Container(height: 5,),
-                      Text("Rio Grande - RS",style: TextStyle(fontSize: 15,color: Colors.grey[500]),)
+                      Text(widget.id,style: TextStyle(fontSize: 15,color: Colors.grey[500]),)
                     ],
                   ),
                 )
@@ -56,7 +55,8 @@ class _UserCardState extends State<UserCard> {
                   padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                   child: Center(child: Text(widget.horas.toString()+" HORAS",style: TextStyle(fontSize: 19,color: themeColor))),
                 ),
-              )
+              ),
+              
             ],
           ),
         ),

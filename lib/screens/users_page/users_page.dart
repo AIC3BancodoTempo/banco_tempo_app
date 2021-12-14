@@ -1,39 +1,26 @@
 
 
-
-import 'package:banco_do_tempo_app/blocs/service/service_bloc.dart';
-import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'components/user_card.dart';
 
 
 
 
-class TelaUsuarios extends StatefulWidget {
-  const TelaUsuarios({ Key key }) : super(key: key);
+class TelaUsuarios extends StatelessWidget {
 
-  @override
-  _TelaUsuariosState createState() => _TelaUsuariosState();
-}
 
-class _TelaUsuariosState extends State<TelaUsuarios> {
+  TelaUsuarios({ Key key }) : super(key: key);
 
-  ServiceBloc serviceBloc;
-  bool isSearch = false;
+  ////CollectionReference<Map<String, dynamic>> docRef = FirebaseFirestore.instance.collection('users');
+
+  /*Future<QuerySnapshot<Map<String, dynamic>>> result = FirebaseFirestore.instance.collection('users').get();
+  List<DocumentSnapshot> documents = result.doc;*/
+
+
   @override
   Widget build(BuildContext context) {
-  
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -53,6 +40,8 @@ class _TelaUsuariosState extends State<TelaUsuarios> {
         stream: FirebaseFirestore.instance.collection("users").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot){
         if(streamSnapshot.data == null) return CircularProgressIndicator();
+        QuerySnapshot snap = streamSnapshot.data;
+        List<DocumentSnapshot> documents = snap.docs;
         return Padding(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Column(
@@ -81,7 +70,7 @@ class _TelaUsuariosState extends State<TelaUsuarios> {
                         color: Colors.grey[600]
                         )
                       ), 
-                      onPressed: () {},
+                      onPressed: () {print(documents);},
                     ),
                   ],
                 ),
@@ -91,7 +80,13 @@ class _TelaUsuariosState extends State<TelaUsuarios> {
                 child: ListView.builder(
                   itemCount: streamSnapshot.data.docs.length,
                   itemBuilder: (context, index) {
-                    return UserCard(nome: streamSnapshot.data.docs[index]["nome"], horas: streamSnapshot.data.docs[index]["horas"]);
+                    DocumentSnapshot doc = documents[index];
+                    return Column(
+                      children: [
+                        UserCard(nome: streamSnapshot.data.docs[index]["nome"], horas: streamSnapshot.data.docs[index]["horas"], id: doc.id,),
+                        Divider(height: 10)
+                      ],
+                    );
                   })
                 )
               ],
