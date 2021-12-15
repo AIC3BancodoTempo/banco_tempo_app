@@ -72,16 +72,6 @@ class _UserProfileState extends State<UserProfile> {
             padding: const EdgeInsets.all(18),
             child: Text("Produtos/Talentos",style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[400]),),
           ),
-          TextButton(
-            onPressed: (){
-              print(widget.id);
-              if (streamSnapshot.data.docs[1]["userPostId"] == widget.id) {
-                print(widget.id);
-              }
-              else print("null");
-            },
-            child: Text("asd",style: TextStyle(fontSize: 20),)
-          ),
           Expanded(
              child: ListView.builder(
                   itemCount: (pos.length/2).toInt(),
