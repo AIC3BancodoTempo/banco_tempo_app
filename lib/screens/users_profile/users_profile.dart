@@ -20,14 +20,12 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
 
   int cont = 0;
-  List<String> produtos = [];
   List<int> pos = [];
 
   @override
   // ignore: must_call_super
   void initState() {
     cont = 0;
-    produtos = [];
     pos = [];
   }
   @override
@@ -54,11 +52,9 @@ class _UserProfileState extends State<UserProfile> {
 
         for (var i = 0; i < streamSnapshot.data.docs.length; i++) {
           if (streamSnapshot.data.docs[i]["userPostId"] == widget.id){
-            produtos.add(streamSnapshot.data.docs[i]["userPostId"]);
             pos.add(i);
           }
         }
-        print((5/2).round());
         return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -74,8 +70,9 @@ class _UserProfileState extends State<UserProfile> {
           ),
           Expanded(
              child: ListView.builder(
-                  itemCount: (pos.length/2).toInt(),
+                  itemCount: (pos.length/2).round(),
                   itemBuilder: (context, index) {
+                    print((pos.length/2).round());
                     return   Padding(
                       padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
                       child: Row(
@@ -88,12 +85,14 @@ class _UserProfileState extends State<UserProfile> {
                             quantidade: streamSnapshot.data.docs[pos[index*2]]["productQuantity"],
                             horas: streamSnapshot.data.docs[pos[index*2]]["custoHoras"],
                             ),
-                          CardProdutoTalento(
+                          index*2+1 < (pos.length) 
+                          ? CardProdutoTalento(
                             imagem: streamSnapshot.data.docs[pos[index*2+1]]["imagens"],
                             nome: streamSnapshot.data.docs[pos[index*2+1]]["productName"],
                             quantidade: streamSnapshot.data.docs[pos[index*2+1]]["productQuantity"],
                             horas: streamSnapshot.data.docs[pos[index*2+1]]["custoHoras"],
                             )
+                          : Container()
                         ],
                       ));
                     // ignore: dead_code

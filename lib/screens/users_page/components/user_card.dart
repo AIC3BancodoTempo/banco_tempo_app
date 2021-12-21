@@ -35,13 +35,15 @@ class _UserCardState extends State<UserCard> {
                 flex: 1,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),
-                  child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(widget.nome,style: TextStyle(fontSize: 19,color: themeColor,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis),
-                      Container(height: 5,),
-                      Text(widget.id,style: TextStyle(fontSize: 15,color: Colors.grey[500]),)
-                    ],
+                  child: Container(
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.nome,style: TextStyle(fontSize: 19,color: themeColor,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis),
+                        Container(height: 5,),
+                        Text("Rio Grande - RS",style: TextStyle(fontSize: 15,color: Colors.grey[500]),)
+                      ],
+                    ),
                   ),
                 )
               ), 
