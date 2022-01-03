@@ -16,10 +16,10 @@ class AnuncianteText extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              isSolicitante ? 'Solicitante: ' + text : 'Anunciante: ' + text,
+              isSolicitante ? 'Solicitante: ' + text : 'Anunciante: ' + text + '\n\nTipo de evento: ' + 'Coletivo' + '\n\nPessoas Cadastradas: ' + '10',
               textAlign: TextAlign.left,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF2F2F3E)),
             ),
