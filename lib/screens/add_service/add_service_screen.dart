@@ -64,6 +64,11 @@ class _AddServicePageState extends State<AddServicePage> {
     9.5,
     10
   ];
+  final List<String> oferece = [
+    "Produto",
+    "Serviço",
+    "Evento"
+  ];
 
   @override
   void dispose() {
@@ -87,7 +92,7 @@ class _AddServicePageState extends State<AddServicePage> {
         centerTitle: true,
         backgroundColor: themeColor,
         title: Text(
-          "Descrição",
+          "Cadastrar",
         ),
       ),
       body: BlocListener<AddServiceBloc, AddServiceState>(
@@ -152,6 +157,25 @@ class _AddServicePageState extends State<AddServicePage> {
                           }).toList(),
                           validator: validateEmptyField,
                           hint: "Quantia em horas que deseja receber ou pagar",
+                          onChanged: (value) {
+                            addServiceBloc.setCustoHoras(value);
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(33.0, 20.0, 33.0, 2.0),
+                        child: FormDropDownUnderline(
+                          items: oferece
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value.toString(),
+                              child: Text(
+                                value.toString(),
+                              ),
+                            );
+                          }).toList(),
+                          validator: validateEmptyField,
+                          hint: "Tipo de serviço, evento ou produto",
                           onChanged: (value) {
                             addServiceBloc.setCustoHoras(value);
                           },
