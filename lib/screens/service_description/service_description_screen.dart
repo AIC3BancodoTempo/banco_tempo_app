@@ -144,7 +144,13 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
                           onpress: () {
                             serviceDescriptionBloc.add(ChatPressedEvent());
                           },
-                        )
+                        ),
+                        /*RoundedButton(
+                          text: "INTERESSE DO BANCO",
+                          onpress: () {
+                            serviceDescriptionBloc.add(ChatPressedEvent());
+                          },
+                        ),*/
                       else
                         Container()
                     ],
