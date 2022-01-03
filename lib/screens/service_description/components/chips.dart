@@ -46,7 +46,7 @@ class _ChipsState extends State<Chips> {
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: DropdownButton<String>(
             value: defValue,
-            hint: Text("Quantidade"),
+            hint: Text(" 1.0 Hora"),
             items: widget.dropList,
             onChanged: (value) {
               setState(() {
@@ -56,7 +56,7 @@ class _ChipsState extends State<Chips> {
             },
           ),
         ),
-        Container(
+        /*Container(
           height: 35,
           padding: EdgeInsets.only(left: 5, right: 5),
           decoration: BoxDecoration(
@@ -68,7 +68,7 @@ class _ChipsState extends State<Chips> {
           child: Chip(
             label: Text(widget.hora + ' Hora'),
           ),
-        ),
+        ),*/
       ],
     );
   }
