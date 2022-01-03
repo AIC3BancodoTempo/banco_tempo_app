@@ -13,7 +13,7 @@ class DrawerHeaderGeral extends StatelessWidget {
         userModel.nome,
         style: TextStyle(fontSize: 18),
       ),
-      accountEmail: Text('Horas acumuladas: ${userModel.horas}'),
+      accountEmail: Text('Horas acumuladas: ${userModel.horas}\n' + 'Horas do banco: 50.0'),
       currentAccountPicture: CircleAvatar(
         child: ClipOval(
           child: Image(
