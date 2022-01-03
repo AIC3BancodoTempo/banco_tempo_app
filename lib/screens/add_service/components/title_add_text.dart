@@ -9,7 +9,7 @@ class TitleAddText extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(25),
           child: Text(
-              "Adicione uma habilidade, serviço ou o que está procurando!",
+              "Cadastre um Serviço, Evento ou Produto ou o que está procurando",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
