@@ -7,7 +7,7 @@ class RoundedInput extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final TextEditingController controller;
-  final Function onChanged;
+  final ValueChanged<String> onChanged;
   final Function validator;
   final TextInputType keyboardType;
   const RoundedInput(

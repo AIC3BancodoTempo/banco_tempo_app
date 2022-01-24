@@ -5,6 +5,7 @@ class UserModel {
   double horas;
   bool isAdmin;
   int reports;
+  String foto;
 
   UserModel({
     this.key,
@@ -13,6 +14,7 @@ class UserModel {
     this.email,
     this.isAdmin,
     this.reports,
+    this.foto
   });
 
   UserModel.fromSnapshot(Map<String, dynamic> data, String id) {
@@ -22,5 +24,6 @@ class UserModel {
     email = data['email'] != null ? data['email'] : '';
     isAdmin = data['is_admin'] != null ? data['is_admin'] : false;
     reports = data['reports'] != null ? data['reports'] : 0;
+    foto = data['foto'] != null ? data['foto'] : "";
   }
 }

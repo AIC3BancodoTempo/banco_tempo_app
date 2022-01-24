@@ -1,6 +1,8 @@
 
 
+import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
+import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'components/user_card.dart';
@@ -18,198 +20,219 @@ class TelaUsuarios extends StatefulWidget {
 }
 
 class _TelaUsuariosState extends State<TelaUsuarios> {
-  var filtro_atual = 0;
-  var ordenar_atual = "Alfabético";
-  var pos_user = [];
-  var users = [];
 
-  func_filtro(valor){
+  bool pesquisar = false;
+  var filtroAtual = 0;
+  var ordenarAtual = "Alfabético";
+  String nome = "";
+
+  funcFiltro(valor){
     if (valor == 0) return "Mostrar todos";
     else return "$valor horas ou mais";
   }
 
+  List<UserModel> _listaUser (QuerySnapshot snapshot){
+    return snapshot.docs.map((e) {
+      print(e);
+      return UserModel(
+        key: e.id,
+        nome: e.get('nome') ?? "",
+        horas: e.get('horas').toDouble() ?? 0,
+        email: e.get('email') ?? "",
+        isAdmin: e.get('is_admin') ?? false,
+        reports: e.get('reports') ?? 0,
+        foto: e.get("foto") ?? ""
+      );
+    }).toList();
+  }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> asd = FirebaseFirestore.instance.collection("users").snapshots();
+  Stream<List<UserModel>> get _users{
+    if(!pesquisar)return FirebaseFirestore.instance.collection("users").where("horas",isGreaterThanOrEqualTo: filtroAtual).snapshots().map(_listaUser);
+    else return FirebaseFirestore.instance.collection("users").where("nome",isGreaterThanOrEqualTo: nome).where("nome",isLessThanOrEqualTo: nome+"z").snapshots().map(_listaUser);
+  }
+  
+  Widget build(BuildContext context){
 
-  @override
-  Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
         centerTitle: true,
         backgroundColor: themeColor,
-        title: Text('Usuarios'),
+        title: !pesquisar
+          ? Text('Usuarios')
+          : TextField(
+            onChanged: (value){setState(() {nome = value;});},
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              hintText: "Procurar",
+              hintStyle: TextStyle(color: Colors.white)
+            ),
+          ),
         actions: <Widget>[
-          Icon(Icons.search),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: !pesquisar 
+              ? IconButton(onPressed: (){setState(() {pesquisar = true;filtroAtual = 0;ordenarAtual = "Alfabético";});}, icon: Icon(Icons.search))
+              : IconButton(onPressed: (){setState(() {pesquisar = false;nome = "";});}, icon: Icon(Icons.close_rounded))
+          ),
         ],
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("users").snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot){
-        pos_user = [];
-        users = [];
-        
-        if(streamSnapshot.data == null) return CircularProgressIndicator();
-        QuerySnapshot snap = streamSnapshot.data;
-        List<DocumentSnapshot> documents = snap.docs;
-        for (var i = 0; i < streamSnapshot.data.docs.length; i++) {
-          if (streamSnapshot.data.docs[i]["horas"] >= filtro_atual) {
-            pos_user.add({"nome": streamSnapshot.data.docs[i]["nome"],"horas":streamSnapshot.data.docs[i]["horas"],"id":documents[i].id});
-            //pos_user.add(i);
-          }
-        }
-    
-        if (ordenar_atual == "Alfabético") {
-          pos_user.sort((a,b){
-            var as = a["nome"];
-            var bs = b["nome"];
-            return as.toString().toLowerCase().compareTo(bs.toString().toLowerCase());
-          });
-        }
-        if (ordenar_atual == "Alfabético inversa") {
-          pos_user.sort((a,b){
-            var as = a["nome"];
-            var bs = b["nome"];
-            return -as.toString().toLowerCase().compareTo(bs.toString().toLowerCase());
-          });
-        }
-        if (ordenar_atual == "Horas crescente") {
-          pos_user.sort((a,b){
-            var as = a["horas"];
-            var bs = b["horas"];
-            return as.toString().compareTo(bs.toString());
-          });
-        }
-        if (ordenar_atual == "Horas decrescente") {
-          pos_user.sort((a,b){
-            var as = a["horas"];
-            var bs = b["horas"];
-            return -as.toString().compareTo(bs.toString());
-          });
-        }
-
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          child: Column(
-            children: [
-              Container(
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: StreamBuilder<List<UserModel>>(
+        stream: _users,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final usuario = snapshot.data?.toList();
+            if (ordenarAtual == "Alfabético") {
+              usuario.sort((a,b){
+                var as = a.nome;
+                var bs = b.nome;
+                return as.toString().toLowerCase().compareTo(bs.toString().toLowerCase());
+              });
+            }
+            else if (ordenarAtual == "Alfabético inversa") {
+              usuario.sort((a,b){
+                var as = a.nome;
+                var bs = b.nome;
+                return -as.toString().toLowerCase().compareTo(bs.toString().toLowerCase());
+              });
+            }
+            else if  (ordenarAtual == "Horas crescente") {
+              usuario.sort((a,b){
+                var as = a.horas;
+                var bs = b.horas;
+                return as.toString().compareTo(bs.toString());
+              });
+            }
+            else if  (ordenarAtual == "Horas decrescente") {
+              usuario.sort((a,b){
+                var as = a.horas;
+                var bs = b.horas;
+                return -as.toString().compareTo(bs.toString());
+              });
+            }
+            return Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Column(
                   children: [
-                    RichText(
-                      text: TextSpan(
+                    !pesquisar 
+                    ?Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          WidgetSpan(child: Icon(Icons.filter_alt_rounded,size: 25,color: Colors.grey[300],)),
-                          TextSpan( text: "Filtrar",
-                            style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[600],fontWeight: FontWeight.w600))
-                        ]
-                      )
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          WidgetSpan(child: Icon(Icons.sort,size: 25,color: Colors.grey[300],)),
-                          TextSpan( text: "Ordenar",
-                        style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey[600],fontWeight: FontWeight.w600))
-                        ]
-                      )
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      height: 35,
-                      child:  DropdownButton(
-                        value: filtro_atual,
-                        onChanged: (e) {
-                          setState(() {
-                          filtro_atual = e;
-                          });
-                        },
-                        items: [0,1,2,3,4,5,6,7,8,9].map((e) {
-                          return DropdownMenuItem(
-                            value: e,
-                            child: Text(
-                              "${func_filtro(e)}",
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.grey[600],
-                                fontWeight: FontWeight.w500
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      )
-                    ),
-                  Container(
-                    height: 35,
-                    child: DropdownButton(
-                      value: ordenar_atual,
-                      onChanged: (e) {
-                        setState(() {
-                        ordenar_atual = e;
-                        });
-                      },
-                      items: ["Alfabético","Alfabético inversa", "Horas crescente", "Horas decrescente"].map((e) {
-                        return DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            "${e}",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey[600],
-                              fontWeight: FontWeight.w500,
-                              
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                WidgetSpan(child: Icon(Icons.filter_alt_rounded,size: 25,color: Colors.grey[300],)),
+                                TextSpan( text: "Filtrar",
+                                  style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.grey[600],fontWeight: FontWeight.w600))
+                              ]
                             )
                           ),
-                        );
-                      }).toList(),
-                    )
-                  ),
-                ],
-              ),
-              
-              Expanded(
-                flex: 1,
-                child: pos_user.length > 0 
-                ? ListView.builder(
-                    itemCount: pos_user.length,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot doc = documents[index];
-                      return Column(
-                        children: [
-                          UserCard(nome: pos_user[index]["nome"], horas: pos_user[index]["horas"], id: pos_user[index]["id"],),
-                          Divider(height: 10)
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                WidgetSpan(child: Icon(Icons.sort,size: 25,color: Colors.grey[300],)),
+                                TextSpan( text: "Ordenar",
+                              style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey[600],fontWeight: FontWeight.w600))
+                              ]
+                            )
+                          ),
                         ],
-                      );
-                  })
-                : Center(child: Text(
-                  "Nenhum usuario foi encontrado",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: themeColor
-                  ),
-                  ))
+                      ),
+                    )
+                    : SizedBox.shrink(),
+                    !pesquisar
+                    ?Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            height: 35,
+                            child:  DropdownButton(
+                              value: filtroAtual,
+                              onChanged: (e) {
+                                setState(() {
+                                filtroAtual = e;
+                                });
+                              },
+                              items: [0,1,2,3,4,5,6,7,8,9].map((e) {
+                                return DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    "${funcFiltro(e)}",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey[600],
+                                      fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            )
+                          ),
+                        Container(
+                          height: 35,
+                          child: DropdownButton(
+                            value: ordenarAtual,
+                            onChanged: (e) {
+                              setState(() {
+                              ordenarAtual = e;
+                              });
+                            },
+                            items: ["Alfabético","Alfabético inversa", "Horas crescente", "Horas decrescente"].map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(
+                                  e,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey[600],
+                                    fontWeight: FontWeight.w500,
+                                    
+                                  )
+                                ),
+                              );
+                            }).toList(),
+                          )
+                        ),
+                      ],
+                    )
+                    :SizedBox.shrink(),
+                    Expanded(
+                      flex: 1,
+                      child: usuario.length > 0 
+                      
+                      ? ListView.builder(
+                          itemCount: usuario.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return UserCard(user: usuario[index]);
+                          
+                        })
+                      : Center(child: Text(
+                        "Nenhum usuario foi encontrado",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: themeColor
+                        ),
+                        ))
+                      )
+                  ]
                 )
-              ],
-            ),
-          );
+              );
+          }
+          else return Loading();
         }
-
       )
     );
   }
+
 }

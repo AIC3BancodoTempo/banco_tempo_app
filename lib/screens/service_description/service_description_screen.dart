@@ -144,7 +144,7 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
                           onpress: () {
                             serviceDescriptionBloc.add(ChatPressedEvent());
                           },
-                        )
+                        ),
                       if (serviceDescriptionBloc.user.uid !=
                           serviceDescriptionBloc.serviceModel.userPostId)
                         RoundedButton(
