@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 
 class ServiceModel {
   String userPostId;
+  String typeProduct;
+  bool isEvent;
+  String idEvent;
   String userPostName;
   String productId;
   String productName;
@@ -16,6 +19,9 @@ class ServiceModel {
   DocumentSnapshot documentSnapshot;
   ServiceModel(
       {this.userPostId,
+      this.typeProduct,
+      this.isEvent = false,
+      this.idEvent,
       this.userPostName,
       this.data,
       this.productQuantity,
@@ -30,6 +36,8 @@ class ServiceModel {
 
   ServiceModel copyWith({
     String userPostId,
+    String typeProduct,
+    String idEvent,
     String userPostName,
     String productId,
     String productName,
@@ -42,6 +50,9 @@ class ServiceModel {
   }) {
     return ServiceModel(
         userPostId: userPostId ?? this.userPostId,
+        typeProduct: typeProduct ?? this.typeProduct,
+        isEvent: isEvent ?? this.isEvent,
+        idEvent: idEvent ?? this.idEvent,
         userPostName: userPostName ?? this.userPostName,
         productId: productId ?? this.productId,
         productName: productName ?? this.productName,
@@ -58,6 +69,9 @@ class ServiceModel {
     productId = doc.id;
     documentSnapshot = doc;
     userPostId = info['userPostId'] != null ? info['userPostId'] : '';
+    typeProduct = info['typeProduct'] != null ? info['typeProduct'] : '';
+    isEvent = info['isEvent'] != null ? info['isEvent'] : false;
+    idEvent = info['idEvent'] != null ? info['idEvent'] : '';
     userPostName = info['userPostName'] != null ? info['userPostName'] : '';
     productQuantity =
         info['productQuantity'] != null ? info['productQuantity'] : 0;
@@ -79,6 +93,9 @@ class ServiceModel {
 
     return ServiceModel(
         userPostId: map['userPostId'],
+        typeProduct: map['typeProduct'],
+        isEvent: map['isEvent'],
+        idEvent: map['idEvent'],
         userPostName: map['userPostName'],
         productId: map['productId'],
         productName: map['productName'],
@@ -92,6 +109,9 @@ class ServiceModel {
   }
   Map<String, dynamic> toMap() {
     return {
+      'typeProduct': typeProduct,
+      'isEvent': isEvent,
+      'idEvent': idEvent,
       'custoHoras': custoHoras,
       'data': DateTime.now().millisecondsSinceEpoch,
       'imagens': images,
