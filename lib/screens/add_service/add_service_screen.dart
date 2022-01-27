@@ -64,11 +64,7 @@ class _AddServicePageState extends State<AddServicePage> {
     9.5,
     10
   ];
-  final List<String> oferece = [
-    "Produto",
-    "Serviço",
-    "Evento"
-  ];
+  final List<String> oferece = ["Produto", "Serviço", "Evento"];
 
   @override
   void dispose() {
@@ -177,12 +173,18 @@ class _AddServicePageState extends State<AddServicePage> {
                           validator: validateEmptyField,
                           hint: "Tipo de serviço, evento ou produto",
                           onChanged: (value) {
-                            addServiceBloc.setCustoHoras(value);
+                            addServiceBloc.setTypeProduct(value);
+                            if (value == 'Evento') {
+                              addServiceBloc.setTypeEvent(true);
+                            }
+                            addServiceBloc.setCreateEvent();
                           },
                         ),
                       ),
                       OfferType(
-                        onChange: (value) => addServiceBloc.setTipe(value),
+                        onChange: (value) {
+                          addServiceBloc.setTipe(value);
+                        },
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(33.0, 10.0, 33.0, 2.0),
