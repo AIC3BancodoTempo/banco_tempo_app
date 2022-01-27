@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AnuncianteText extends StatelessWidget {
-  final String text;
+  final String textAnunciante;
+  final String textTipo;
   final bool isSolicitante;
+  final bool isEvento;
 
   const AnuncianteText(
-      {Key key, @required this.text, this.isSolicitante = false})
+      {Key key,
+      @required this.textAnunciante,
+      this.isSolicitante = false,
+      this.isEvento = false,
+      this.textTipo})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,29 @@ class AnuncianteText extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              isSolicitante ? 'Solicitante: ' + text : 'Anunciante: ' + text + '\n\nTipo de evento: ' + 'Coletivo' + '\n\nPessoas Cadastradas: ' + '10',
+              isEvento && isSolicitante
+                  ? '\n\nPessoas Cadastradas: ' +
+                      '0' +
+                      '\n\nSolicitante: ' +
+                      textAnunciante +
+                      '\n\nTipo: ' +
+                      textTipo
+                  : isEvento && isSolicitante == false
+                      ? '\n\nPessoas Cadastradas: ' +
+                          '0' +
+                          '\n\nAnunciante: ' +
+                          textAnunciante +
+                          '\n\nTipo: ' +
+                          textTipo
+                      : isEvento == false && isSolicitante
+                          ? '\n\nSolicitante: ' +
+                              textAnunciante +
+                              '\n\nTipo: ' +
+                              textTipo
+                          : 'Anunciante: ' +
+                              textAnunciante +
+                              '\n\nTipo: ' +
+                              textTipo,
               textAlign: TextAlign.left,
               style: TextStyle(
                   fontSize: 15,
