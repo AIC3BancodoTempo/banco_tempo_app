@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../blocs/service_description/service_description_bloc.dart';
 import '../../core/models/service_model.dart';
 import '../core/colors.dart';
@@ -130,10 +129,14 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
                       ),
                       spaceVertical(30),
                       AnuncianteText(
-                        isSolicitante:
-                            serviceDescriptionBloc.serviceModel.isSearch,
-                        text: serviceDescriptionBloc.serviceModel.userPostName,
-                      ),
+                          isSolicitante:
+                              serviceDescriptionBloc.serviceModel.isSearch,
+                          textAnunciante:
+                              serviceDescriptionBloc.serviceModel.userPostName,
+                          textTipo:
+                              serviceDescriptionBloc.serviceModel.typeProduct,
+                          isEvento:
+                              serviceDescriptionBloc.serviceModel.isEvent),
                       spaceVertical(20),
                       if (serviceDescriptionBloc.user.uid !=
                           serviceDescriptionBloc.serviceModel.userPostId)
