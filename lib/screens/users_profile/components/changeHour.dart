@@ -56,7 +56,7 @@ class _ChangeHourState extends State<ChangeHour> {
                       Expanded(
                         flex: 1,
                         child: TextFormField(
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))],
                           autofocus: true,
                           textAlign: TextAlign.right,
                           initialValue: this.widget.horas.toString(),

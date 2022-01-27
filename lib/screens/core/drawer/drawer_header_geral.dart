@@ -41,7 +41,7 @@ class DrawerHeaderGeral extends StatelessWidget {
               usuario.nome,
               style: TextStyle(fontSize: 18),
             ),
-            accountEmail: Text('Horas acumuladas: ${usuario.horas}\n' + 'Horas do banco: 50.0'),
+            accountEmail: Text('Horas acumuladas: ${usuario.horas}\n' + 'Horas do banco: 50.0'), 
             currentAccountPicture: Stack(
               children: [
                 GestureDetector(
