@@ -49,7 +49,7 @@ class _CardHoursState extends State<CardHours> {
             padding: const EdgeInsets.symmetric(vertical: 75),
             child: GestureDetector(
               onTap: (){
-                Navigator.of(context).push(PageRouteBuilder(barrierDismissible: true,opaque: false,pageBuilder: (_, __, ___) => ChangeHour(horas: info.horas.toInt(),nome: info.nome,id: info.key,)));},
+                Navigator.of(context).push(PageRouteBuilder(barrierDismissible: true,opaque: false,pageBuilder: (_, __, ___) => ChangeHour(horas: info.horas,nome: info.nome,id: info.key,)));},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
