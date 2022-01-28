@@ -1,5 +1,5 @@
 
-import 'package:banco_do_tempo_app/core/models/service_model.dart';
+//import 'package:banco_do_tempo_app/core/models/service_model.dart';
 import 'package:banco_do_tempo_app/core/models/userService_model.dart';
 import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';

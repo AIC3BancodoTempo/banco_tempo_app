@@ -1,8 +1,8 @@
-import 'package:banco_do_tempo_app/core/models/service_model.dart';
+//import 'package:banco_do_tempo_app/core/models/service_model.dart';
 import 'package:banco_do_tempo_app/core/models/userService_model.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+//import 'package:meta/meta.dart';
 
 class CardProdutoTalento extends StatefulWidget {
 

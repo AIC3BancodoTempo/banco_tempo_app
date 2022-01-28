@@ -3,7 +3,7 @@ import '../core/loading.dart';
 import '../../blocs/exchange_in_progress/exchange_in_progress_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+//import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/card_exchange_in_progress.dart';
