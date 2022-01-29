@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ChangeHour extends StatefulWidget {
-  final int horas;
+  final double horas;
   final String id;
   final String nome;
   
@@ -59,7 +59,7 @@ class _ChangeHourState extends State<ChangeHour> {
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))],
                           autofocus: true,
                           textAlign: TextAlign.right,
-                          initialValue: this.widget.horas.toString(),
+                          initialValue: this.widget.horas.toDouble().toString(),
                           style: TextStyle(color: Colors.white, fontSize: 30),
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -79,17 +79,19 @@ class _ChangeHourState extends State<ChangeHour> {
                     ],
                   ),
                   Opacity(
-                    opacity: novaHora.length == 0 || novaHora == widget.horas.toString() ? 0.3 : 1,
+                    opacity: novaHora.length == 0 || novaHora == widget.horas.toDouble().toString() ? 0.3 : 1,
                     child: TextButton.icon(
                       style: TextButton.styleFrom(
                         backgroundColor: themeColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(90))
-                         
+                          borderRadius: BorderRadius.circular(90)
+                        )
                       ),
                       onPressed: (){
-                        attHoras();
-                        Navigator.pop(context);
+                        if (novaHora.length != 0 && novaHora != widget.horas.toDouble().toString()){
+                          attHoras();
+                          Navigator.pop(context);
+                        }
                       },
                       icon: Icon(Icons.done, color: Colors.white,),
                       label: Text("Confirmar",style: TextStyle(color: white),)),
