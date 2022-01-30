@@ -26,6 +26,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+// ignore: unused_element
 BuildContext _context;
 init(BuildContext context) async {
   _context = context;

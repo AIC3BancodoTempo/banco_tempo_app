@@ -92,14 +92,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is CreateLoginEmailEvent) {
         user = await _authRepository.createUserWithEmailPass(
             event.email, event.senha);
-
-        await user.updateProfile(displayName: event.nome);
+        await user.updatePhotoURL(event.nome);
         userModel = await _usersRepository.insertUser(
           user.uid,
           event.email,
           event.nome,
         );
         String token = await _messagingRepository.getToken();
+        // ignore: unused_local_variable
         bool insertedToken = await tokenRepository.setToken(user.uid, token);
 
         if (userModel == null) {

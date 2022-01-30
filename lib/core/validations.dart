@@ -22,7 +22,7 @@ String validateSenha(String value) {
   if (value.isEmpty)
     return 'Senha não pode ser vazia!';
   else
-    return value.length > 6 ? null : 'Senha deve conter mais de 6 caracteres';
+    return value.length >= 6 ? null : 'Senha deve conter mais de 6 caracteres';
 }
 
 String validateEmptyField(String value) {

@@ -7,34 +7,32 @@ import 'package:flutter/material.dart';
 
 class CardHours extends StatefulWidget {
   final String id;
-  const CardHours({ Key key, this.id }) : super(key: key);
+  const CardHours({Key key, this.id}) : super(key: key);
 
   @override
   _CardHoursState createState() => _CardHoursState();
 }
 
 class _CardHoursState extends State<CardHours> {
+  //@override
 
-  
+  UserModel _usuario(DocumentSnapshot snapshot) {
+    return UserModel(
+      key: snapshot.id,
+      nome: snapshot['nome'] ?? "",
+      horas: snapshot['horas'].toDouble() ?? 0,
+    );
+  }
 
-  @override
+  Stream<UserModel> get _user {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.id)
+        .snapshots()
+        .map(_usuario);
+  }
 
-  UserModel _usuario (DocumentSnapshot snapshot){
-      return UserModel(
-        key: snapshot.id,
-        nome: snapshot['nome'] ?? "",
-        horas: snapshot['horas'].toDouble() ?? 0,
-      );
-    }
-
-    Stream<UserModel> get _user{
-      return FirebaseFirestore.instance.collection("users").doc(widget.id).snapshots().map(_usuario);
-    }
   Widget build(BuildContext context) {
-
-    
-
-
     return StreamBuilder<UserModel>(
       stream: _user,
       builder: (context, snapshot) {

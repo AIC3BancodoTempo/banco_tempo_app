@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import '../tokens/firestore_tokens.dart';
@@ -48,6 +47,7 @@ class MessagingRepository {
   void sendMessage(String token, String from, String content) async {
     final String serverToken =
         'AAAABcTPY-8:APA91bFLJygVNqeHnCEDnK-Xs0KM1z_44mWKMw8zi3yhTWnWEMKHsu0XPSgoHmHwKwS5gjDqYyV3xyr2OddEYv5YWhIiI8oCTkuJBDc6NRnH5c6vfLkOF7ZMNIJANbBCAJtBz_4b1F-0';
+    // ignore: unused_local_variable
     http.Response response = await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
       headers: <String, String>{

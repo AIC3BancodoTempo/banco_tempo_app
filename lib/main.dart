@@ -27,6 +27,7 @@ void main() async {
   runApp(Run());
 }
 
+// ignore: must_be_immutable
 class Run extends StatelessWidget {
   Run({Key key}) : super(key: key);
   User _user;
