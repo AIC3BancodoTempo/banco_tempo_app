@@ -2,11 +2,12 @@
 import 'package:banco_do_tempo_app/core/models/service_model.dart';
 import 'package:banco_do_tempo_app/core/models/userService_model.dart';
 import 'package:banco_do_tempo_app/core/models/user_model.dart';
+import 'package:banco_do_tempo_app/screens/admin/users_profile/components/card_hours.dart';
+import 'package:banco_do_tempo_app/screens/admin/users_profile/components/card_produtotalento.dart';
+import 'package:banco_do_tempo_app/screens/admin/users_profile/components/card_profile.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:banco_do_tempo_app/screens/core/loading.dart';
-import 'package:banco_do_tempo_app/screens/users_profile/components/card_hours.dart';
-import 'package:banco_do_tempo_app/screens/users_profile/components/card_produtotalento.dart';
-import 'package:banco_do_tempo_app/screens/users_profile/components/card_profile.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

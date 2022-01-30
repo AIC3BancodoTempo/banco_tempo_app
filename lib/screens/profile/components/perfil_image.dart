@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PerfilImage extends StatelessWidget {
+  String fotoURL;
+  PerfilImage(this.fotoURL);
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      child: Stack(
         children: [
           Container(
             margin: EdgeInsets.only(top: 120), //10
@@ -20,10 +21,13 @@ class PerfilImage extends StatelessWidget {
               ),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/profile.png"),
+                image: this.fotoURL != ""
+                        ? NetworkImage(this.fotoURL)
+                        : AssetImage('assets/images/profile.png'),
               ),
             ),
           ),
+          
         ],
       ),
     );

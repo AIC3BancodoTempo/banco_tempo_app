@@ -71,7 +71,7 @@ class _ProfileScreenPageState extends State<ProfileScreenPage> {
                     ),
                   ),
                 ),
-                PerfilImage(),
+                PerfilImage(profileBloc.user.foto),
               ],
             ),
             RightTextProfile(

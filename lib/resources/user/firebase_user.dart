@@ -13,7 +13,7 @@ class UsersRepository {
     this.firestoreInstance = FirebaseFirestore.instance;
   }
 
-  Future<UserModel> insertUser(String userId, String email, String nome,) async {
+  Future<UserModel> insertUser(String userId, String email, String nome) async {
     return await firestoreInstance.collection('users').doc(userId).set({
       'horas': 4,
       'email': email,

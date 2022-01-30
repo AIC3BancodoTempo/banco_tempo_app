@@ -4,35 +4,41 @@ import 'package:banco_do_tempo_app/screens/core/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class ChangeHour extends StatefulWidget {
   final double horas;
   final String id;
   final String nome;
   
-  const ChangeHour({ Key key, this.horas, this.id, this.nome }) : super(key: key);
+  const ChangeHour({ Key key, this.horas, this.id, this.nome}) : super(key: key);
+
+  
 
   @override
   State<ChangeHour> createState() => _ChangeHourState();
 }
 
 
+
 class _ChangeHourState extends State<ChangeHour> {
 
   String novaHora = "";
-
+  
 
 
   @override
   
   Widget build(BuildContext context) {
     Future attHoras() async {
+      await FirebaseFirestore.instance.collection("admin").doc("log").update({
+        "logHoras": FieldValue.arrayUnion(["${DateFormat('dd/MM/yyyy').format(DateTime.now())},${widget.nome},${widget.horas},${double.parse(novaHora)}"])
+      });
       return await FirebaseFirestore.instance.collection("users").doc(widget.id).update({
         "horas": double.parse(novaHora)
         }
       );
     }
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BackdropFilter(

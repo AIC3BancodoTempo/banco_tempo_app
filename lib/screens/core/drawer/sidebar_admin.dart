@@ -60,7 +60,8 @@ class SideBarAdm extends StatelessWidget {
               authBloc.add(LogoutEvent());
             },
           ),
-          Container(height: 50,),
+          SizedBox(height: 50,),
+          Divider(height: 2,thickness: 2,),
           ListTile(
             title: Text("Administrador:"),
           ),
@@ -71,6 +72,14 @@ class SideBarAdm extends StatelessWidget {
               navigateToUsersPage(context);
             },
           ),
+          ListTile(
+            trailing: Icon(Icons.history),
+            title: Text("Historico de mudanças de horas"),
+            onTap: () {
+              navigateToLogHours(context);
+            },
+          ),
+          
         ],
       ),
     );

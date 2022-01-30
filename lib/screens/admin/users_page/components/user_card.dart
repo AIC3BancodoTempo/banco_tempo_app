@@ -1,7 +1,7 @@
 import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/resources/fotos/FotosPerfil.dart';
+import 'package:banco_do_tempo_app/screens/admin/users_profile/users_profile.dart';
 import 'package:banco_do_tempo_app/screens/core/colors.dart';
-import 'package:banco_do_tempo_app/screens/users_profile/users_profile.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
