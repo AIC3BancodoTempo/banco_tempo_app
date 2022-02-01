@@ -177,7 +177,7 @@ class _AddServicePageState extends State<AddServicePage> {
                             if (value == 'Evento') {
                               addServiceBloc.setTypeEvent(true);
                             }
-                            addServiceBloc.setCreateEvent();
+                            addServiceBloc.setCreateEvent(value);
                           },
                         ),
                       ),
