@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_picture_uploader/firebase_picture_uploader.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,6 +10,7 @@ import '../../core/models/service_model.dart';
 import '../../core/models/user_model.dart';
 import '../../resources/service/firestore_service.dart';
 import '../../resources/storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 part 'add_service_event.dart';
 part 'add_service_state.dart';
 
@@ -63,8 +65,15 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
     product.isEvent = isEvent;
   }
 
-  setCreateEvent() {
-    product.idEvent = '';
+  setCreateEvent(String typeProduct) {
+    if (typeProduct == 'Evento') {
+      var id = '';
+      var document = FirebaseFirestore.instance.collection('eventos');
+      document.doc(id = Uuid().v4()).set({'users': []});
+      product.idEvent = id;
+    } else {
+      product.idEvent = null;
+    }
   }
 
   setCustoHoras(String custohoras) {
