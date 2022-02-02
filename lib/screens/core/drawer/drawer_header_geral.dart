@@ -20,12 +20,9 @@ class DrawerHeaderGeral extends StatefulWidget {
 class _DrawerHeaderGeralState extends State<DrawerHeaderGeral> {
   final BankModel bankModel = BankModel();
 
-  
-
   AddFotos add = AddFotos();
 
   UserModel _usuario(DocumentSnapshot snapshot) {
-    
     return UserModel(
         key: snapshot.id,
         nome: snapshot['nome'] ?? "",
@@ -40,6 +37,7 @@ class _DrawerHeaderGeralState extends State<DrawerHeaderGeral> {
         .snapshots()
         .map(_usuario);
   }
+
   double horas = 0.0;
   @override
   Widget build(BuildContext context) {

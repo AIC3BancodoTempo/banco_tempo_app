@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class PerfilImage extends StatelessWidget {
   String fotoURL;
   PerfilImage(this.fotoURL);
@@ -22,12 +23,11 @@ class PerfilImage extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: this.fotoURL != ""
-                        ? NetworkImage(this.fotoURL)
-                        : AssetImage('assets/images/profile.png'),
+                    ? NetworkImage(this.fotoURL)
+                    : AssetImage('assets/images/profile.png'),
               ),
             ),
           ),
-          
         ],
       ),
     );

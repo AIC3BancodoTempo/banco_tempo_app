@@ -60,8 +60,13 @@ class SideBarAdm extends StatelessWidget {
               authBloc.add(LogoutEvent());
             },
           ),
-          SizedBox(height: 50,),
-          Divider(height: 2,thickness: 2,),
+          SizedBox(
+            height: 50,
+          ),
+          Divider(
+            height: 2,
+            thickness: 2,
+          ),
           ListTile(
             title: Text("Administrador:"),
           ),
@@ -79,7 +84,6 @@ class SideBarAdm extends StatelessWidget {
               navigateToLogHours(context);
             },
           ),
-          
         ],
       ),
     );

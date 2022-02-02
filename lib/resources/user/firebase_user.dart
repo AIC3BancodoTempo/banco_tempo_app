@@ -4,8 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../core/models/user_model.dart';
 
 class UsersRepository {
-
-
   FirebaseFirestore firestoreInstance;
 
   UsersRepository() {
@@ -22,7 +20,12 @@ class UsersRepository {
       "foto": ""
     }).then((value) {
       return UserModel(
-          email: email, horas: 22, isAdmin: false, nome: nome, reports: 0, foto: "");
+          email: email,
+          horas: 22,
+          isAdmin: false,
+          nome: nome,
+          reports: 0,
+          foto: "");
     }).catchError((error) => throw error);
   }
 
@@ -56,20 +59,16 @@ class UsersRepository {
     }).catchError((error) => throw error);
   }
 
-
-
-    List<UserModel> _listaUsuarios(QuerySnapshot snapshot){
-    return snapshot.docs.map((e){
-      return UserModel(
-        nome: e.get("nome") ?? "",
-        horas: e.get("horas") ?? ""
-        );
-      }
-    ).toList();
+  List<UserModel> _listaUsuarios(QuerySnapshot snapshot) {
+    return snapshot.docs.map((e) {
+      return UserModel(nome: e.get("nome") ?? "", horas: e.get("horas") ?? "");
+    }).toList();
   }
 
-  Stream<List<UserModel>> get usuarios{
-    return firestoreInstance.collection('users').snapshots().map(_listaUsuarios);
+  Stream<List<UserModel>> get usuarios {
+    return firestoreInstance
+        .collection('users')
+        .snapshots()
+        .map(_listaUsuarios);
   }
-
 }

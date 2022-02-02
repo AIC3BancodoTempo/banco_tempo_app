@@ -7,15 +7,14 @@ class UserModel {
   int reports;
   String foto;
 
-  UserModel({
-    this.key,
-    this.nome,
-    this.horas,
-    this.email,
-    this.isAdmin,
-    this.reports,
-    this.foto
-  });
+  UserModel(
+      {this.key,
+      this.nome,
+      this.horas,
+      this.email,
+      this.isAdmin,
+      this.reports,
+      this.foto});
 
   UserModel.fromSnapshot(Map<String, dynamic> data, String id) {
     key = id;

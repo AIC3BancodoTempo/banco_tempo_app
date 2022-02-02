@@ -2,7 +2,7 @@ import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:banco_do_tempo_app/resources/fotos/FotosPerfil.dart';
 import 'package:banco_do_tempo_app/screens/core/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/models/exchange_model.dart';

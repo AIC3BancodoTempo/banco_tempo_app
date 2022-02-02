@@ -9,7 +9,9 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundImage: image != "" ? NetworkImage(image) : AssetImage("assets/images/profile.png"),
+      backgroundImage: image != ""
+          ? NetworkImage(image)
+          : AssetImage("assets/images/profile.png"),
       maxRadius: radius,
     );
   }

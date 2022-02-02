@@ -37,7 +37,8 @@ void navigateToUsersPage(BuildContext context) {
   Navigator.of(context).pushNamed('/tela_usuarios');
 }
 
-
-void navigateToLogHours(BuildContext context){
-  Navigator.of(context).pushNamed('/log_horas',);
+void navigateToLogHours(BuildContext context) {
+  Navigator.of(context).pushNamed(
+    '/log_horas',
+  );
 }
