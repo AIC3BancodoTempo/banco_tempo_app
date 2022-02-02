@@ -8,15 +8,24 @@ import '../../../core/models/user_model.dart';
 import '../../../core/models/bank_model.dart';
 
 // ignore: must_be_immutable
-class DrawerHeaderGeral extends StatelessWidget {
+class DrawerHeaderGeral extends StatefulWidget {
   final UserModel userModel;
-  final BankModel bankModel = BankModel();
 
   DrawerHeaderGeral({Key key, this.userModel}) : super(key: key);
+
+  @override
+  State<DrawerHeaderGeral> createState() => _DrawerHeaderGeralState();
+}
+
+class _DrawerHeaderGeralState extends State<DrawerHeaderGeral> {
+  final BankModel bankModel = BankModel();
+
+  
 
   AddFotos add = AddFotos();
 
   UserModel _usuario(DocumentSnapshot snapshot) {
+    
     return UserModel(
         key: snapshot.id,
         nome: snapshot['nome'] ?? "",
@@ -27,13 +36,32 @@ class DrawerHeaderGeral extends StatelessWidget {
   Stream<UserModel> get _user {
     return FirebaseFirestore.instance
         .collection("users")
-        .doc(userModel.key)
+        .doc(widget.userModel.key)
         .snapshots()
         .map(_usuario);
   }
-
+  double horas = 0.0;
   @override
   Widget build(BuildContext context) {
+    Future<BankModel> readinfo() async {
+      BankModel model;
+      try {
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection('bank')
+            .doc('info')
+            .get();
+        if (snapshot.exists) {
+          model = BankModel.fromSnapshot(snapshot.data());
+          horas = model.horas;
+        }
+      } catch (error) {
+        throw error;
+      }
+      return model;
+    }
+
+    readinfo();
+
     return StreamBuilder<UserModel>(
         stream: _user,
         builder: (context, snapshot) {
@@ -45,7 +73,7 @@ class DrawerHeaderGeral extends StatelessWidget {
                 style: TextStyle(fontSize: 18),
               ),
               accountEmail: Text('Horas acumuladas: ${usuario.horas}\n' +
-                  'Horas do banco: ${bankModel.horas}'),
+                  'Horas do banco: $horas'),
               currentAccountPicture: Stack(children: [
                 GestureDetector(
                   onTap: () {
