@@ -1,6 +1,8 @@
+// import 'package:banco_do_tempo_app/core/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../blocs/service_description/service_description_bloc.dart';
 import '../../core/models/service_model.dart';
 import '../core/colors.dart';
@@ -48,9 +50,22 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
     super.dispose();
   }
 
+  var isAdmin = false;
+
   @override
   Widget build(BuildContext context) {
     serviceDescriptionBloc = BlocProvider.of<ServiceDescriptionBloc>(context);
+
+    getData() async {
+      var response = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(serviceDescriptionBloc.user.uid)
+          .get();
+      isAdmin = response.data()['is_admin'];
+    }
+
+    getData();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -148,8 +163,7 @@ class _DescriptionPageState extends State<ServiceDescriptionPage> {
                             serviceDescriptionBloc.add(ChatPressedEvent());
                           },
                         ),
-                      if (serviceDescriptionBloc.user.uid !=
-                          serviceDescriptionBloc.serviceModel.userPostId)
+                      if (isAdmin)
                         RoundedButton(
                           text: "INTERESSE DO BANCO",
                           onpress: () {
