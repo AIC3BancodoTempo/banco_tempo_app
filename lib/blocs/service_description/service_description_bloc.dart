@@ -21,6 +21,7 @@ class ServiceDescriptionBloc
   ServiceDescriptionBloc({@required this.user, @required this.serviceModel})
       : super(ServiceDescriptionInitial());
   final ExchangeRepository _exchangeRepository = ExchangeRepository();
+  final FirebaseAuth auth = FirebaseAuth.instance;
   List<DropdownMenuItem<String>> quantidadeList = [];
   ExchangeModel exchange;
   int amount = 0;

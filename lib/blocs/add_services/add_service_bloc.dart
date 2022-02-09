@@ -89,7 +89,8 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
   }
 
   setQuantity(String productQuantity) {
-    product.productQuantity = int.parse(productQuantity);
+    if (productQuantity == "") product.productQuantity = 0;
+    else product.productQuantity = int.parse(productQuantity);
   }
 
   setTipe(bool isSearch) {

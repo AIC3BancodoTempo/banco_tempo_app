@@ -46,6 +46,8 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
     serviceBloc = BlocProvider.of<ServiceBloc>(context);
+    print(widget.authBloc.user.displayName);
+    if(widget.authBloc.user.displayName == null)widget.authBloc.user.updateDisplayName(widget.authBloc.userModel.nome);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: themeColor,

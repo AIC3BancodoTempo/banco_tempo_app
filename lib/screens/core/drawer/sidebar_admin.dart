@@ -18,14 +18,6 @@ class SideBarAdm extends StatelessWidget {
           DrawerHeaderGeral(userModel: authBloc.userModel), //DrawerHeader
 
           ListTile(
-            trailing: Icon(Icons.add_rounded),
-            title: Text("Divulgações pendentes"),
-            onTap: () {
-              navigateToPendingPosts(context);
-            },
-          ),
-
-          ListTile(
             trailing: Icon(Icons.article_outlined),
             title: Text("Meus cadastros", style: TextStyle()),
             onTap: () {
@@ -69,6 +61,13 @@ class SideBarAdm extends StatelessWidget {
           ),
           ListTile(
             title: Text("Administrador:"),
+          ),
+          ListTile(
+            trailing: Icon(Icons.add_rounded),
+            title: Text("Divulgações pendentes"),
+            onTap: () {
+              navigateToPendingPosts(context);
+            },
           ),
           ListTile(
             trailing: Icon(Icons.person_outline_rounded),

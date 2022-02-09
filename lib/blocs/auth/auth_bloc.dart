@@ -98,6 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           event.email,
           event.nome,
         );
+        user.updateDisplayName(event.nome);
         String token = await _messagingRepository.getToken();
         // ignore: unused_local_variable
         bool insertedToken = await tokenRepository.setToken(user.uid, token);
