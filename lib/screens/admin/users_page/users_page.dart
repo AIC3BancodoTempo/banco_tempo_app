@@ -27,7 +27,6 @@ class _TelaUsuariosState extends State<TelaUsuarios> {
 
   List<UserModel> _listaUser(QuerySnapshot snapshot) {
     return snapshot.docs.map((e) {
-      print(e);
       return UserModel(
           key: e.id,
           nome: e.get('nome') ?? "",

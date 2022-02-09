@@ -46,46 +46,45 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
     serviceBloc = BlocProvider.of<ServiceBloc>(context);
-    print(widget.authBloc.user.displayName);
     if(widget.authBloc.user.displayName == null)widget.authBloc.user.updateDisplayName(widget.authBloc.userModel.nome);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: themeColor,
         centerTitle: true,
         title: !isSearch
-            ? Text('Serviços/Habilidades')
-            : TextField(
-                onChanged: (value) {
-                  serviceBloc.add(SearchServiceEvent(search: value));
-                },
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: "Procurar",
-                    hintStyle: TextStyle(color: Colors.white)),
-              ),
+        ? Text('Serviços/Habilidades')
+        : TextField(
+            onChanged: (value) {
+              serviceBloc.add(SearchServiceEvent(search: value));
+            },
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+            icon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            hintText: "Procurar",
+            hintStyle: TextStyle(color: Colors.white)),
+          ),
         actions: <Widget>[
           isSearch
-              ? IconButton(
-                  icon: Icon(Icons.cancel),
-                  onPressed: () {
-                    setState(() {
-                      this.isSearch = false;
-                    });
-                    serviceBloc.add(NewServiceEvent());
-                  },
-                )
-              : IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    setState(() {
-                      this.isSearch = true;
-                    });
-                  },
-                )
+          ? IconButton(
+            icon: Icon(Icons.cancel),
+            onPressed: () {
+              setState(() {
+                this.isSearch = false;
+              });
+              serviceBloc.add(NewServiceEvent());
+            },
+          )
+          : IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              setState(() {
+                this.isSearch = true;
+              });
+            },
+          )
         ],
       ),
       drawer: widget.authBloc.userModel.isAdmin
