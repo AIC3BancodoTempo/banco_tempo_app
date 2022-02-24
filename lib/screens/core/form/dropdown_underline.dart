@@ -39,7 +39,7 @@ class _FormDropDownState extends State<FormDropDownUnderline> {
           ),
         ),
       ),
-      validator: widget.validator,
+      validator: (a) => a == null ? 'Você esqueceu de responder' : null,
       value: padrao != null ? padrao : null,
       items: widget.items,
       isExpanded: true,

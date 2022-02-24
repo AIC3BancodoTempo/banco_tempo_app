@@ -20,7 +20,8 @@ import 'components/title_add_text.dart';
 class AddServiceScreen extends StatelessWidget {
   final UserModel user;
 
-  const AddServiceScreen({Key key, this.user}) : super(key: key);
+  AddServiceScreen({Key key, this.user}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,10 @@ class _AddServicePageState extends State<AddServicePage> {
     super.dispose();
   }
 
+  bool teste = false;
+
   @override
+
   Widget build(BuildContext context) {
     addServiceBloc = BlocProvider.of<AddServiceBloc>(context);
 
@@ -123,20 +127,20 @@ class _AddServicePageState extends State<AddServicePage> {
                       InsertInputs(
                         insertLabel: 'Nome',
                         onChanged: (value) {
-                          addServiceBloc.setName(value);
+                          if (value != null) addServiceBloc.setName(value);
                         },
                       ),
                       InsertInputs(
                         insertLabel: 'Descrição',
                         onChanged: (value) {
-                          addServiceBloc.setDescription(value);
+                          if (value != null) addServiceBloc.setDescription(value);
                         },
                       ),
                       InsertInputs(
                         keyboardType: TextInputType.number,
                         insertLabel: 'Quantidade disponível ou desejava',
                         onChanged: (value) {
-                          addServiceBloc.setQuantity(value);
+                          if (value != null) addServiceBloc.setQuantity(value);
                         },
                       ),
                       Padding(
@@ -154,7 +158,7 @@ class _AddServicePageState extends State<AddServicePage> {
                           validator: validateEmptyField,
                           hint: "Quantia em horas que deseja receber ou pagar",
                           onChanged: (value) {
-                            addServiceBloc.setCustoHoras(value);
+                            if (value != null) addServiceBloc.setCustoHoras(value);
                           },
                         ),
                       ),
@@ -173,11 +177,14 @@ class _AddServicePageState extends State<AddServicePage> {
                           validator: validateEmptyField,
                           hint: "Tipo de serviço, evento ou produto",
                           onChanged: (value) {
-                            addServiceBloc.setTypeProduct(value);
-                            if (value == 'Evento') {
-                              addServiceBloc.setTypeEvent(true);
+                            if (value != null){
+                              addServiceBloc.setTypeProduct(value);
+                              if (value == 'Evento') {
+                                addServiceBloc.setTypeEvent(true);
+                              }
+                              addServiceBloc.setCreateEvent(value);
                             }
-                            addServiceBloc.setCreateEvent(value);
+                            
                           },
                         ),
                       ),
