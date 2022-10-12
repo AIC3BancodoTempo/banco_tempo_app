@@ -21,7 +21,7 @@ class ButtonDescriptionAndAdd extends StatelessWidget {
       minWidth: 300,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: themeColor,
+          backgroundColor: themeColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
