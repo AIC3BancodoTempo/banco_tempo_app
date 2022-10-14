@@ -29,6 +29,7 @@ class TermsButton extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   recognizer: new TapGestureRecognizer()
                     ..onTap = () {
+                      // ignore: deprecated_member_use
                       launch(
                           'https://drive.google.com/file/d/1PcU8-GYK90bVK2YG6O3OeAH2FcAu4Gzo/view?usp=sharing');
                     }),

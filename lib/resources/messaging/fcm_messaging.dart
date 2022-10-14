@@ -55,12 +55,12 @@ init(BuildContext context) async {
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@drawable/logo');
-  final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings(
+  final DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings(
           onDidReceiveLocalNotification:
               messageWidget.onDidReceiveLocalNotification);
-  final MacOSInitializationSettings initializationSettingsMacOS =
-      MacOSInitializationSettings();
+  final DarwinInitializationSettings initializationSettingsMacOS =
+      DarwinInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -114,7 +114,7 @@ Future showNotification(RemoteMessage message) async {
       setAsGroupSummary: true,
       groupKey: groupKey);
 
-  var iosChanelsSpecifics = IOSNotificationDetails();
+  var iosChanelsSpecifics = DarwinNotificationDetails();
   var platformChannelSpecifics = new NotificationDetails(
       android: androidPlatformChannelSpecifics, iOS: iosChanelsSpecifics);
   await flutterLocalNotificationsPlugin.show(
