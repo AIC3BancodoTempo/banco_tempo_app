@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application android:name="io.flutter.app.FlutterApplication" android:label="Banco do Tempo" android:icon="@mipmap/launcher_icon">
+    <application android:name="${applicationName}" android:label="Banco do Tempo" android:icon="@mipmap/launcher_icon">
         <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize" android:showWhenLocked="true" android:turnScreenOn="true">
             <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/logo" />
             <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorPrimary" />
